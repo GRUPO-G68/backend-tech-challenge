@@ -5,23 +5,23 @@ const app = express()
 const port = 3000
 
 var connection = mysql.createConnection({
-    host : 'fiap-mysql',
+    host : 'db',
     user : 'root',
-    password : 'segredo',
+    password : 'root',
     database: 'sistema_db',
     port: 3306
 })
 
 connection.connect()
 
-app.get('/', (req, res)=>{
-    connection.query('SELECT * from produtos',function (error, result,fields) {
-        if(error) throw error;
-        res.send(`${result[0].name} - ${result[1].name}`)
+// app.get('/', (req, res)=>{
+//     connection.query('SELECT * from produtos',function (error, result,fields) {
+//         if(error) throw error;
+//         res.send(`${result[0].name} - ${result[1].name}`)
 
-        connection.end()
-    })
-})
+//         connection.end()
+//     })
+// })
 
 
 app.listen(port, () => {

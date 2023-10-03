@@ -5,7 +5,6 @@ RUN npm install
 COPY index.js .
 CMD ["node", "index"]
 
-
 ##criar a imagem do mysql
 
 #docker network create fiap-network
@@ -22,7 +21,7 @@ CMD ["node", "index"]
 ##docker exec -it fiap-mysql bash
 ##mysql -uroot -psegredo
 
-
+##cria a imagem, o espaço ponto quer dizer que vai ser no local que esta o docker file
 #docker build -t fiap-imagem .
 ##tem que esta com a imagem mysql rodando na mesma network
 #docker run -it --rm --name sistema-fiap -p "3000:3000" --network=fiap-network fiap-imagem

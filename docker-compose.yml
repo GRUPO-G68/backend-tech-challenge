@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  db: 
+    image: mysql
+    container_name: mysql-fiap
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sistema_db
+    volumes: 
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306" 
+    restart: always
+    networks:
+      - fiap-network
+  api:
+    build: "./"
+    container_name: node-fiap
+    restart: always
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - "9001:9001"
+    depends_on:
+      - db
+    networks:
+      - fiap-network  
+volumes:
+  mysql-data:
+
+networks:
+  fiap-network: 

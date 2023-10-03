@@ -5,6 +5,9 @@ RUN npm install
 COPY index.js .
 CMD ["node", "index"]
 
+
+##criar a imagem do mysql
+
 #docker network create fiap-network
 
 ##volume é usado para armazenar os dados do mysql

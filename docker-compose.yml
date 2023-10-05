@@ -1,8 +1,10 @@
 version: "3.8"
 services:
   db:
+    build: 
+      context: ./docker
+      dockerfile: DockerfileMariaDb
     container_name: mysql-fiap
-    image: mariadb
     restart: always
     ports:
       - ${MYSQL_PORT}:${MYSQL_PORT}
@@ -12,11 +14,14 @@ services:
       - MARIADB_USER=${MYSQL_USER}
       - MARIADB_PASSWORD=${MYSQL_PASSWORD}
     volumes:
+      - ./migrations:/migrations
       - ./docker/mariadb:/var/lib/mysql
     networks:
       - fiap-network  
   api:
-    build: "./"
+    build: 
+      context: ./docker
+      dockerfile: DockerfileNode
     container_name: node-fiap
     restart: always
     volumes:

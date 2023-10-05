@@ -1,0 +1,8 @@
+# Use uma imagem base do MariaDB
+FROM mariadb:latest
+
+# Atualize o sistema e instale o cliente MySQL
+RUN apt-get update && apt-get install -y mysql-client
+
+# Limpe o cache de pacotes
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*

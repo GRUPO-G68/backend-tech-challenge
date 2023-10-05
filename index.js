@@ -18,7 +18,7 @@ app.get('/', async (req, res)=>{
 
     try {
         conn = await pool.getConnection();
-        const rows = await conn.query('SELECT * from produtos');
+        const rows = await conn.query('SELECT * from clientes');
         res.send(rows)
 
     }catch(e){

@@ -6,15 +6,14 @@ const app = express()
 const port = process.env.PORT
 
 const pool = mariadb.createPool({
-        host: 'mysql-fiap', 
-        user: 'fiap', 
-        password: 'fiap',
-        database:'fiap_db'
+        host: process.env.MYSQL_HOST, 
+        user: process.env.MYSQL_USER, 
+        password: process.env.MYSQL_PASSWORD,
+        database:process.env.MYSQL_DB_NAME
     });
 
 
 app.get('/', async (req, res)=>{
-    console.log('oi')
     let conn;
 
     try {

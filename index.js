@@ -1,27 +1,33 @@
+require('dotenv').config()
 const express = require('express')
-var mysql     = require('mysql2')
+const mariadb = require('mariadb');
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
-var connection = mysql.createConnection({
-    host : 'db',
-    user : 'root',
-    password : 'root',
-    database: 'sistema_db',
-    port: 3306
+const pool = mariadb.createPool({
+        host: 'mysql-fiap', 
+        user: 'fiap', 
+        password: 'fiap',
+        database:'fiap_db'
+    });
+
+
+app.get('/', async (req, res)=>{
+    console.log('oi')
+    let conn;
+
+    try {
+        conn = await pool.getConnection();
+        const rows = await conn.query('SELECT * from produtos');
+        res.send(rows)
+
+    }catch(e){
+        console.log(e)
+    } finally {
+    if (conn) conn.release(); //release to pool
+    }
 })
-
-connection.connect()
-
-// app.get('/', (req, res)=>{
-//     connection.query('SELECT * from produtos',function (error, result,fields) {
-//         if(error) throw error;
-//         res.send(`${result[0].name} - ${result[1].name}`)
-
-//         connection.end()
-//     })
-// })
 
 
 app.listen(port, () => {

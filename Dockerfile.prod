@@ -1,11 +1,9 @@
 FROM node
-WORKDIR /home/node/app
+WORKDIR /usr/src/app
 COPY package.json .
-COPY index.js .
-COPY /migrations .
-COPY migration.js .
 RUN npm install
-CMD ["npm", "run", "dev"]
+COPY index.js .
+CMD ["npm", "run", "start"]
 
 ##criar a imagem do mysql
 

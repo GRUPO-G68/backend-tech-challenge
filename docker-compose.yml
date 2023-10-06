@@ -2,8 +2,8 @@ version: "3.8"
 services:
   db:
     build: 
-      context: ./
-      dockerfile: Dockerfiledb
+      context: ./docker
+      dockerfile: DockerfileMariadb
     container_name: mysql-fiap
     restart: always
     ports:
@@ -19,7 +19,7 @@ services:
       - fiap-network  
   api:
     build: 
-      context: ./
+      context: ./docker
       dockerfile: DockerfileNode
     container_name: node-fiap
     restart: always

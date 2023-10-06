@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -L .",
-    "start": "node ."
+    "start": "node .",
+    "migrate": "node migration.js up --migrate-all"
   },
   "author": "",
   "license": "ISC",

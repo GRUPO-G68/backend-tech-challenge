@@ -3,7 +3,7 @@ services:
   db:
     build: 
       context: ./
-      dockerfile: DockerfileMariadb
+      dockerfile: Dockerfiledb
     container_name: mysql-fiap
     restart: always
     ports:

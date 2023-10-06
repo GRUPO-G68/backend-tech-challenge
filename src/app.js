@@ -1,24 +1,14 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express')
-const mariadb = require('mariadb');
-
 const app = express()
 const port = process.env.PORT
-
-const pool = mariadb.createPool({
-        host: process.env.MYSQL_HOST, 
-        user: process.env.MYSQL_USER, 
-        password: process.env.MYSQL_PASSWORD,
-        database:process.env.MYSQL_DB_NAME
-    });
-
+const dbConnect = require('./config/dbConnect.js');
 
 app.get('/', async (req, res)=>{
     let conn;
 
     try {
-        conn = await pool.getConnection();
-        const rows = await conn.query('SELECT * from clientes');
+        const rows = await dbConnect.query('SELECT * from clientes');
         res.send(rows)
 
     }catch(e){

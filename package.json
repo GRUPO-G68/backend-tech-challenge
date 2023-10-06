@@ -2,12 +2,10 @@
   "name": "sistema",
   "version": "1.0.0",
   "description": "sistema para fiap",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -L src/app.js",
-    "start": "node src/app.js",
-    "migrate": "node migration.js up --migrate-all"
+    "start": "node src/app.js"
   },
   "author": "",
   "license": "ISC",

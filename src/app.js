@@ -1,25 +1,13 @@
-require('dotenv').config();
-const express = require('express')
+import express from "express"
+import routes from "./routes/index.js"
+
 const app = express()
 const port = process.env.PORT
-const dbConnect = require('./config/dbConnect.js');
 
-app.get('/', async (req, res)=>{
-    let conn;
+//pega o que esta chegando via POST ou PUT e transforma um objeto para pode manipular
+app.use(express.json())
 
-    try {
-        const rows = await dbConnect.query('SELECT * from clientes');
-        res.send(rows)
+routes(app)
 
-    }catch(e){
-        console.log(e)
-    } finally {
-    if (conn) conn.release(); //release to pool
-    }
-})
-
-
-app.listen(port, () => {
-    console.log(`Exemple app Listening on port ${port}`)
-})
+export default app
 

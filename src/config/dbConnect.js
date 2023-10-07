@@ -1,5 +1,7 @@
-require('dotenv').config();
-const mariadb = require('mariadb');
+import dotenv from 'dotenv';
+import mariadb from 'mariadb';
+
+dotenv.config();
 
 const pool = mariadb.createPool({
     host: process.env.MYSQL_HOST,
@@ -12,7 +14,6 @@ async function getConnection() {
     let db;
     try {
         db = await pool.getConnection();
-        console.log('Connected to MariaDB!');
         return db;
     } catch (error) {
         console.error('Error connecting to MariaDB:', error);
@@ -30,7 +31,4 @@ async function query(sql, params) {
     }
 }
 
-module.exports = {
-    getConnection,
-    query  // Exporte a função query
-};
+export { getConnection, query };

@@ -1,12 +1,14 @@
 {
   "name": "sistema",
   "version": "1.0.0",
-  "description": "sistema para fiap",
-  "main": "src/app.js",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon -L src/app.js",
-    "start": "node src/app.js"
+    "dev": "nodemon -L server.js",
+    "start": "node server.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {

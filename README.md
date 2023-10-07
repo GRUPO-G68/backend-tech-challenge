@@ -1,6 +1,8 @@
-npm install
 
-.env
+
+duplique os arquivos .exemplo e remova o .exemplo
+
+npm install
 
 docker compose up -d
 

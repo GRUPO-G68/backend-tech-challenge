@@ -30,7 +30,7 @@ Certifique-se de ter o Docker instalado em sua máquina e execute o seguinte com
 ```bash
   docker compose up -d
 ```
-Isso irá criar as imagens e iniciará os contêineres Docker necessários para executar o projeto.
+Isso iniciará os contêineres Docker necessários para executar o projeto.
 
 #### 6. Acesse o aplicativo
 Após a inicialização bem-sucedida com o Docker, abra seu navegador da web e acesse a seguinte URL:

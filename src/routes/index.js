@@ -1,14 +1,15 @@
-import { query } from '../config/dbConnect.js';
+import express from "express"
+import clientes from "./clientesRoutes.js"
 
 const routes = (app) => {
-  
-    app.route("/").get(async (req, res) => {
-        try {
-            const rows = await query('SELECT * from clientes');
-            res.send(rows)
-        }catch(e){
-            console.log(e)
-        }
-  })
+    app.route("/").get((_req, res) => {
+        res.status(200).send({message: "Bem vindo!"})
+    })
+
+    app.use(
+        express.json(),
+        clientes,
+    )
 }
+
 export default routes

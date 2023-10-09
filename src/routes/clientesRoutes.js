@@ -1,11 +1,15 @@
-import express from "express"
-import Cliente from "./../controllers/clientesController.js"
-const router = express.Router()
-import clientesMiddleware from "../middlewares/clientesMiddleware.js"
+import express from "express";
+import Cliente from "./../controllers/clientesController.js";
+const router = express.Router();
+import clientesMiddleware from "../middlewares/clientesMiddleware.js";
 
-router.get("/clientes", Cliente.getAll)
-router.post("/clientes",clientesMiddleware.valideBody,  Cliente.createCliente)
-router.delete("/clientes/:id", Cliente.inactiveCliente)
-router.put("/clientes/:id",clientesMiddleware.valideBody, Cliente.updateCliente)
+router.get("/clientes", Cliente.getAll);
+router.post("/clientes", clientesMiddleware.valideBody, Cliente.createCliente);
+router.delete("/clientes/:id", Cliente.inactiveCliente);
+router.put(
+  "/clientes/:id",
+  clientesMiddleware.valideBody,
+  Cliente.updateCliente,
+);
 
-export default router
+export default router;

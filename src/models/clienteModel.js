@@ -6,10 +6,22 @@ const getAll = async () => {
 };
 
 const createCliente = async (cliente) => {
-  const { nome, cpf, email = null, celular = null } = cliente;
+  const {
+    nome,
+    cpf,
+    email = null,
+    celular = null,
+    aniversario = null,
+  } = cliente;
   const sql =
-    "INSERT INTO cliente (nome, cpf, email, celular) VALUES (?,?,?,?)";
-  const createdCliente = await query(sql, [nome, cpf, email, celular]);
+    "INSERT INTO cliente (nome, cpf, email, celular, aniversario) VALUES (?,?,?,?)";
+  const createdCliente = await query(sql, [
+    nome,
+    cpf,
+    email,
+    celular,
+    aniversario,
+  ]);
   return createdCliente.insertId.toString();
 };
 
@@ -20,10 +32,23 @@ const inactiveCliente = async (id) => {
 };
 
 const updateCliente = async (id, cliente) => {
-  const { nome, cpf, email = null, celular = null } = cliente;
+  const {
+    nome,
+    cpf,
+    email = null,
+    celular = null,
+    aniversario = null,
+  } = cliente;
   const sql =
-    "UPDATE cliente SET nome = ?, cpf = ?, email = ?, celular = ? WHERE id = ?";
-  const updatedCliente = await query(sql, [nome, cpf, email, celular, id]);
+    "UPDATE cliente SET nome = ?, cpf = ?, email = ?, celular = ?, aniversario = ? WHERE id = ?";
+  const updatedCliente = await query(sql, [
+    nome,
+    cpf,
+    email,
+    celular,
+    aniversario,
+    id,
+  ]);
   return updatedCliente;
 };
 

@@ -9,7 +9,21 @@ const createCliente = async  (req, res) => {
     const createdCliente = await clienteModel.createCliente(req.body)
     return res.status(201).json(createdCliente)
 }
+
+const inactiveCliente = async  (req, res) => {
+    const {id} = req.params
+    await clienteModel.inactiveCliente(id)
+    return res.status(204).json()
+}
+
+const updateCliente = async  (req, res) => {
+    const {id} = req.params
+    await clienteModel.updateCliente(id,req.body)
+    return res.status(204).json()
+}
 export default {
     getAll,
-    createCliente
+    createCliente,
+    inactiveCliente,
+    updateCliente
 }

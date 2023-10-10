@@ -1,9 +1,8 @@
-import express from "express"
-import routes from "./routes/index.js"
+import express from "express";
+import routes from "./routes/index.js";
 
-const app = express()
-const port = process.env.PORT
+const app = express();
+const port = process.env.PORT;
 
-routes(app)
-export default app
-
+routes(app);
+export default app;

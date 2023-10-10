@@ -56,7 +56,7 @@ Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 
 #### 7. Acesse a documentação
 
-Esse projeto utiliza a [documentação dinâmica herbs](https://github.com/herbsjs/herbsshelf), para acessar navegue para
+Esse projeto utiliza a [documentação dinâmica herbs](https://github.com/herbsjs/herbsshelf), para acessar navegue a seguinte URL:
 
 ```bash
   localhost:9001/documentacao

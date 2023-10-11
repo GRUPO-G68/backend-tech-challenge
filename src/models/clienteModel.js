@@ -1,4 +1,5 @@
 import { query } from "../config/dbConnect.js";
+//  código 1 para cliente ativo "número mágico" - arrumar
 
 const getAll = async () => {
   const clientes = await query("SELECT * from cliente WHERE status = 1");

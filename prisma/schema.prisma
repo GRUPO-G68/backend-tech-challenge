@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+// CREATE TABLE `cliente` (
+// 	`ID` INT(11) NOT NULL AUTO_INCREMENT,
+// 	`nome` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+// 	`cpf` CHAR(11) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+// 	`created_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+// 	`updated_at` TIMESTAMP NULL DEFAULT NULL,
+// 	`status` CHAR(1) NULL DEFAULT '1' COLLATE 'utf8mb4_general_ci',
+// 	`email` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+// 	`celular` CHAR(11) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+// 	PRIMARY KEY (`ID`) USING BTREE
+// )
+// COLLATE='utf8mb4_general_ci'
+// ENGINE=InnoDB
+// ;
+
+// npx prisma migrate dev --name init

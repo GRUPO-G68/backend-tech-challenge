@@ -1,8 +1,7 @@
 version: "3.8"
 services:
   db:
-    build: 
-      dockerfile: DockerfileMariaDb
+    image: mariadb
     container_name: mysql-fiap
     restart: always
     ports:

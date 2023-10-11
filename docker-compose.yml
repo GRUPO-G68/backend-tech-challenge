@@ -17,7 +17,7 @@ services:
       - fiap-network  
   api:
     build: 
-      dockerfile: DockerfileNode
+      dockerfile: Dockerfile
     container_name: node-fiap
     restart: always
     volumes:

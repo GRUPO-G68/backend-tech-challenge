@@ -44,7 +44,22 @@ Certifique-se de ter o Docker instalado em sua máquina e execute o seguinte com
 
 Isso iniciará os contêineres Docker necessários para executar o projeto.
 
-#### 6. Acesse o aplicativo
+#### 6. Execute as migrations
+
+Após o container iniciado por completo execute o seguinte comando para realizar as migrações do banco:
+**Nota:** Certifique-se de que o container e o banco esteja de pé 
+
+```bash
+  npx prisma migrate dev --name init
+```
+#### 7. Execute os seeders
+
+Após as migrations executadas, execute os seeders:
+```bash
+  npx prisma db seed
+```
+
+#### 8. Acesse o aplicativo
 
 Após a inicialização bem-sucedida com o Docker, abra seu navegador da web e acesse a seguinte URL:
 
@@ -54,7 +69,7 @@ Após a inicialização bem-sucedida com o Docker, abra seu navegador da web e a
 
 Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 
-#### 7. Acesse a documentação
+#### 9. Acesse a documentação
 
 Esse projeto utiliza a [documentação dinâmica herbs](https://github.com/herbsjs/herbsshelf), para acessar navegue a seguinte URL:
 

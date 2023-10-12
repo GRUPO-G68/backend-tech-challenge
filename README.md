@@ -48,7 +48,7 @@ Isso iniciará os contêineres Docker necessários para executar o projeto.
 
 Após o container iniciado por completo execute o seguinte comando para realizar as migrações do banco:
 
-**Nota:** Certifique-se de que o container e o banco esteja de pé
+**Obs:** Certifique-se de que o container e o banco esteja de pé
 
 ```bash
   npx prisma migrate dev --name init

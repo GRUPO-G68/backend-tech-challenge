@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model cliente {
+  id       Int      @id @default(autoincrement())
+  nome     String?
+  cpf      String?
+  created_at DateTime @default(now())
+  updated_at DateTime?
+  status   String?  @default("1")
+  email    String?
+  celular  String?
+  @@map(name: "cliente")
+}
+
+model Funcionario {
+  ID           Int      @id @default(autoincrement())
+  nome         String?
+  cpf          String?
+  ctps_numero  String?
+  ctps_serie   String?
+  ctps_emissao DateTime?
+  email        String?
+  data_inicio  DateTime?
+  celular      String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime?
+  status       String    @default("1")
+  @@map("funcionario")
+}
+
+
+//comando para executar diferença em migrate
+// npx prisma migrate dev --name nome_da_atualizacao

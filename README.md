@@ -70,12 +70,4 @@ Após a inicialização bem-sucedida com o Docker, abra seu navegador da web e a
 
 Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 
-#### 9. Acesse a documentação
-
-Esse projeto utiliza a [documentação dinâmica herbs](https://github.com/herbsjs/herbsshelf), para acessar navegue a seguinte URL:
-
-```bash
-  localhost:9001/documentacao
-```
-
 **Nota:** Certifique-se de ler a documentação completa do projeto.

@@ -53,6 +53,7 @@ Após o container iniciado por completo execute o seguinte comando para realizar
 ```bash
   npx prisma migrate dev --name init
 ```
+
 #### 7. Execute os seeders
 
 Após as migrations executadas, execute os seeders:

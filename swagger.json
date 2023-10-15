@@ -115,7 +115,8 @@
                         "description":"Aniversário do cliente",
                         "example":"2020-01-01"
                     }
-                }
+                },
+                "required":["nome","cpf"]
             },
             "responseCliente":{
                 "type":"object",

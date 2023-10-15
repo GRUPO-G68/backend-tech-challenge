@@ -5,11 +5,11 @@ const getAll = async  (_req, res) => {
     return res.status(200).json(cliente)
 }
 
-// const getByCpf = async  (req, res) => {
-//     const {cpf} = req.params
-//     const cliente = await clienteModel.getByCpf(cpf)
-//     return res.status(200).json(cliente)
-// }
+const getByCpf = async  (req, res) => {
+    const {cpf} = req.params
+    const cliente = await clienteModel.getByCpf(cpf)
+    return res.status(200).json(cliente)
+}
 
 const createCliente = async  (req, res) => {
     const createdCliente = await clienteModel.createCliente(req.body)
@@ -31,6 +31,6 @@ export default {
     getAll,
     createCliente,
     inactiveCliente,
-    updateCliente
-    // getByCpf
+    updateCliente,
+    getByCpf
 }

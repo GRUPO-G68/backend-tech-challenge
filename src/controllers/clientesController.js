@@ -5,6 +5,12 @@ const getAll = async  (_req, res) => {
     return res.status(200).json(cliente)
 }
 
+const getByCpf = async  (req, res) => {
+    const {cpf} = req.params
+    const cliente = await clienteModel.getByCpf(cpf)
+    return res.status(200).json(cliente)
+}
+
 const createCliente = async  (req, res) => {
     const createdCliente = await clienteModel.createCliente(req.body)
     return res.status(201).json(createdCliente)
@@ -25,5 +31,6 @@ export default {
     getAll,
     createCliente,
     inactiveCliente,
-    updateCliente
+    updateCliente,
+    getByCpf
 }

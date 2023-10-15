@@ -1,9 +1,6 @@
 import express from "express";
 import clientes from "./clientesRoutes.js";
 import funcionarios from "./funcionariosRoutes.js";
-import { renderShelfHTML } from "@herbsjs/herbsshelf";
-import usecases from "./_uclist.js";
-
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from '../../swagger.json' assert { type: 'json' };
 

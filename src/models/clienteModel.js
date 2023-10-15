@@ -6,6 +6,12 @@ const getAll = async () => {
   return clientes;
 };
 
+// const getByCpf = async (cpf) => {
+//   const sql = "SELECT * from cliente WHERE status = 1 AND cpf = ?";
+//   const cliente = await query(sql, [cpf]);
+//   return cliente;
+// };
+
 const createCliente = async (cliente) => {
   const {
     nome,
@@ -57,5 +63,6 @@ export default {
   getAll,
   createCliente,
   inactiveCliente,
-  updateCliente,
+  updateCliente
+  // getByCpf
 };

@@ -15,7 +15,7 @@ const createCliente = async (cliente) => {
     aniversario = null,
   } = cliente;
   const sql =
-    "INSERT INTO cliente (nome, cpf, email, celular, aniversario) VALUES (?,?,?,?)";
+    "INSERT INTO cliente (nome, cpf, email, celular, aniversario) VALUES (?,?,?,?,?)";
   const createdCliente = await query(sql, [
     nome,
     cpf,

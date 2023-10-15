@@ -73,10 +73,14 @@ Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 
 #### 9. Acesse a documentação
 
-Esse projeto utiliza a [documentação dinâmica herbs](https://github.com/herbsjs/herbsshelf), para acessar navegue a seguinte URL:
-
+Esse projeto utiliza a documentação dinâmica [swagger](https://swagger.io/docs/specification/adding-examples/) e [redocly](https://redocly.com/docs/), para acessar navegue a seguinte URL:
+redocly : 
 ```bash
   localhost:9001/documentacao
+```
+swagger : 
+```bash
+  localhost:9001/docs
 ```
 
 **Nota:** Certifique-se de ler a documentação completa do projeto.

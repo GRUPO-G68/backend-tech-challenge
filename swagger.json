@@ -92,6 +92,68 @@
                     }
                 }
             }
+        },
+        "/clientes/{id}":{
+            "put":{
+                "tags": ["Clientes"],
+                "description":"Atualizar cliente",
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"id do cliente",
+                        "required":true,
+                        "type":"string",
+                        "format":"uui"
+                    }
+                ],
+                "requestBody":{
+                    "description":"Dados necessários para o atualizar o cliente",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/requestCliente"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/responseCliente"
+                                }
+                            }
+                        }
+                    },
+                    "204":{
+                        "description":"Nenhum cliente encontrado"
+                    }
+                }
+            },
+            "delete":{
+                "tags": ["Clientes"],
+                "description":"Remover cliente",
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"id do cliente",
+                        "required":true,
+                        "type":"string",
+                        "format":"uui"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Cliente Removido"
+                    },
+                    "204":{
+                        "description":"Nenhum cliente encontrado"
+                    }
+                }
+            }
         }
     },
     "components":{

@@ -9,7 +9,7 @@
     "tags": [
         {
             "name": "Clientes",
-            "description": "Operações relacionadas a clientes"
+            "description": "Operações relacionadas ao cliente"
         }
     ],
     "paths":{

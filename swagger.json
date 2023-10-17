@@ -6,10 +6,17 @@
         "description": "Sistema desenvolvido para o tech Challenge da fiap",
         "version": "1.0.0"
     },
+    "tags": [
+        {
+            "name": "Clientes",
+            "description": "Operações relacionadas a clientes"
+        }
+    ],
     "paths":{
         "tags": ["Clientes"],
         "/clientes":{
             "post":{
+                "tags": ["Clientes"],
                 "description":"Cadastrar um cliente",
                 "requestBody":{
                     "description":"Dados necessários para o cadastro do cliente",
@@ -38,6 +45,7 @@
                 }
             },
             "get":{
+                "tags": ["Clientes"],
                 "description":"Clientes cadastrados",
                 "responses":{
                     "200":{
@@ -57,6 +65,7 @@
         },
         "/clientes/cpf/{cpf}":{
             "get":{
+                "tags": ["Clientes"],
                 "description":"Busca de cliente por CPF",
                 "parameters": [
                     {

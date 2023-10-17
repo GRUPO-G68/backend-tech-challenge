@@ -60,9 +60,9 @@
                 "description":"Busca de cliente por CPF",
                 "parameters": [
                     {
-                        "name":"id",
+                        "name":"cpf",
                         "in":"path",
-                        "description":"Id do video",
+                        "description":"CPF do cliente",
                         "required":true,
                         "type":"string",
                         "format":"uui"

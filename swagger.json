@@ -55,7 +55,7 @@
                 }
             }
         },
-        "/clientes/{cpf}":{
+        "/clientes/cpf/{cpf}":{
             "get":{
                 "description":"Busca de cliente por CPF",
                 "parameters": [

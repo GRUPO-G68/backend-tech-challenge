@@ -1,5 +1,0 @@
-regras do negocio
-informações que vem do banco
-validações
-inserção de dados
-segundo aula, seria o M do MVC

@@ -11,7 +11,6 @@ model Cliente {
   nome      String?  @db.VarChar(191)
   cpf       String?  @db.VarChar(191)
   email     String?  @db.VarChar(191)
-  createdAt DateTime @default(now()) @db.DateTime(3)
 
   pedidos Pedido[]
 }
@@ -59,7 +58,6 @@ model Produto {
   updatedAt   DateTime? @db.DateTime
   status      Int       @default(1) @db.TinyInt
   pedidos    PedidoItem[]
-  
 }
 
 model Categoria {
@@ -74,7 +72,6 @@ model Categoria {
 model Situacao {
   id         Int      @id @default(autoincrement())
   descricao  String
-
   pedidos    Pedido[]
 }
 //comando para executar diferença em migrate

@@ -4,27 +4,17 @@ const prisma = new PrismaClient();
 
 async function seedFuncionarios() {
     try {
-        await prisma.funcionario.createMany({
+        await prisma.Funcionario.createMany({
             data: [
             {
                 nome: 'CARLOS',
                 cpf: '65332844018',
-                ctps_numero: '1234567890',
-                ctps_serie: 'ABC12',
-                ctps_emissao: new Date('2023-01-15'),
                 email: 'carlos@example.com',
-                data_inicio: new Date('2023-10-09'),
-                celular: '9876543210',
             },
             {
                 nome: 'VIVIAN',
                 cpf: '46993132052',
-                ctps_numero: '9876543210',
-                ctps_serie: 'XYZ34',
-                ctps_emissao: new Date('2023-02-20'),
                 email: 'vivian@example.com',
-                data_inicio: new Date('2023-10-10'),
-                celular: '1234567890',
             },
             ],
         });
@@ -40,7 +30,7 @@ async function seedFuncionarios() {
 
 async function seedClientes() {
     try {
-      await prisma.cliente.createMany({
+      await prisma.Cliente.createMany({
         data: [
           {
             nome: 'João',

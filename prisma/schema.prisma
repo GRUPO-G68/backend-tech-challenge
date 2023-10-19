@@ -29,7 +29,6 @@ model Pedido {
   id             Int          @id
   cliente   Cliente @relation(fields: [idCliente], references: [id])
   idCliente      Int
-  descricao      String       @db.VarChar(50)
   situacao     Situacao    @relation(fields: [idSituacao], references: [id])
   idSituacao     Int
   createdAt      DateTime     @default(now()) @db.DateTime
@@ -53,6 +52,7 @@ model Produto {
   categoria   Categoria    @relation(fields: [idCategoria], references: [id])
   idCategoria  Int
   preco       Float
+  nome        String    @db.VarChar(50)
   descricao   String    @db.VarChar(50)
   createdAt   DateTime  @default(now()) @db.DateTime
   updatedAt   DateTime? @db.DateTime

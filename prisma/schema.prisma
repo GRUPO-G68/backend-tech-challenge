@@ -6,35 +6,76 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-model cliente {
-  id       Int      @id @default(autoincrement())
-  nome     String?
-  cpf      String?
-  created_at DateTime @default(now())
-  updated_at DateTime?
-  status   String?  @default("1")
-  email    String?
-  aniversario DateTime?
-  celular  String?
-  @@map(name: "cliente")
+model Cliente {
+  id        Int      @id @default(autoincrement())
+  nome      String?  @db.VarChar(191)
+  cpf       String?  @db.VarChar(191)
+  email     String?  @db.VarChar(191)
+  createdAt DateTime @default(now()) @db.DateTime(3)
+
+  pedidos Pedido[]
 }
 
 model Funcionario {
-  ID           Int      @id @default(autoincrement())
-  nome         String?
-  cpf          String?
-  ctps_numero  String?
-  ctps_serie   String?
-  ctps_emissao DateTime?
-  email        String?
-  data_inicio  DateTime?
-  celular      String?
-  created_at   DateTime @default(now())
-  updated_at   DateTime?
-  status       String    @default("1")
-  @@map("funcionario")
+  id        Int      @id @default(autoincrement())
+  nome      String?  @db.VarChar(191)
+  cpf       String?  @db.VarChar(191)
+  email     String?  @db.VarChar(191)
+  createdAt DateTime @default(now()) @db.DateTime(3)
+  updatedAt DateTime? @db.DateTime(3)
+  status    Int      @default(1) @db.TinyInt
 }
 
+model Pedido {
+  id             Int          @id
+  cliente   Cliente @relation(fields: [idCliente], references: [id])
+  idCliente      Int
+  descricao      String       @db.VarChar(50)
+  situacao     Situacao    @relation(fields: [idSituacao], references: [id])
+  idSituacao     Int
+  createdAt      DateTime     @default(now()) @db.DateTime
+  updatedAt      DateTime?    @db.DateTime
+  status         Int          @default(1) @db.TinyInt
 
+  produtos    PedidoItem[]
+}
+
+model PedidoItem {
+  id         Int      @id @default(autoincrement())
+  pedido     Pedido    @relation(fields: [idPedido], references: [id])
+  idPedido   Int
+  produto     Produto    @relation(fields: [idProduto], references: [id])
+  idProduto  Int
+  quantidade Int  
+}
+
+model Produto {
+  id          Int       @id @default(autoincrement())
+  categoria   Categoria    @relation(fields: [idCategoria], references: [id])
+  idCategoria  Int
+  preco       Float
+  descricao   String    @db.VarChar(50)
+  createdAt   DateTime  @default(now()) @db.DateTime
+  updatedAt   DateTime? @db.DateTime
+  status      Int       @default(1) @db.TinyInt
+  pedidos    PedidoItem[]
+  
+}
+
+model Categoria {
+  id          Int      @id @default(autoincrement())
+  descricao   String   @db.VarChar(50) @default("0")
+  createdAt   DateTime @default(now()) @db.DateTime
+  updatedAt   DateTime? @db.DateTime
+  status      Int?     @default(1) @db.TinyInt
+  produtos    Produto[]
+}
+
+model Situacao {
+  id         Int      @id @default(autoincrement())
+  descricao  String
+
+  pedidos    Pedido[]
+}
 //comando para executar diferença em migrate
 // npx prisma migrate dev --name nome_da_atualizacao

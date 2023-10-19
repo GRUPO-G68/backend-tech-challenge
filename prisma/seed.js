@@ -35,14 +35,12 @@ async function seedClientes() {
           {
             nome: 'João',
             cpf: '12345678901',
-            email: 'joao@example.com',
-            celular: '9876543210',
+            email: 'joao@example.com'
           },
           {
             nome: 'Maria',
             cpf: '98765432123',
-            email: 'maria@example.com',
-            celular: '1234567890',
+            email: 'maria@example.com'
           },
         ],
       });

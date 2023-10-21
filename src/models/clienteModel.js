@@ -2,12 +2,12 @@ import { query } from "../config/dbConnect.js";
 //  código 1 para cliente ativo "número mágico" - arrumar
 
 const getAll = async () => {
-  const clientes = await query("SELECT * from cliente WHERE status = 1");
+  const clientes = await query("SELECT * from Cliente");
   return clientes;
 };
 
 const getByCpf = async (cpf) => {
-  const sql = "SELECT * from cliente WHERE status = 1 AND cpf = ?";
+  const sql = "SELECT * from Cliente WHERE cpf = ?";
   const cliente = await query(sql, [cpf]);
   return cliente;
 };
@@ -21,7 +21,7 @@ const createCliente = async (cliente) => {
     aniversario = null,
   } = cliente;
   const sql =
-    "INSERT INTO cliente (nome, cpf, email, celular, aniversario) VALUES (?,?,?,?,?)";
+    "INSERT INTO Cliente (nome, cpf, email ) VALUES (?,?,?)";
   const createdCliente = await query(sql, [
     nome,
     cpf,
@@ -33,7 +33,7 @@ const createCliente = async (cliente) => {
 };
 
 const inactiveCliente = async (id) => {
-  const sql = "UPDATE cliente SET status = 0 WHERE id = ?";
+  const sql = "UPDATE Cliente SET status = 0 WHERE id = ?";
   const updatedClienteStatus = await query(sql, [id]);
   return updatedClienteStatus;
 };
@@ -47,7 +47,7 @@ const updateCliente = async (id, cliente) => {
     aniversario = null,
   } = cliente;
   const sql =
-    "UPDATE cliente SET nome = ?, cpf = ?, email = ?, celular = ?, aniversario = ? WHERE id = ?";
+    "UPDATE Cliente SET nome = ?, cpf = ?, email = ? WHERE id = ?";
   const updatedCliente = await query(sql, [
     nome,
     cpf,

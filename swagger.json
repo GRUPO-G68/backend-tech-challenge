@@ -135,28 +135,6 @@
                         "description":"Nenhum cliente encontrado"
                     }
                 }
-            },
-            "delete":{
-                "tags": ["Clientes"],
-                "description":"Remover cliente",
-                "parameters": [
-                    {
-                        "name":"id",
-                        "in":"path",
-                        "description":"id do cliente",
-                        "required":true,
-                        "type":"string",
-                        "format":"uui"
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"Cliente Removido"
-                    },
-                    "204":{
-                        "description":"Nenhum cliente encontrado"
-                    }
-                }
             }
         }
     },

@@ -1,5 +1,0 @@
-conjunto de entidades que compartilham a linguagem ubíqua
-
-só ele troca seu próprio estado
-
-executa as acoes 

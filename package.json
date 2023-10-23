@@ -3,19 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts'"
+    "dev": "nodemon -L src/index.ts -e ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^20.8.7",
+  "dependencies": {
+    "dotenv": "^16.3.1",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
-    "tslib": "^2.6.2",
     "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3"
   }
 }

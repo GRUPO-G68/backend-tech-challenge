@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -L src/server.ts -e ts",
-    "migrate": "npx prisma migrate dev --schema src/infrastructure/prisma/schema.prisma --name init"
+    "migrate": "npx prisma migrate dev --schema src/infrastructure/prisma/schema.prisma --name init",
+    "seed": "npx prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node src/infrastructure/prisma/seed.ts"
   },
   "keywords": [],
   "author": "",

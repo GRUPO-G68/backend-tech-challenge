@@ -51,14 +51,15 @@ Após o container iniciado por completo execute o seguinte comando para realizar
 **Obs:** Certifique-se de que o container e o banco esteja de pé
 
 ```bash
-  npx prisma migrate dev --name init
+  npm run migrate
 ```
 
 #### 7. Execute os seeders
 
 Após as migrations executadas, execute os seeders:
+
 ```bash
-  npx prisma db seed
+  npm run seed
 ```
 
 #### 8. Acesse o aplicativo
@@ -75,11 +76,14 @@ Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 
 Esse projeto utiliza a documentação dinâmica [swagger](https://swagger.io/docs/specification/adding-examples/) e [redocly](https://redocly.com/docs/), para acessar navegue a seguinte URL
 
-redocly : 
+redocly :
+
 ```bash
   localhost:9001/documentacao
 ```
-swagger : 
+
+swagger :
+
 ```bash
   localhost:9001/docs
 ```

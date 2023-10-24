@@ -1,0 +1,211 @@
+{
+  "openapi": "3.1.0",
+  "swagger": "3.0",
+  "info": {
+    "title": "Tech Challenge",
+    "description": "Sistema desenvolvido para o tech Challenge da fiap",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Clientes",
+      "description": "Operações relacionadas ao cliente"
+    },
+    {
+      "name": "Funcionarios",
+      "description": "Operações relacionadas ao funcionario"
+    }
+  ],
+  "paths": {
+    "tags": ["Clientes"],
+    "/clientes": {
+      "post": {
+        "tags": ["Clientes"],
+        "description": "Cadastrar um cliente",
+        "requestBody": {
+          "description": "Dados necessários para o cadastro do cliente",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestCliente"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cadastro realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseCliente"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Campo obrigatório em branco"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Clientes"],
+        "description": "Clientes cadastrados",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/responseCliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clientes/cpf/{cpf}": {
+      "get": {
+        "tags": ["Clientes"],
+        "description": "Busca de cliente por CPF",
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "description": "CPF do cliente",
+            "required": true,
+            "type": "string",
+            "format": "uui"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseCliente"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Nenhum cliente encontrado"
+          }
+        }
+      }
+    },
+    "/clientes/{id}": {
+      "put": {
+        "tags": ["Clientes"],
+        "description": "Atualizar cliente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do cliente",
+            "required": true,
+            "type": "string",
+            "format": "uui"
+          }
+        ],
+        "requestBody": {
+          "description": "Dados necessários para o atualizar o cliente",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestCliente"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseCliente"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Nenhum cliente encontrado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "requestCliente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do cliente",
+            "example": "Fulano"
+          },
+          "cpf": {
+            "type": "integer",
+            "description": "CPF do cliente",
+            "example": "44444444444"
+          },
+          "email": {
+            "type": "string",
+            "description": "E-mail do cliente",
+            "example": "teste@teste.com"
+          },
+          "celular": {
+            "type": "string",
+            "description": "Celular do cliente",
+            "example": "12988888888"
+          },
+          "aniversario": {
+            "type": "string",
+            "description": "Aniversário do cliente",
+            "example": "2020-01-01"
+          }
+        },
+        "required": ["nome", "cpf"]
+      },
+      "responseCliente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do cliente",
+            "example": "Fulano"
+          },
+          "cpf": {
+            "type": "integer",
+            "description": "CPF do cliente",
+            "example": "44444444444"
+          },
+          "email": {
+            "type": "string",
+            "description": "E-mail do cliente",
+            "example": "teste@teste.com"
+          },
+          "celular": {
+            "type": "string",
+            "description": "Celular do cliente",
+            "example": "12988888888"
+          },
+          "aniversario": {
+            "type": "string",
+            "description": "Aniversário do cliente",
+            "example": "2020-01-01"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Id do cliente",
+            "format": "uuid"
+          }
+        }
+      }
+    }
+  }
+}

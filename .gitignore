@@ -1,4 +1,4 @@
 /node_modules
 /docker
-/src/infrastructure/prisma/migrations
+src/adapter/driven/infra/prisma/migrations
 .env

@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -L src/infrastructure/server.ts -e ts",
-    "migrate": "npx prisma migrate dev --schema src/infrastructure/prisma/schema.prisma --name init",
+    "dev": "nodemon -L src/adapter/driver/server.ts -e ts",
+    "migrate": "npx prisma migrate dev --schema src/adapter/driven/infra/prisma/schema.prisma --name init",
     "seed": "npx prisma db seed"
   },
   "prisma": {
-    "seed": "ts-node src/infrastructure/prisma/seed.ts"
+    "seed": "ts-node src/adapter/driven/infra/prisma/seed.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,8 +1,8 @@
 import express from "express";
 import { config } from "dotenv";
-import Database from "./database";
+import Database from "../driven/infra/database";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "../../swagger.json";
+import swaggerDocument from "../../../swagger.json";
 
 config();
 

@@ -74,5 +74,3 @@ model Situacao {
   descricao  String
   pedidos    Pedido[]
 }
-//comando para executar diferença em migrate
-// npx prisma migrate dev --name nome_da_atualizacao

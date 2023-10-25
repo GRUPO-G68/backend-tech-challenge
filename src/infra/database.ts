@@ -26,10 +26,10 @@ class Database {
     }
   }
 
-  public async query(sql: string, params: any): Promise<any> {
+  public async query(sql: string): Promise<any> {
     const conn = await this.getConnection();
     try {
-      return await conn.query(sql, params);
+      return await conn.query(sql);
     } finally {
       if (conn) conn.release();
     }

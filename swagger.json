@@ -8,7 +8,7 @@
   },
   "tags": [
     {
-      "name": "Clientes",
+      "name": "Cliente",
       "description": "Operações relacionadas ao cliente"
     },
     {
@@ -17,10 +17,10 @@
     }
   ],
   "paths": {
-    "tags": ["Clientes"],
+    "tags": ["Cliente"],
     "/clientes": {
       "post": {
-        "tags": ["Clientes"],
+        "tags": ["Cliente"],
         "description": "Cadastrar um cliente",
         "requestBody": {
           "description": "Dados necessários para o cadastro do cliente",
@@ -49,7 +49,7 @@
         }
       },
       "get": {
-        "tags": ["Clientes"],
+        "tags": ["Cliente"],
         "description": "Clientes cadastrados",
         "responses": {
           "200": {
@@ -67,9 +67,9 @@
         }
       }
     },
-    "/clientes/{cpf}": {
+    "/cliente/{cpf}": {
       "get": {
-        "tags": ["Clientes"],
+        "tags": ["Cliente"],
         "description": "Busca de cliente por CPF",
         "parameters": [
           {

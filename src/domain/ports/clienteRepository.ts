@@ -1,4 +1,4 @@
-import { Cliente } from "../domain/entities/clientes";
+import { Cliente } from "../entities/clientes";
 
 export interface IClienteRepository {
   findAll(): Promise<Cliente | null>;

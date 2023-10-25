@@ -9,7 +9,7 @@ datasource db {
 model Cliente {
   id        Int      @id @default(autoincrement())
   nome      String?  @db.VarChar(191)
-  cpf       String?  @db.VarChar(191)
+  cpf       String?  @db.VarChar(11) @unique
   email     String?  @db.VarChar(191)
 
   pedidos Pedido[]
@@ -18,7 +18,7 @@ model Cliente {
 model Funcionario {
   id        Int      @id @default(autoincrement())
   nome      String?  @db.VarChar(191)
-  cpf       String?  @db.VarChar(191)
+  cpf       String?  @db.VarChar(11) @unique
   email     String?  @db.VarChar(191)
   createdAt DateTime @default(now()) @db.DateTime(3)
   updatedAt DateTime? @db.DateTime(3)

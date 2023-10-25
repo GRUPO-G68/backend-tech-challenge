@@ -8,19 +8,19 @@
   },
   "tags": [
     {
-      "name": "Clientes",
+      "name": "Cliente",
       "description": "Operações relacionadas ao cliente"
     },
     {
-      "name": "Funcionarios",
+      "name": "Pedido",
       "description": "Operações relacionadas ao funcionario"
     }
   ],
   "paths": {
-    "tags": ["Clientes"],
-    "/clientes": {
+    "tags": ["Cliente"],
+    "/cliente": {
       "post": {
-        "tags": ["Clientes"],
+        "tags": ["Cliente"],
         "description": "Cadastrar um cliente",
         "requestBody": {
           "description": "Dados necessários para o cadastro do cliente",
@@ -49,7 +49,7 @@
         }
       },
       "get": {
-        "tags": ["Clientes"],
+        "tags": ["Cliente"],
         "description": "Clientes cadastrados",
         "responses": {
           "200": {
@@ -67,9 +67,9 @@
         }
       }
     },
-    "/clientes/cpf/{cpf}": {
+    "/cliente/{cpf}": {
       "get": {
-        "tags": ["Clientes"],
+        "tags": ["Cliente"],
         "description": "Busca de cliente por CPF",
         "parameters": [
           {
@@ -81,46 +81,6 @@
             "format": "uui"
           }
         ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/responseCliente"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "Nenhum cliente encontrado"
-          }
-        }
-      }
-    },
-    "/clientes/{id}": {
-      "put": {
-        "tags": ["Clientes"],
-        "description": "Atualizar cliente",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id do cliente",
-            "required": true,
-            "type": "string",
-            "format": "uui"
-          }
-        ],
-        "requestBody": {
-          "description": "Dados necessários para o atualizar o cliente",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/requestCliente"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -157,16 +117,6 @@
             "type": "string",
             "description": "E-mail do cliente",
             "example": "teste@teste.com"
-          },
-          "celular": {
-            "type": "string",
-            "description": "Celular do cliente",
-            "example": "12988888888"
-          },
-          "aniversario": {
-            "type": "string",
-            "description": "Aniversário do cliente",
-            "example": "2020-01-01"
           }
         },
         "required": ["nome", "cpf"]
@@ -188,16 +138,6 @@
             "type": "string",
             "description": "E-mail do cliente",
             "example": "teste@teste.com"
-          },
-          "celular": {
-            "type": "string",
-            "description": "Celular do cliente",
-            "example": "12988888888"
-          },
-          "aniversario": {
-            "type": "string",
-            "description": "Aniversário do cliente",
-            "example": "2020-01-01"
           },
           "id": {
             "type": "integer",

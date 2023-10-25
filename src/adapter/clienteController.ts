@@ -2,7 +2,6 @@ import { Request, Response, Router } from "express";
 import { clienteInDatabaseRepository } from "./clienteInDatabaseRepository";
 const clienteController = Router();
 
-// Defina as rotas e manipuladores de rota aqui
 clienteController
   .get("/cliente/", async (req: Request, res: Response) => {
     try {

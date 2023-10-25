@@ -18,15 +18,5 @@ app.use("/documentacao", (_req, res) => {
 });
 
 app.use(clienteController);
-app.listen(port, () => console.log(`listening on port ${port}`));
 
-// import Database from "./database";
-// const db = new Database();
-/* app.get("/", async (_req, res) => {
-  try {
-    const results = await db.query("SELECT * FROM Cliente", []);
-    res.json(results);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
-  }
-});*/
+app.listen(port, () => console.log(`listening on port ${port}`));

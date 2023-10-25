@@ -18,7 +18,7 @@
   ],
   "paths": {
     "tags": ["Cliente"],
-    "/clientes": {
+    "/cliente": {
       "post": {
         "tags": ["Cliente"],
         "description": "Cadastrar um cliente",
@@ -117,16 +117,6 @@
             "type": "string",
             "description": "E-mail do cliente",
             "example": "teste@teste.com"
-          },
-          "celular": {
-            "type": "string",
-            "description": "Celular do cliente",
-            "example": "12988888888"
-          },
-          "aniversario": {
-            "type": "string",
-            "description": "Aniversário do cliente",
-            "example": "2020-01-01"
           }
         },
         "required": ["nome", "cpf"]
@@ -148,16 +138,6 @@
             "type": "string",
             "description": "E-mail do cliente",
             "example": "teste@teste.com"
-          },
-          "celular": {
-            "type": "string",
-            "description": "Celular do cliente",
-            "example": "12988888888"
-          },
-          "aniversario": {
-            "type": "string",
-            "description": "Aniversário do cliente",
-            "example": "2020-01-01"
           },
           "id": {
             "type": "integer",

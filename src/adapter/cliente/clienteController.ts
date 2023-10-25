@@ -22,6 +22,17 @@ clienteController
     } catch (error) {
       res.status(400).json({ message: error });
     }
+  })
+  .post("/cliente", async (req: Request, res: Response) => {
+    try {
+      console.log(req);
+      const clienteBody = req.body;
+      console.log(clienteBody);
+      await new clienteInDatabaseRepository().save(clienteBody);
+      res.status(200).json({ message: "Cliente cadastrado com sucesso" });
+    } catch (error) {
+      res.status(400).json({ message: `Erro ao cadastar cliente ${error}` });
+    }
   });
 
 export default clienteController;

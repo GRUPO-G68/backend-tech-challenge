@@ -1,5 +1,5 @@
 import { Cliente } from "../domain/entities/clientes";
-import { IClienteRepository } from "../domain/ports/clienteRepository";
+import { IClienteRepository } from "../applications/ports/clienteRepository";
 import Database from "../infra/database";
 
 export class clienteInDatabaseRepository implements IClienteRepository {

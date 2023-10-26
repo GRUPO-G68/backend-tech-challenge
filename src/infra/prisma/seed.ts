@@ -51,9 +51,33 @@ async function seedClientes() {
   }
 }
 
+async function seedCategoria() {
+  try {
+    await prisma.categoria.createMany({
+      data: [
+        {
+          descricao: 'lanche'
+        },
+        {
+          descricao: 'bebida'
+        },
+        {
+          descricao: 'acompanhamento'
+        }
+      ]
+    })
+    console.log("Categorias inseridas com sucesso");
+  } catch (error) {
+    console.error("Erro ao inserir Categorias:", error);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
 async function main() {
   await seedFuncionarios();
   await seedClientes();
+  await seedCategoria();
 }
 
 main()

@@ -1,7 +1,67 @@
-import  { Request, Response, Router } from "express";
-const router = Router(); // checar depois se vamos usar dessa forma ou centralizar 
+import { Request, Response, Router } from "express";
+import { produtoInDatabaseRepository } from "./produtoInDatabaseRepository";
+const produtoController = Router();
 
+produtoController
+  .get("/produto", async (request: Request, response: Response) => {
+    try {
+      const body = await new produtoInDatabaseRepository().findAll();
+      response.status(200).json(body);
+    } catch (error) {
+      response.status(500).json({ message: error });
+    }
+  })
+  .get(
+    "/produto/categoria/:idCategoria",
+    async (request: Request, response: Response) => {
+      try {
+        const idCategoria = request.params?.["idCategoria"];
 
-router.get('/produtos', async(request: Request, reponse: Response) => {
+        const body = await new produtoInDatabaseRepository().findByCategory(
+          idCategoria
+        );
 
-})
+        response.status(200).json(body);
+      } catch (error) {
+        response.status(500).json({ message: error });
+      }
+    }
+  )
+  .get("/produto/:idProduto", async (request: Request, response: Response) => {
+    try {
+      const idProduto = request.params?.["idProduto"];
+
+      const body = (
+        await new produtoInDatabaseRepository().findById(idProduto)
+      )?.[0];
+
+      response.status(200).json(body);
+    } catch (error) {
+      response.status(500).json({ message: error });
+    }
+  })
+  .post("/produto", async (request: Request, response: Response) => {
+    try {
+      const produto = request.body;
+
+      const body = await new produtoInDatabaseRepository().save(produto);
+
+      response.status(200).json({ message: "Produto cadastrado com sucesso" });
+    } catch (error) {
+      response.status(500).json({ message: "Falha ao cadastrar produto" });
+    }
+  })
+  .patch("/produto", async (request: Request, response: Response) => {
+    try {
+      const produto = request.body;
+
+      const body = await new produtoInDatabaseRepository().update(produto);
+
+      response.status(200).json({ message: "Produto atualizao com sucesso" });
+    } catch (error) {
+      console.error(error);
+      response.status(500).json({ message: "Falha ao atualizar produto" });
+    }
+  });
+
+export default produtoController;

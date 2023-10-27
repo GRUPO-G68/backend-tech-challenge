@@ -13,7 +13,7 @@
     },
     {
       "name": "Pedido",
-      "description": "Operações relacionadas ao funcionario"
+      "description": "Operações relacionadas ao pedido"
     }
   ],
   "paths": {

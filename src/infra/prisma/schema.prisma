@@ -26,7 +26,7 @@ model Funcionario {
 }
 
 model Pedido {
-  id             Int          @id
+  id             Int          @id @default(autoincrement())
   cliente   Cliente @relation(fields: [idCliente], references: [id])
   idCliente      Int
   situacao     Situacao    @relation(fields: [idSituacao], references: [id])

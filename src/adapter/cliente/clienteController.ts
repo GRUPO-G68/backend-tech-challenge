@@ -8,7 +8,7 @@ clienteController
       const cliente = await new clienteInDatabaseRepository().findAll();
       res.status(200).json(cliente);
     } catch (error) {
-      res.status(400).json({ message: error });
+      res.status(500).json({ message: error });
     }
   })
   .get("/cliente/:clienteCpf", async (req: Request, res: Response) => {
@@ -20,7 +20,7 @@ clienteController
       );
       res.status(200).json(cliente);
     } catch (error) {
-      res.status(400).json({ message: error });
+      res.status(500).json({ message: error });
     }
   })
   .post("/cliente", async (req: Request, res: Response) => {
@@ -31,7 +31,7 @@ clienteController
       await new clienteInDatabaseRepository().save(clienteBody);
       res.status(200).json({ message: "Cliente cadastrado com sucesso" });
     } catch (error) {
-      res.status(400).json({ message: `Erro ao cadastar cliente ${error}` });
+      res.status(500).json({ message: `Erro ao cadastar cliente ${error}` });
     }
   });
 

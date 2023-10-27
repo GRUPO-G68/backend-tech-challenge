@@ -15,14 +15,18 @@ export class pedidoInDatabaseRepository implements IProdutoRepository {
     return itens;
   }
 
-  async findAll(): Promise<Array<Pedido> | null> {
-    const pedidos = await this.db.query(
-      `SELECT 
-      p.*,
-      s.descricao AS situacao 
-    FROM Pedido AS p
-      LEFT JOIN Situacao AS s ON s.id = p.idSituacao`
-    );
+  async findAll(idSituacao?: string): Promise<Array<Pedido> | null> {
+    let query = `SELECT 
+                    p.*,
+                    s.descricao AS situacao 
+                  FROM Pedido AS p
+                  LEFT JOIN Situacao AS s ON s.id = p.idSituacao`;
+
+    if (idSituacao) {
+      query += ` WHERE p.idSituacao = '${idSituacao}'`;
+    }
+
+    const pedidos = await this.db.query(query);
 
     for (const pedidoCliente of pedidos) {
       pedidoCliente.itens = await this.itensPedido(pedidoCliente.id);

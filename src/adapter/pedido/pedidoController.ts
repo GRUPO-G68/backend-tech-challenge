@@ -5,8 +5,17 @@ const pedidoController = Router();
 pedidoController
   .get("/pedido", async (_req: Request, res: Response) => {
     try {
-      const cliente = await new pedidoInDatabaseRepository().findAll();
-      res.status(200).json(cliente);
+      const pedido = await new pedidoInDatabaseRepository().findAll();
+      res.status(200).json(pedido);
+    } catch (error) {
+      res.status(500).json({ message: error });
+    }
+  })
+  .get("/pedido/situacao/:idSituacao", async (req: Request, res: Response) => {
+    try {
+      const { idSituacao } = req.params;
+      const pedido = await new pedidoInDatabaseRepository().findAll(idSituacao);
+      res.status(200).json(pedido);
     } catch (error) {
       res.status(500).json({ message: error });
     }

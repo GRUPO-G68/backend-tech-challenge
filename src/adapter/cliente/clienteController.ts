@@ -3,7 +3,7 @@ import { clienteInDatabaseRepository } from "./clienteInDatabaseRepository";
 const clienteController = Router();
 
 clienteController
-  .get("/cliente/", async (req: Request, res: Response) => {
+  .get("/cliente", async (_req: Request, res: Response) => {
     try {
       const cliente = await new clienteInDatabaseRepository().findAll();
       res.status(200).json(cliente);
@@ -25,9 +25,7 @@ clienteController
   })
   .post("/cliente", async (req: Request, res: Response) => {
     try {
-      console.log(req);
       const clienteBody = req.body;
-      console.log(clienteBody);
       await new clienteInDatabaseRepository().save(clienteBody);
       res.status(200).json({ message: "Cliente cadastrado com sucesso" });
     } catch (error) {

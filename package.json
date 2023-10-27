@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -L src/infra/server.ts -e ts",
+    "dev:debug": "nodemon -L src/infra/server.ts -e ts --inspect",
     "migrate": "npx prisma migrate dev --schema src/infra/prisma/schema.prisma --name init",
     "seed": "npx prisma db seed"
   },

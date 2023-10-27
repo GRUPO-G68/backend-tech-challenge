@@ -1,5 +1,6 @@
 import { Pedido } from "../../domain/entities/pedido";
 import { IProdutoRepository } from "../../applications/ports/pedidoRepository";
+import { clienteInDatabaseRepository } from "../cliente/clienteInDatabaseRepository";
 import Database from "../../infra/database";
 
 export class pedidoInDatabaseRepository implements IProdutoRepository {
@@ -42,10 +43,27 @@ export class pedidoInDatabaseRepository implements IProdutoRepository {
     return pedido;
   }
 
-  async save(pedido: Pedido): Promise<void> {
-    pedido;
-    // return await this.db.query(
-    //   `INSERT INTO Cliente ( nome, cpf, email) VALUES ('${pedido.nome}', '${pedido.cpf}', '${pedido.email}')`
-    // );
+  async save(pedido: Pedido): Promise<string> {
+    const cliente = await new clienteInDatabaseRepository().findByCpf(
+      pedido.cpfCliente
+    );
+
+    if (cliente === null || Object.keys(cliente as object).length == 0) {
+      return "Cliente não encontrado";
+    }
+
+    const pedidoResult = await this.db.query(
+      `INSERT INTO Pedido ( idCliente, idSituacao ) VALUES ('${cliente.id}', '1')`
+    );
+    const idPedido = pedidoResult.insertId;
+
+    for (const prop in pedido.itens) {
+      const item = pedido.itens[prop];
+      await this.db.query(
+        `INSERT INTO PedidoItem ( idPedido, idProduto, quantidade ) VALUES ('${idPedido}','${item.id}', '${item.quantidade}')`
+      );
+    }
+
+    return "Pedido realizado com sucesso";
   }
 }

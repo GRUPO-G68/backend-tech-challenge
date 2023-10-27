@@ -23,9 +23,8 @@ pedidoController
   })
   .post("/pedido", async (req: Request, res: Response) => {
     try {
-      const clienteBody = req.body;
-      await new pedidoInDatabaseRepository().save(clienteBody);
-      res.status(200).json({ message: "Pedido realizado com sucesso" });
+      const result = await new pedidoInDatabaseRepository().save(req.body);
+      res.status(200).json({ message: result });
     } catch (error) {
       res.status(500).json({ message: `Erro ao realizar pedido ${error}` });
     }

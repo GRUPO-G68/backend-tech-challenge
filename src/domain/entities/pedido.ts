@@ -1,25 +1,33 @@
 import { Produto } from "@prisma/client";
-import { Cliente } from "./clientes";
+
+export interface ProdutoPedido extends Produto {
+  quantidade: number;
+}
 
 export interface IPedido {
   id: string;
+  cpfCliente: string;
   idSituacao: string;
-  itens: Produto[];
-  cliente: Cliente;
+  itens: ProdutoPedido[];
   // mudarSituacaoPedido(idSituacao: string): void;
 }
 
 export class Pedido implements IPedido {
   id: string;
-  cliente: Cliente;
+  cpfCliente: string;
   idSituacao: string;
-  itens: Produto[];
+  itens: ProdutoPedido[];
 
-  constructor(id: string, idSituacao: string, cliente: Cliente) {
+  constructor(
+    id: string,
+    idSituacao: string,
+    cpfCliente: string,
+    itens: ProdutoPedido[]
+  ) {
     this.id = id;
     this.idSituacao = idSituacao;
-    this.cliente = cliente;
-    this.itens = [];
+    this.cpfCliente = cpfCliente;
+    this.itens = itens;
   }
 
   // mudarSituacaoPedido(idSituacao: string): void {

@@ -25,8 +25,7 @@ clienteController
   })
   .post("/cliente", async (req: Request, res: Response) => {
     try {
-      const clienteBody = req.body;
-      await new clienteInDatabaseRepository().save(clienteBody);
+      await new clienteInDatabaseRepository().save(req.body);
       res.status(200).json({ message: "Cliente cadastrado com sucesso" });
     } catch (error) {
       res.status(500).json({ message: `Erro ao cadastar cliente ${error}` });

@@ -12,6 +12,7 @@ const app = express();
 const port = process.env.PORT || 9001;
 
 app.use(bodyParser.json());
+app.use(clienteController, produtoController, pedidoController);
 
 /*docs*/
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -22,5 +23,4 @@ app.use("/documentacao", (_req, res) => {
   return res.sendFile(process.cwd() + "/index.html");
 });
 
-app.use(clienteController, produtoController, pedidoController);
 app.listen(port, () => console.log(`listening on port ${port}`));

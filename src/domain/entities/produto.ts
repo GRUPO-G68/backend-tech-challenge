@@ -2,7 +2,7 @@ export interface IProduto {
   id: string;
   nome: string;
   descricao: string;
-  idCategoria: string;
+  idCategoria: number;
   preco: string;
   createdAt: string;
   updatedAt: string;
@@ -13,7 +13,7 @@ export class Produto implements IProduto {
   id!: string;
   nome!: string;
   descricao!: string;
-  idCategoria!: string;
+  idCategoria!: number;
   preco!: string;
   createdAt!: string;
   updatedAt!: string;
@@ -23,7 +23,7 @@ export class Produto implements IProduto {
     id: string,
     nome: string,
     descricao: string,
-    idCategoria: string,
+    idCategoria: number,
     preco: string,
     createdAt: string,
     updatedAt: string,

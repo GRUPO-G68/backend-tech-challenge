@@ -62,15 +62,11 @@ Após as migrations executadas, execute os seeders:
   npm run seed
 ```
 
-#### 8. Acesse o aplicativo
-
-Após a inicialização bem-sucedida com o Docker, abra seu navegador da web e acesse a seguinte URL:
-
-```bash
-  localhost:9001
-```
+#### 10. Importe a colletion da API
 
 Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
+
+O arquivo da colletion esta no diretório e esta nomeada de `COLLECTION DA API.postman_collection.json`,
 
 #### 9. Acesse a documentação
 

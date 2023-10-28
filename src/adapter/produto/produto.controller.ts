@@ -44,18 +44,17 @@ produtoController
     try {
       const produto = request.body;
 
-      const body = await new produtoInDatabaseRepository().save(produto);
+      await new produtoInDatabaseRepository().save(produto);
 
       response.status(200).json({ message: "Produto cadastrado com sucesso" });
     } catch (error) {
       response.status(500).json({ message: "Falha ao cadastrar produto" });
     }
   })
-  .patch("/produto", async (request: Request, response: Response) => {
+  .put("/produto", async (request: Request, response: Response) => {
     try {
       const produto = request.body;
-
-      const body = await new produtoInDatabaseRepository().update(produto);
+      await new produtoInDatabaseRepository().update(produto);
 
       response.status(200).json({ message: "Produto atualizao com sucesso" });
     } catch (error) {

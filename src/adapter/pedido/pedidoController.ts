@@ -49,7 +49,33 @@ pedidoController
       });
       res.status(200).json({ message: result });
     } catch (error) {
-      res.status(500).json({ message: `Erro ao realizar pedido ${error}` });
+      res.status(500).json({ message: `Erro ao realizar pagamento ${error}` });
+    }
+  })
+  .put("/pedido/pronto/", async (req: Request, res: Response) => {
+    try {
+      const { idPedido } = req.body;
+      const result = await new MudarSituacaoPedido(pedidoRepository).execute({
+        idPedido,
+        idSituacao: "3",
+      });
+      res.status(200).json({ message: result });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: `Erro em deixar pedido pronto ${error}` });
+    }
+  })
+  .put("/pedido/finalizado/", async (req: Request, res: Response) => {
+    try {
+      const { idPedido } = req.body;
+      const result = await new MudarSituacaoPedido(pedidoRepository).execute({
+        idPedido,
+        idSituacao: "4",
+      });
+      res.status(200).json({ message: result });
+    } catch (error) {
+      res.status(500).json({ message: `Erro ao finalizar pedido ${error}` });
     }
   });
 

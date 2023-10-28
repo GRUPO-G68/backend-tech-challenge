@@ -1,9 +1,9 @@
 import { Pedido } from "../../domain/entities/pedido";
-import { IProdutoRepository } from "../../applications/ports/pedidoRepository";
+import { IPedidoRepository } from "../../applications/ports/pedidoRepository";
 import { clienteInDatabaseRepository } from "../cliente/clienteInDatabaseRepository";
 import Database from "../../infra/database";
 
-export class pedidoInDatabaseRepository implements IProdutoRepository {
+export class PedidoInDatabaseRepository implements IPedidoRepository {
   db: Database;
   constructor() {
     this.db = new Database();
@@ -45,6 +45,16 @@ export class pedidoInDatabaseRepository implements IProdutoRepository {
     );
     pedido[0].itens = await this.itensPedido(id);
     return pedido;
+  }
+
+  async updateSituationOrder(id: string, idSituacao: string): Promise<string> {
+    await this.db.query(
+      `UPDATE Pedido
+      SET idSituacao = ${idSituacao}
+      where
+        id = ${id}`
+    );
+    return "Pedido atualizado com sucesso";
   }
 
   async save(pedido: Pedido): Promise<string> {

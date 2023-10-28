@@ -75,7 +75,7 @@ async function seedCategoria() {
 }
 async function seedSituacaoPedido() {
   try {
-    await prisma.categoria.createMany({
+    await prisma.situacao.createMany({
       data: [
         {
           descricao: "Recebido",

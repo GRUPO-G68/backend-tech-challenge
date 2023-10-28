@@ -23,15 +23,14 @@ export class produtoInDatabaseRepository implements IProdutoRepository {
   }
 
   async save(produto: Produto): Promise<void> {
-    console.log('produto', produto)
     return await this.db.query(
-      `INSERT INTO Produto (descricao, idCategoria, nome, preco, status, updatedAt ) VALUES ('${produto.descricao}',${produto.idCategoria},'${produto.nome}','${produto.preco}',${produto.status},'${produto.updatedAt}')`
+      `INSERT INTO Produto (descricao, idCategoria, nome, preco) VALUES ('${produto.descricao}',${produto.idCategoria},'${produto.nome}','${produto.preco}')`
     );
   }
 
   async update(produto: Produto): Promise<void> {
     return await this.db.query(
-      `UPDATE PRODUTO SET descricao = '${produto.descricao}', idCategoria = '${produto.idCategoria}', nome = '${produto.nome}', preco = ${produto.preco}, status = '${produto.status}' WHERE id = ${produto.id}`
+      `UPDATE Produto SET descricao = '${produto.descricao}', idCategoria = '${produto.idCategoria}', nome = '${produto.nome}', preco = ${produto.preco}, status = '${produto.status}' WHERE id = ${produto.id}`
     );
   }
 }

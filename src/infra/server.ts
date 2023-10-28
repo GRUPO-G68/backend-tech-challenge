@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../../swagger.json";
 import clienteController from "../adapter/cliente/clienteController";
+import pedidoController from "../adapter/pedido/pedidoController";
 import produtoController from "../adapter/produto/produto.controller";
 import bodyParser from "body-parser";
 
@@ -21,6 +22,5 @@ app.use("/documentacao", (_req, res) => {
   return res.sendFile(process.cwd() + "/index.html");
 });
 
-app.use(clienteController);
-app.use(produtoController);
+app.use(clienteController, produtoController, pedidoController);
 app.listen(port, () => console.log(`listening on port ${port}`));

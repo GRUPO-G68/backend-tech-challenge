@@ -230,15 +230,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"idPedido\":16\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
+        "body": {},
         "url": {
           "raw": "http://localhost:9001/produto/",
           "protocol": "http",
@@ -257,15 +249,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"idPedido\":16\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
+        "body": {},
         "url": {
           "raw": "http://localhost:9001/produto/categoria/1",
           "protocol": "http",
@@ -284,15 +268,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"idPedido\":16\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
+        "body": {},
         "url": {
           "raw": "http://localhost:9001/produto/1",
           "protocol": "http",

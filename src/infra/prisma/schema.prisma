@@ -27,15 +27,15 @@ model Funcionario {
 
 model Pedido {
   id             Int          @id @default(autoincrement())
-  cliente   Cliente @relation(fields: [idCliente], references: [id])
-  idCliente      Int
-  situacao     Situacao    @relation(fields: [idSituacao], references: [id])
+  cliente        Cliente?     @relation(fields: [idCliente], references: [id])
+  idCliente      Int?
+  situacao       Situacao     @relation(fields: [idSituacao], references: [id])
   idSituacao     Int
   createdAt      DateTime     @default(now()) @db.DateTime
   updatedAt      DateTime?    @db.DateTime
   status         Int          @default(1) @db.TinyInt
 
-  produtos    PedidoItem[]
+  produtos       PedidoItem[]
 }
 
 model PedidoItem {

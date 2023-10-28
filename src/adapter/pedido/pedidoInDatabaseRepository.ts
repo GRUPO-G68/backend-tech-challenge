@@ -58,16 +58,24 @@ export class PedidoInDatabaseRepository implements IPedidoRepository {
   }
 
   async save(pedido: Pedido): Promise<string> {
-    const cliente = await new clienteInDatabaseRepository().findByCpf(
-      pedido.cpfCliente
-    );
+    let idCliente = null;
 
-    if (cliente === null || Object.keys(cliente as object).length == 0) {
-      return "Cliente não encontrado";
+    if (pedido.cpfCliente) {
+      const cliente = await new clienteInDatabaseRepository().findByCpf(
+        pedido.cpfCliente
+      );
+
+      if (cliente === null || Object.keys(cliente as object).length == 0) {
+        return "Cliente não encontrado";
+      }
+
+      idCliente = cliente.id;
     }
 
     const pedidoResult = await this.db.query(
-      `INSERT INTO Pedido ( idCliente, idSituacao ) VALUES ('${cliente.id}', '1')`
+      `INSERT INTO Pedido ( idCliente, idSituacao ) VALUES (${
+        idCliente ? `'${idCliente}'` : "NULL"
+      }, '1')`
     );
     const idPedido = pedidoResult.insertId;
 

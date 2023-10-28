@@ -17,8 +17,25 @@
     }
   ],
   "paths": {
-    "tags": ["Cliente"],
     "/cliente": {
+      "get": {
+        "tags": ["Cliente"],
+        "description": "Clientes cadastrados",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/responseCliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": ["Cliente"],
         "description": "Cadastrar um cliente",
@@ -45,24 +62,6 @@
           },
           "400": {
             "description": "Campo obrigatório em branco"
-          }
-        }
-      },
-      "get": {
-        "tags": ["Cliente"],
-        "description": "Clientes cadastrados",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/responseCliente"
-                  }
-                }
-              }
-            }
           }
         }
       }

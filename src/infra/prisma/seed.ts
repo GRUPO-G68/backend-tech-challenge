@@ -91,7 +91,7 @@ async function seedSituacaoPedido() {
         },
       ],
     });
-    console.log("Categorias inseridas com sucesso");
+    console.log("Situações inseridas com sucesso");
   } catch (error) {
     console.error("Erro ao inserir Categorias:", error);
   } finally {

@@ -53,7 +53,7 @@ model Produto {
   idCategoria  Int
   preco       Float
   nome        String    @db.VarChar(50)
-  descricao   String    @db.VarChar(50)
+  descricao   String    @db.VarChar(150)
   createdAt   DateTime  @default(now()) @db.DateTime
   updatedAt   DateTime? @db.DateTime
   status      Int       @default(1) @db.TinyInt

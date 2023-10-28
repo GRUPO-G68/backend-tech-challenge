@@ -99,11 +99,83 @@ async function seedSituacaoPedido() {
   }
 }
 
+async function seedProdutos() {
+  try {
+    await prisma.produto.createMany({
+      data: [
+        {
+          idCategoria: 1,
+          nome: "Cachorro quente",
+          descricao:
+            "Cachorro quente com 1 salsicha, molho, milho, ervilha e batata palha",
+          preco: 15,
+        },
+        {
+          idCategoria: 1,
+          nome: "Cachorro quente especial",
+          descricao:
+            "Cachorro quente com 2 salsicha, molho, milho, ervilha, bacon, pure de batata e batata palha",
+          preco: 19,
+        },
+        {
+          idCategoria: 1,
+          nome: "Frangão",
+          descricao:
+            "1 salsicha, frango desfiado, molho de tomate, bacon, calabresa e batata palha",
+          preco: 25,
+        },
+        {
+          idCategoria: 3,
+          nome: "Bata frita",
+          descricao: "A classica, bem sequinha",
+          preco: 10,
+        },
+        {
+          idCategoria: 3,
+          nome: "Batata frita rústica",
+          descricao: "Aquela batata mais rustica, macia por dentro",
+          preco: 14,
+        },
+        {
+          idCategoria: 2,
+          nome: "Coca-cola lata",
+          descricao: "",
+          preco: 6,
+        },
+        {
+          idCategoria: 2,
+          nome: "Sprite lata",
+          descricao: "",
+          preco: 6,
+        },
+        {
+          idCategoria: 2,
+          nome: "Suco",
+          descricao: "",
+          preco: 8,
+        },
+        {
+          idCategoria: 2,
+          nome: "Cerveja lata",
+          descricao: "",
+          preco: 8,
+        },
+      ],
+    });
+    console.log("Produtos inseridas com sucesso");
+  } catch (error) {
+    console.error("Erro ao inserir Produtos:", error);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
 async function main() {
   await seedFuncionarios();
   await seedClientes();
   await seedCategoria();
-  await seedSituacaoPedido();
+  await seedSituacaoPedido()
+  await seedProdutos();
 }
 
 main()

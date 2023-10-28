@@ -55,11 +55,11 @@ pedidoController
   .put("/pedido/pronto/", async (req: Request, res: Response) => {
     try {
       const { idPedido } = req.body;
-      const result = await new MudarSituacaoPedido(pedidoRepository).execute({
+      await new MudarSituacaoPedido(pedidoRepository).execute({
         idPedido,
         idSituacao: "3",
       });
-      res.status(200).json({ message: result });
+      res.status(200).json({ message: "Pedido pronto" });
     } catch (error) {
       res
         .status(500)
@@ -69,11 +69,11 @@ pedidoController
   .put("/pedido/finalizado/", async (req: Request, res: Response) => {
     try {
       const { idPedido } = req.body;
-      const result = await new MudarSituacaoPedido(pedidoRepository).execute({
+      await new MudarSituacaoPedido(pedidoRepository).execute({
         idPedido,
         idSituacao: "4",
       });
-      res.status(200).json({ message: result });
+      res.status(200).json({ message: "Pedido finalizado" });
     } catch (error) {
       res.status(500).json({ message: `Erro ao finalizar pedido ${error}` });
     }

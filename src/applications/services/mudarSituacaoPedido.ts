@@ -22,6 +22,6 @@ export class MudarSituacaoPedido {
 
     await this.pedidoRepository.updateSituationOrder(idPedido, idSituacao);
 
-    return "Pedido finalizado!";
+    return "Sucesso";
   }
 }

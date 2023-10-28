@@ -66,7 +66,7 @@ Após as migrations executadas, execute os seeders:
 
 Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 
-O arquivo da colletion esta no diretório e esta nomeada de `COLLECTION DA API.postman_collection.json`,
+O arquivo da colletion esta na raiz do projeto e está nomeada de `COLLECTION DA API.postman_collection.json`,
 
 #### 9. Acesse a documentação
 

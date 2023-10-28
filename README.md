@@ -62,7 +62,7 @@ Após as migrations executadas, execute os seeders:
   npm run seed
 ```
 
-#### 10. Importe a colletion da API
+#### 8. Importe a colletion da API
 
 Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 

@@ -1,6 +1,5 @@
 {
   "openapi": "3.1.0",
-  "swagger": "3.0",
   "info": {
     "title": "Tech Challenge",
     "description": "Sistema desenvolvido para o tech Challenge da fiap",
@@ -76,8 +75,9 @@
             "in": "path",
             "description": "CPF do cliente",
             "required": true,
-            "type": "string",
-            "format": "uui"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -109,6 +109,138 @@
                 }
               }
             }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Pedido"],
+        "description": "Realizar um novo pedido",
+        "requestBody": {
+          "description": "Dados necessários para a criação do pedido",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestPedido"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pedido realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePedido"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na criação do pedido"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Pedido"],
+        "description": "Atualizar a situação do pedido para 'Checkout'",
+        "requestBody": {
+          "description": "Dados necessários para a atualização do pedido",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestAtualizarSituacaoPedido"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pedido atualizado para 'Checkout' com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Atualização realizada com sucesso",
+                      "example": "Pedido atualizado para 'Checkout' com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na atualização do pedido"
+          }
+        }
+      }
+    },
+    "/pedido/situacao/{idSituacao}": {
+      "get": {
+        "tags": ["Pedido"],
+        "description": "Buscar pedidos por situação",
+        "parameters": [
+          {
+            "name": "idSituacao",
+            "in": "path",
+            "description": "ID da situação do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedidos encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/responsePedido"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Nenhum pedido encontrado"
+          }
+        }
+      }
+    },
+    "/pedido/{idPedido}": {
+      "get": {
+        "tags": ["Pedido"],
+        "description": "Buscar um pedido por ID",
+        "parameters": [
+          {
+            "name": "idPedido",
+            "in": "path",
+            "description": "ID do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePedido"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Nenhum pedido encontrado"
           }
         }
       }
@@ -172,6 +304,36 @@
           }
         }
       },
+      "requestPedido": {
+        "type": "object",
+        "properties": {
+          "idCliente": {
+            "type": "integer",
+            "description": "ID do cliente que solicitou o pedido",
+            "example": "1"
+          },
+          "itens": {
+            "type": "array",
+            "description": "Itens do pedido",
+            "items": {
+              "type": "object",
+              "properties": {
+                "idProduto": {
+                  "type": "integer",
+                  "description": "ID do produto",
+                  "example": "1"
+                },
+                "quantidade": {
+                  "type": "integer",
+                  "description": "Quantidade do produto",
+                  "example": "2"
+                }
+              }
+            }
+          }
+        },
+        "required": ["idCliente", "itens"]
+      },
       "responsePedido": {
         "type": "object",
         "properties": {
@@ -192,14 +354,16 @@
             "example": "1"
           },
           "createdAt": {
-            "type": "datetime",
+            "type": "string",
+            "format": "date-time",
             "description": "data e hora do recebimento do pedido",
-            "example": "12023-10-28T14:42:26.000Z"
+            "example": "2023-10-28T14:42:26.000Z"
           },
           "updatedAt": {
-            "type": "datetime",
+            "type": "string",
+            "format": "date-time",
             "description": "data e hora da atualização da situação do pedido",
-            "example": "12023-10-28T14:59:26.000Z"
+            "example": "2023-10-28T14:59:26.000Z"
           },
           "status": {
             "type": "integer",
@@ -212,24 +376,38 @@
             "example": "Recebido"
           },
           "itens": {
-            "type": "array of object",
+            "type": "array",
             "description": "Itens do pedido",
-            "example": [
-              {
-                "id": 1,
-                "idPedido": 1,
-                "idProduto": 1,
-                "quantidade": 2
-              },
-              {
-                "id": 2,
-                "idPedido": 1,
-                "idProduto": 2,
-                "quantidade": 1
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "idPedido": {
+                  "type": "integer"
+                },
+                "idProduto": {
+                  "type": "integer"
+                },
+                "quantidade": {
+                  "type": "integer"
+                }
               }
-            ]
+            }
           }
         }
+      },
+      "requestAtualizarSituacaoPedido": {
+        "type": "object",
+        "properties": {
+          "idPedido": {
+            "type": "string",
+            "description": "ID do pedido",
+            "example": "1"
+          }
+        },
+        "required": ["idPedido"]
       }
     }
   }

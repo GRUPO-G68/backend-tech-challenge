@@ -152,7 +152,7 @@
     "/pedido/{idPedido}": {
       "get": {
         "tags": ["Pedido"],
-        "description": "Buscar um pedido por ID",
+        "description": "Buscar um pedido por id",
         "parameters": [
           {
             "name": "idPedido",
@@ -331,6 +331,89 @@
           }
         }
       }
+    },
+    "/produto/{idProduto}": {
+      "get": {
+        "tags": ["Produto"],
+        "description": "Buscar um produto por id",
+        "parameters": [
+          {
+            "name": "idProduto",
+            "in": "path",
+            "description": "Id do produto",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produtos encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseProduto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao buscar pedido"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Produto"],
+        "description": "Remover produto",
+        "responses": {
+          "200": {
+            "description": "Produto removido com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseDeleteProduto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao remover produto"
+          }
+        }
+      }
+    },
+    "/produto/{idCategoria}": {
+      "get": {
+        "tags": ["Produto"],
+        "description": "Buscar produtos por categoria",
+        "parameters": [
+          {
+            "name": "idCategoria",
+            "in": "path",
+            "description": "Id da categoria",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produtos encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseProduto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao buscar pedido"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -398,6 +481,16 @@
             "type": "integer",
             "description": "Id do cliente",
             "format": "uuid"
+          }
+        }
+      },
+      "responseDeleteProduto": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Produto removido com sucesso",
+            "example": "Produto removido com sucesso"
           }
         }
       },

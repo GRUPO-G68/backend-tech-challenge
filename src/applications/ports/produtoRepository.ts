@@ -6,4 +6,5 @@ export interface IProdutoRepository {
   findByCategory(idCategoria: string): Promise<Array<Produto> | null>;
   save(produto: Produto): Promise<void>;
   update(produto: Produto): Promise<void>;
+  delete(idProduto: string): Promise<void>;
 }

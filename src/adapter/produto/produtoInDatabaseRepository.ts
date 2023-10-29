@@ -9,16 +9,20 @@ export class produtoInDatabaseRepository implements IProdutoRepository {
   }
 
   async findAll(): Promise<Array<Produto> | null> {
-    return await this.db.query("SELECT * FROM Produto");
+    return await this.db.query(
+      "SELECT id, idCategoria, preco, nome, descricao, createdAt, updatedAt FROM Produto WHERE status = 1"
+    );
   }
 
   async findById(idProduto: string): Promise<Array<Produto> | null> {
-    return await this.db.query(`SELECT * FROM Produto WHERE id = ${idProduto}`);
+    return await this.db.query(
+      `SELECT id, idCategoria, preco, nome, descricao, createdAt, updatedAt FROM Produto WHERE status = 1 AND id = ${idProduto}`
+    );
   }
 
   async findByCategory(idCategoria: string): Promise<Array<Produto> | null> {
     return await this.db.query(
-      `SELECT * FROM Produto WHERE idCategoria = ${idCategoria}`
+      `SELECT id, idCategoria, preco, nome, descricao, createdAt, updatedAt FROM Produto WHERE status = 1 AND idCategoria = ${idCategoria}`
     );
   }
 
@@ -30,7 +34,13 @@ export class produtoInDatabaseRepository implements IProdutoRepository {
 
   async update(produto: Produto): Promise<void> {
     return await this.db.query(
-      `UPDATE Produto SET descricao = '${produto.descricao}', idCategoria = '${produto.idCategoria}', nome = '${produto.nome}', preco = ${produto.preco}, status = '${produto.status}' WHERE id = ${produto.id}`
+      `UPDATE Produto SET descricao = '${produto.descricao}', idCategoria = '${produto.idCategoria}', nome = '${produto.nome}', preco = ${produto.preco} WHERE id = ${produto.id}`
+    );
+  }
+
+  async delete(idProduto: string): Promise<void> {
+    return await this.db.query(
+      `UPDATE Produto SET status = '0' WHERE id = ${idProduto}`
     );
   }
 }

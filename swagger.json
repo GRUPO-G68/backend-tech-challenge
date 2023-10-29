@@ -1,6 +1,5 @@
 {
   "openapi": "3.1.0",
-  "swagger": "3.0",
   "info": {
     "title": "Tech Challenge",
     "description": "Sistema desenvolvido para o tech Challenge da fiap",
@@ -14,6 +13,10 @@
     {
       "name": "Pedido",
       "description": "Operações relacionadas ao pedido"
+    },
+    {
+      "name": "Produto",
+      "description": "Operações relacionadas ao produto"
     }
   ],
   "paths": {
@@ -55,13 +58,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/responseCliente"
+                  "$ref": "#/components/schemas/responsePost"
                 }
               }
             }
           },
-          "400": {
-            "description": "Campo obrigatório em branco"
+          "500": {
+            "description": "Erro ao cadastrar cliente"
           }
         }
       }
@@ -76,8 +79,9 @@
             "in": "path",
             "description": "CPF do cliente",
             "required": true,
-            "type": "string",
-            "format": "uui"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -95,10 +99,367 @@
           }
         }
       }
+    },
+    "/pedido": {
+      "get": {
+        "tags": ["Pedido"],
+        "description": "Buscar todos os pedidos",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePedido"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao buscar pedido"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Pedido"],
+        "description": "Realizar um novo pedido",
+        "requestBody": {
+          "description": "Dados necessários para a criação do pedido",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestPedido"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pedido realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePedidoPost"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro na criação do pedido"
+          }
+        }
+      }
+    },
+    "/pedido/{idPedido}": {
+      "get": {
+        "tags": ["Pedido"],
+        "description": "Buscar um pedido por id",
+        "parameters": [
+          {
+            "name": "idPedido",
+            "in": "path",
+            "description": "ID do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePedido"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao buscar pedido"
+          }
+        }
+      }
+    },
+    "/pedido/situacao/{idSituacao}": {
+      "get": {
+        "tags": ["Pedido"],
+        "description": "Buscar pedidos por situação",
+        "parameters": [
+          {
+            "name": "idSituacao",
+            "in": "path",
+            "description": "ID da situação do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedidos encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/responsePedido"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao buscar pedido"
+          }
+        }
+      }
+    },
+    "/pedido/{idPedido}/situacao": {
+      "put": {
+        "tags": ["Pedido"],
+        "description": "Atualizar a situação do pedido",
+        "parameters": [
+          {
+            "name": "idPedido",
+            "in": "path",
+            "description": "ID do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados necessários para a atualização do pedido",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestAtualizarSituacaoPedido"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pedido atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Atualização realizada com sucesso",
+                      "example": "Pedido atualizado com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro na atualização do pedido"
+          }
+        }
+      }
+    },
+    "/produto": {
+      "get": {
+        "tags": ["Produto"],
+        "description": "Produtos cadastrados",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/responseProduto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Produto"],
+        "description": "Cadastrar um produto",
+        "requestBody": {
+          "description": "Dados necessários para o cadastro do produto",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestProduto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cadastro realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePost"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao cadastrar produto"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Produto"],
+        "description": "Atualizar um produto",
+        "requestBody": {
+          "description": "Dados necessários para a atualização do produto",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestProdutoPut"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cadastro atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePut"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao atualizar produto"
+          }
+        }
+      }
+    },
+    "/produto/{idProduto}": {
+      "get": {
+        "tags": ["Produto"],
+        "description": "Buscar um produto por id",
+        "parameters": [
+          {
+            "name": "idProduto",
+            "in": "path",
+            "description": "Id do produto",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produtos encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseProduto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao buscar pedido"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Produto"],
+        "description": "Remover produto",
+        "parameters": [
+          {
+            "name": "idProduto",
+            "in": "path",
+            "description": "Id do produto",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto removido com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseDeleteProduto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao remover produto"
+          }
+        }
+      }
+    },
+    "/produto/categoria/{idCategoria}": {
+      "get": {
+        "tags": ["Produto"],
+        "description": "Buscar produtos por categoria",
+        "parameters": [
+          {
+            "name": "idCategoria",
+            "in": "path",
+            "description": "Id da categoria",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produtos encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseProduto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao buscar produto"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "responsePost": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Cadastro realizado com sucesso",
+            "example": "Cadastro realizado com sucesso"
+          }
+        }
+      },
+      "responsePut": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Atualização realizada com sucesso",
+            "example": "Atualização realizada com sucesso"
+          }
+        }
+      },
       "requestCliente": {
         "type": "object",
         "properties": {
@@ -144,6 +505,236 @@
             "format": "uuid"
           }
         }
+      },
+      "responseDeleteProduto": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Produto removido com sucesso",
+            "example": "Produto removido com sucesso"
+          }
+        }
+      },
+      "requestPedido": {
+        "type": "object",
+        "properties": {
+          "cpfCliente": {
+            "type": "string",
+            "description": "ID do cliente que solicitou o pedido",
+            "example": "06573549023"
+          },
+          "itens": {
+            "type": "array",
+            "description": "Itens do pedido",
+            "items": {
+              "type": "object",
+              "properties": {
+                "idProduto": {
+                  "type": "integer",
+                  "description": "ID do produto",
+                  "example": "1"
+                },
+                "quantidade": {
+                  "type": "integer",
+                  "description": "Quantidade do produto",
+                  "example": "2"
+                }
+              }
+            }
+          }
+        },
+        "required": ["itens"]
+      },
+      "responsePedido": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id do pedido",
+            "format": "uuid",
+            "example": "1"
+          },
+          "idCliente": {
+            "type": "integer",
+            "description": "Id do cliente que solicitou o pedido",
+            "example": "1"
+          },
+          "idSituacao": {
+            "type": "integer",
+            "description": "Id da situação em que se encontra o pedido",
+            "example": "1"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "data e hora do recebimento do pedido",
+            "example": "2023-10-28T14:42:26.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "data e hora da atualização da situação do pedido",
+            "example": "2023-10-28T14:59:26.000Z"
+          },
+          "status": {
+            "type": "integer",
+            "description": "estado que indica se o pedido esta ativo ou foi cancelado",
+            "example": "1"
+          },
+          "situacao": {
+            "type": "string",
+            "description": "descrição da situação do pedido",
+            "example": "Recebido"
+          },
+          "itens": {
+            "type": "array",
+            "description": "Itens do pedido",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "idPedido": {
+                  "type": "integer"
+                },
+                "idProduto": {
+                  "type": "integer"
+                },
+                "quantidade": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responsePedidoPost": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Pedido realizado com sucesso",
+            "example": "Pedido realizado com sucesso"
+          }
+        }
+      },
+      "requestAtualizarSituacaoPedido": {
+        "type": "object",
+        "properties": {
+          "idSituacao": {
+            "type": "string",
+            "description": "Id da situação desejada",
+            "example": "1"
+          }
+        },
+        "required": ["idPedido", "idSituacao"]
+      },
+      "responseProduto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id do produto",
+            "format": "uuid",
+            "example": "1"
+          },
+          "idCategoria": {
+            "type": "integer",
+            "description": "Id da categoria do produto",
+            "example": "1"
+          },
+          "preco": {
+            "type": "integer",
+            "description": "Valor do produto",
+            "example": "15"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do produto",
+            "example": "Cachorro quente"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "uma breve descrição sobre o produto e seus acompanhamentos",
+            "example": "Cachorro quente com 1 salsicha, molho, milho, ervilha e batata palha"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "data e hora que o produto foi cadastrado",
+            "example": "2023-10-28T14:42:26.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "data e hora da ultima atualização de informações do produto",
+            "example": "2023-10-28T14:59:26.000Z"
+          },
+          "status": {
+            "type": "integer",
+            "description": "informa se o produto esta ativo",
+            "example": "1"
+          }
+        }
+      },
+      "requestProduto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do produto",
+            "example": "Guaraná"
+          },
+          "preco": {
+            "type": "double",
+            "description": "valor do produto",
+            "example": "5.5"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do produto",
+            "example": "refrigerante em lata de 350 ml"
+          },
+          "idCategoria": {
+            "type": "integer",
+            "description": "Id da categoria do produto",
+            "example": "2"
+          }
+        },
+        "required": ["nome", "preco", "idCategoria"]
+      },
+      "requestProdutoPut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "id": "interger",
+            "description": "Id do produto",
+            "example": "1"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do produto",
+            "example": "Coca-cola lata"
+          },
+          "preco": {
+            "type": "double",
+            "description": "valor do produto",
+            "example": "6"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do produto",
+            "example": "refrigerante em lata de 350 ml"
+          },
+          "idCategoria": {
+            "type": "integer",
+            "description": "Id da categoria do produto",
+            "example": "2"
+          }
+        },
+        "required": ["id", "nome", "preco", "idCategoria", "descricao"]
       }
     }
   }

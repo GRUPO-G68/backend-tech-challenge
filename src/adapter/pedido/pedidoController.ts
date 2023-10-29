@@ -10,26 +10,7 @@ pedidoController
       const pedido = await new PedidoInDatabaseRepository().findAll();
       res.status(200).json(pedido);
     } catch (error) {
-      res.status(500).json({ message: error });
-    }
-  })
-  .get("/pedido/situacao/:idSituacao", async (req: Request, res: Response) => {
-    try {
-      const { idSituacao } = req.params;
-      const pedido = await new PedidoInDatabaseRepository().findAll(idSituacao);
-      res.status(200).json(pedido);
-    } catch (error) {
-      res.status(500).json({ message: error });
-    }
-  })
-  .get("/pedido/:idPedido", async (req: Request, res: Response) => {
-    try {
-      const { idPedido } = req.params;
-
-      const pedido = await new PedidoInDatabaseRepository().findById(idPedido);
-      res.status(200).json(pedido);
-    } catch (error) {
-      res.status(500).json({ message: error });
+      res.status(500).json({ message: `Erro ao buscar pedido ${error}` });
     }
   })
   .post("/pedido", async (req: Request, res: Response) => {
@@ -40,40 +21,34 @@ pedidoController
       res.status(500).json({ message: `Erro ao realizar pedido ${error}` });
     }
   })
-  .put("/pedido/checkout/", async (req: Request, res: Response) => {
+  .get("/pedido/:idPedido", async (req: Request, res: Response) => {
     try {
-      const { idPedido } = req.body;
-      const result = await new MudarSituacaoPedido(pedidoRepository).execute({
-        idPedido,
-        idSituacao: "2",
-      });
-      res.status(200).json({ message: result });
+      const { idPedido } = req.params;
+
+      const pedido = await new PedidoInDatabaseRepository().findById(idPedido);
+      res.status(200).json(pedido);
     } catch (error) {
-      res.status(500).json({ message: `Erro ao realizar pagamento ${error}` });
+      res.status(500).json({ message: `Erro ao buscar pedido ${error}` });
     }
   })
-  .put("/pedido/pronto/", async (req: Request, res: Response) => {
+  .get("/pedido/situacao/:idSituacao", async (req: Request, res: Response) => {
     try {
-      const { idPedido } = req.body;
-      await new MudarSituacaoPedido(pedidoRepository).execute({
-        idPedido,
-        idSituacao: "3",
-      });
-      res.status(200).json({ message: "Pedido pronto" });
+      const { idSituacao } = req.params;
+      const pedido = await new PedidoInDatabaseRepository().findAll(idSituacao);
+      res.status(200).json(pedido);
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: `Erro em deixar pedido pronto ${error}` });
+      res.status(500).json({ message: `Erro ao buscar pedido ${error}` });
     }
   })
-  .put("/pedido/finalizado/", async (req: Request, res: Response) => {
+  .put("/pedido/:idPedido/situacao", async (req: Request, res: Response) => {
     try {
-      const { idPedido } = req.body;
+      const { idSituacao } = req.body;
+      const { idPedido } = req.params;
       await new MudarSituacaoPedido(pedidoRepository).execute({
         idPedido,
-        idSituacao: "4",
+        idSituacao,
       });
-      res.status(200).json({ message: "Pedido finalizado" });
+      res.status(200).json({ message: "Pedido Atualizado" });
     } catch (error) {
       res.status(500).json({ message: `Erro ao finalizar pedido ${error}` });
     }

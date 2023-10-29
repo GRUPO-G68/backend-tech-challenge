@@ -20,10 +20,11 @@ export class PedidoInDatabaseRepository implements IPedidoRepository {
                     p.*,
                     s.descricao AS situacao 
                   FROM Pedido AS p
-                  LEFT JOIN Situacao AS s ON s.id = p.idSituacao`;
+                  LEFT JOIN Situacao AS s ON s.id = p.idSituacao
+                  WHERE p.status = 1`;
 
     if (idSituacao) {
-      query += ` WHERE p.idSituacao = '${idSituacao}'`;
+      query += ` AND p.idSituacao = '${idSituacao}'`;
     }
 
     const pedidos = await this.db.query(query);
@@ -43,7 +44,9 @@ export class PedidoInDatabaseRepository implements IPedidoRepository {
     FROM Pedido AS p
       LEFT JOIN Situacao AS s ON s.id = p.idSituacao WHERE p.id = ${id}`
     );
-    pedido[0].itens = await this.itensPedido(id);
+    if (pedido.length > 0) {
+      pedido[0].itens = await this.itensPedido(id);
+    }
     return pedido;
   }
 

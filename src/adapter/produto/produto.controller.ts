@@ -61,6 +61,22 @@ produtoController
       console.error(error);
       response.status(500).json({ message: "Falha ao atualizar produto" });
     }
-  });
+  })
+  .delete(
+    "/produto/:idProduto",
+    async (request: Request, response: Response) => {
+      try {
+        const idProduto = request.params?.["idProduto"];
+
+        await new produtoInDatabaseRepository().delete(idProduto);
+
+        response.status(200).json({ message: "Produto removido com sucesso" });
+      } catch (error) {
+        response
+          .status(500)
+          .json({ message: `Erro ao remover produto ${error}` });
+      }
+    }
+  );
 
 export default produtoController;

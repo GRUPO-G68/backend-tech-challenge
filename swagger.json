@@ -220,6 +220,17 @@
       "put": {
         "tags": ["Pedido"],
         "description": "Atualizar a situação do pedido",
+        "parameters": [
+          {
+            "name": "idPedido",
+            "in": "path",
+            "description": "ID do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Dados necessários para a atualização do pedido",
           "content": {
@@ -366,6 +377,17 @@
       "delete": {
         "tags": ["Produto"],
         "description": "Remover produto",
+        "parameters": [
+          {
+            "name": "idProduto",
+            "in": "path",
+            "description": "Id do produto",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Produto removido com sucesso",
@@ -383,7 +405,7 @@
         }
       }
     },
-    "/produto/{idCategoria}": {
+    "/produto/categoria/{idCategoria}": {
       "get": {
         "tags": ["Produto"],
         "description": "Buscar produtos por categoria",
@@ -410,7 +432,7 @@
             }
           },
           "500": {
-            "description": "Erro ao buscar pedido"
+            "description": "Erro ao buscar produto"
           }
         }
       }

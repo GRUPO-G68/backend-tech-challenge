@@ -75,13 +75,13 @@ Esse projeto utiliza a documentação dinâmica [swagger](https://swagger.io/doc
 redocly :
 
 ```bash
-  localhost:9001/documentacao
+  localhost:9001/
 ```
 
 swagger :
 
 ```bash
-  localhost:9001/docs
+  localhost:9001/documentacao
 ```
 
 **Nota:** Certifique-se de ler a documentação completa do projeto.

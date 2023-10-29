@@ -55,7 +55,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/responseCliente"
+                  "$ref": "#/components/schemas/responseClientePost"
                 }
               }
             }
@@ -92,6 +92,23 @@
           },
           "204": {
             "description": "Nenhum cliente encontrado"
+          }
+        }
+      }
+    },
+    "/pedido": {
+      "get": {
+        "tags": ["Pedido"],
+        "description": "Buscar todos os pedidos",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePedido"
+                }
+              }
+            }
           }
         }
       }
@@ -142,6 +159,75 @@
             "type": "integer",
             "description": "Id do cliente",
             "format": "uuid"
+          }
+        }
+      },
+      "responseClientePost": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Cadastro realizado com sucesso",
+            "example": "Cadastro realizado com sucesso"
+          }
+        }
+      },
+      "responsePedido": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id do pedido",
+            "format": "uuid",
+            "example": "1"
+          },
+          "idCliente": {
+            "type": "integer",
+            "description": "Id do cliente que solicitou o pedido",
+            "example": "1"
+          },
+          "idSituacao": {
+            "type": "integer",
+            "description": "Id da situação em que se encontra o pedido",
+            "example": "1"
+          },
+          "createdAt": {
+            "type": "datetime",
+            "description": "data e hora do recebimento do pedido",
+            "example": "12023-10-28T14:42:26.000Z"
+          },
+          "updatedAt": {
+            "type": "datetime",
+            "description": "data e hora da atualização da situação do pedido",
+            "example": "12023-10-28T14:59:26.000Z"
+          },
+          "status": {
+            "type": "integer",
+            "description": "estado que indica se o pedido esta ativo ou foi cancelado",
+            "example": "1"
+          },
+          "situacao": {
+            "type": "string",
+            "description": "descrição da situação do pedido",
+            "example": "Recebido"
+          },
+          "itens": {
+            "type": "array of object",
+            "description": "Itens do pedido",
+            "example": [
+              {
+                "id": 1,
+                "idPedido": 1,
+                "idProduto": 1,
+                "quantidade": 2
+              },
+              {
+                "id": 2,
+                "idPedido": 1,
+                "idProduto": 2,
+                "quantidade": 1
+              }
+            ]
           }
         }
       }

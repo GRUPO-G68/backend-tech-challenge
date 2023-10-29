@@ -15,11 +15,11 @@ app.use(bodyParser.json());
 app.use(clienteController, produtoController, pedidoController);
 
 /*docs*/
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/documentacao", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/swagger", (_req, res) => {
   return res.sendFile(process.cwd() + "/swagger.json");
 });
-app.use("/documentacao", (_req, res) => {
+app.use("/", (_req, res) => {
   return res.sendFile(process.cwd() + "/index.html");
 });
 

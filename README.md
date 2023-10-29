@@ -84,4 +84,13 @@ swagger :
   localhost:9001/documentacao
 ```
 
+#### 10. Acesso ao banco
+
+```bash
+  URL: localhoat
+  user: root
+  password: segredo
+  port: 3306
+```
+
 **Nota:** Certifique-se de ler a documentação completa do projeto.

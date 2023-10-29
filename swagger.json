@@ -13,6 +13,10 @@
     {
       "name": "Pedido",
       "description": "Operações relacionadas ao pedido"
+    },
+    {
+      "name": "Produto",
+      "description": "Operações relacionadas ao produto"
     }
   ],
   "paths": {
@@ -54,13 +58,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/responseClientePost"
+                  "$ref": "#/components/schemas/responsePost"
                 }
               }
             }
           },
-          "400": {
-            "description": "Campo obrigatório em branco"
+          "500": {
+            "description": "Erro ao cadastrar cliente"
           }
         }
       }
@@ -109,6 +113,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro ao buscar pedido"
           }
         }
       },
@@ -131,49 +138,45 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/responsePedidoPost"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro na criação do pedido"
+          }
+        }
+      }
+    },
+    "/pedido/{idPedido}": {
+      "get": {
+        "tags": ["Pedido"],
+        "description": "Buscar um pedido por ID",
+        "parameters": [
+          {
+            "name": "idPedido",
+            "in": "path",
+            "description": "ID do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/responsePedido"
                 }
               }
             }
           },
-          "400": {
-            "description": "Erro na criação do pedido"
-          }
-        }
-      },
-      "put": {
-        "tags": ["Pedido"],
-        "description": "Atualizar a situação do pedido para 'Checkout'",
-        "requestBody": {
-          "description": "Dados necessários para a atualização do pedido",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/requestAtualizarSituacaoPedido"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Pedido atualizado para 'Checkout' com sucesso",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Atualização realizada com sucesso",
-                      "example": "Pedido atualizado para 'Checkout' com sucesso"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Erro na atualização do pedido"
+          "500": {
+            "description": "Erro ao buscar pedido"
           }
         }
       }
@@ -207,40 +210,124 @@
               }
             }
           },
-          "204": {
-            "description": "Nenhum pedido encontrado"
+          "500": {
+            "description": "Erro ao buscar pedido"
           }
         }
       }
     },
-    "/pedido/{idPedido}": {
-      "get": {
+    "/pedido/{idPedido}/situacao": {
+      "put": {
         "tags": ["Pedido"],
-        "description": "Buscar um pedido por ID",
-        "parameters": [
-          {
-            "name": "idPedido",
-            "in": "path",
-            "description": "ID do pedido",
-            "required": true,
-            "schema": {
-              "type": "string"
+        "description": "Atualizar a situação do pedido",
+        "requestBody": {
+          "description": "Dados necessários para a atualização do pedido",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestAtualizarSituacaoPedido"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "Pedido encontrado",
+            "description": "Pedido atualizado com sucesso",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/responsePedido"
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Atualização realizada com sucesso",
+                      "example": "Pedido atualizado com sucesso"
+                    }
+                  }
                 }
               }
             }
           },
-          "204": {
-            "description": "Nenhum pedido encontrado"
+          "500": {
+            "description": "Erro na atualização do pedido"
+          }
+        }
+      }
+    },
+    "/produto": {
+      "get": {
+        "tags": ["Produto"],
+        "description": "Produtos cadastrados",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/responseProduto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Produto"],
+        "description": "Cadastrar um produto",
+        "requestBody": {
+          "description": "Dados necessários para o cadastro do produto",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestProduto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cadastro realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePost"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao cadastrar produto"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Produto"],
+        "description": "Atualizar um produto",
+        "requestBody": {
+          "description": "Dados necessários para a atualização do produto",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/requestProdutoPut"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cadastro atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responsePut"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao atualizar produto"
           }
         }
       }
@@ -248,6 +335,26 @@
   },
   "components": {
     "schemas": {
+      "responsePost": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Cadastro realizado com sucesso",
+            "example": "Cadastro realizado com sucesso"
+          }
+        }
+      },
+      "responsePut": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Atualização realizada com sucesso",
+            "example": "Atualização realizada com sucesso"
+          }
+        }
+      },
       "requestCliente": {
         "type": "object",
         "properties": {
@@ -294,23 +401,13 @@
           }
         }
       },
-      "responseClientePost": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "description": "Cadastro realizado com sucesso",
-            "example": "Cadastro realizado com sucesso"
-          }
-        }
-      },
       "requestPedido": {
         "type": "object",
         "properties": {
-          "idCliente": {
-            "type": "integer",
+          "cpfCliente": {
+            "type": "string",
             "description": "ID do cliente que solicitou o pedido",
-            "example": "1"
+            "example": "06573549023"
           },
           "itens": {
             "type": "array",
@@ -332,7 +429,7 @@
             }
           }
         },
-        "required": ["idCliente", "itens"]
+        "required": ["itens"]
       },
       "responsePedido": {
         "type": "object",
@@ -398,16 +495,131 @@
           }
         }
       },
+      "responsePedidoPost": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Pedido realizado com sucesso",
+            "example": "Pedido realizado com sucesso"
+          }
+        }
+      },
       "requestAtualizarSituacaoPedido": {
         "type": "object",
         "properties": {
-          "idPedido": {
+          "idSituacao": {
             "type": "string",
-            "description": "ID do pedido",
+            "description": "Id da situação desejada",
             "example": "1"
           }
         },
-        "required": ["idPedido"]
+        "required": ["idPedido", "idSituacao"]
+      },
+      "responseProduto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id do produto",
+            "format": "uuid",
+            "example": "1"
+          },
+          "idCategoria": {
+            "type": "integer",
+            "description": "Id da categoria do produto",
+            "example": "1"
+          },
+          "preco": {
+            "type": "integer",
+            "description": "Valor do produto",
+            "example": "15"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do produto",
+            "example": "Cachorro quente"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "uma breve descrição sobre o produto e seus acompanhamentos",
+            "example": "Cachorro quente com 1 salsicha, molho, milho, ervilha e batata palha"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "data e hora que o produto foi cadastrado",
+            "example": "2023-10-28T14:42:26.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "data e hora da ultima atualização de informações do produto",
+            "example": "2023-10-28T14:59:26.000Z"
+          },
+          "status": {
+            "type": "integer",
+            "description": "informa se o produto esta ativo",
+            "example": "1"
+          }
+        }
+      },
+      "requestProduto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do produto",
+            "example": "Guaraná"
+          },
+          "preco": {
+            "type": "double",
+            "description": "valor do produto",
+            "example": "5.5"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do produto",
+            "example": "refrigerante em lata de 350 ml"
+          },
+          "idCategoria": {
+            "type": "integer",
+            "description": "Id da categoria do produto",
+            "example": "2"
+          }
+        },
+        "required": ["nome", "preco", "idCategoria"]
+      },
+      "requestProdutoPut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "id": "interger",
+            "description": "Id do produto",
+            "example": "1"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do produto",
+            "example": "Coca-cola lata"
+          },
+          "preco": {
+            "type": "double",
+            "description": "valor do produto",
+            "example": "6"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do produto",
+            "example": "refrigerante em lata de 350 ml"
+          },
+          "idCategoria": {
+            "type": "integer",
+            "description": "Id da categoria do produto",
+            "example": "2"
+          }
+        },
+        "required": ["id", "nome", "preco", "idCategoria", "descricao"]
       }
     }
   }

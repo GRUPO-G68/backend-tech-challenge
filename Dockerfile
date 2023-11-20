@@ -6,5 +6,5 @@ COPY src/ .
 COPY swagger.json .
 COPY index.html .
 RUN npm install
-CMD ["lss"]
+CMD ["ls"]
 CMD ["npm", "run", "start"]

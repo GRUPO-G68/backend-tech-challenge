@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: db-configmap
 data:
-  MYSQL_HOST: svc-db:3306
+  MYSQL_HOST: svc-db:30001
   MARIADB_ROOT_PASSWORD: segredo
   MYSQL_USER: fiap
   MYSQL_PASSWORD: fiap

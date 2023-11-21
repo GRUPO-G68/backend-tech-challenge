@@ -1,10 +1,14 @@
 FROM node
+
 WORKDIR /home/node/app
+
 COPY package.json .
 COPY tsconfig.json .
-COPY src/ .
 COPY swagger.json .
 COPY index.html .
+COPY .env.exemple .env
+COPY src/ ./src
+
 RUN npm install
-CMD ["ls"]
-CMD ["npm", "run", "start"]
+
+CMD npm run migrate && npm run seed && npm run start

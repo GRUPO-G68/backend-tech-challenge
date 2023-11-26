@@ -21,8 +21,6 @@ async function seedFuncionarios() {
     console.log("Funcionários inseridos com sucesso");
   } catch (error) {
     console.error("Erro ao inserir Funcionarios:", error);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-configmap
+data:
+  HOST_DB: svc-mysql-fiap:3306
+  USER_DB: root
+  PASS_DB: segredo
+  DATABASE_DB: fiap_db

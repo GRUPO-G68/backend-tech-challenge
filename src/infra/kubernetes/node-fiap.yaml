@@ -12,4 +12,4 @@ spec:
         - containerPort: 9001
       envFrom:
         - configMapRef:
-            name: db-configmap
+            name: node-fiap-configmap

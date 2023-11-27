@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: db-configmap
+  name: node-fiap-configmap
 data:
   HOST_DB: svc-mysql-fiap:3306
   USER_DB: root

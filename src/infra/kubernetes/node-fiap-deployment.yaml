@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-fiap-deployment
+spec:
+  template:
+    metadata:
+      name: node-fiap
+      labels:
+        app: node-fiap
+    spec:
+      containers:
+        - name: node-fiap-container
+          image: noobezera/node-fiap:latest
+          ports:
+            - containerPort: 9001
+          envFrom:
+            - configMapRef:
+                name: node-fiap-configmap
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-fiap

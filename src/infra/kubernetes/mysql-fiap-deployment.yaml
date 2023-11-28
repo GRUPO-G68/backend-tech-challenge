@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-fiap-deployment
+spec:
+  template:
+    metadata:
+      name: mysql-fiap
+      labels:
+        app: mysql-fiap
+    spec:
+      containers:
+        - name: mysql-fiap-container
+          image: mariadb:latest
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - configMapRef:
+                name: mysql-fiap-configmap
+  selector:
+    matchLabels:
+      app: mysql-fiap

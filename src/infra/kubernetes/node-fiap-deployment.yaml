@@ -30,7 +30,7 @@ spec:
               port: 9001
             periodSeconds: 10
             failureThreshold: 5
-            initialDelaySeconds: 3
+            initialDelaySeconds: 60
   replicas: 3
   selector:
     matchLabels:

@@ -52,8 +52,8 @@ model Produto {
   categoria   Categoria    @relation(fields: [idCategoria], references: [id])
   idCategoria  Int
   preco       Float
-  nome        String    @db.VarChar(50)
-  descricao   String    @db.VarChar(150)
+  nome        String    @db.VarChar(50)  @unique
+  descricao   String    @db.VarChar(150) @unique
   createdAt   DateTime  @default(now()) @db.DateTime
   updatedAt   DateTime? @db.DateTime
   status      Int       @default(1) @db.TinyInt
@@ -62,7 +62,7 @@ model Produto {
 
 model Categoria {
   id          Int      @id @default(autoincrement())
-  descricao   String   @db.VarChar(50) @default("0")
+  descricao   String   @db.VarChar(50) @default("0") @unique
   createdAt   DateTime @default(now()) @db.DateTime
   updatedAt   DateTime? @db.DateTime
   status      Int?     @default(1) @db.TinyInt
@@ -71,6 +71,6 @@ model Categoria {
 
 model Situacao {
   id         Int      @id @default(autoincrement())
-  descricao  String
+  descricao  String   @unique
   pedidos    Pedido[]
 }

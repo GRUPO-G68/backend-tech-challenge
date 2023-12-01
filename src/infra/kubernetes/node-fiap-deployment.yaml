@@ -17,6 +17,20 @@ spec:
           envFrom:
             - configMapRef:
                 name: node-fiap-configmap
+          livenessProbe:
+            httpGet:
+              path: /cliente
+              port: 9001
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /cliente
+              port: 9001
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 3
   replicas: 3
   selector:
     matchLabels:

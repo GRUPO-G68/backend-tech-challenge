@@ -6,7 +6,7 @@ USE fiap_db;
 -- Criaçao das tabelas
 
 -- Cliente
-CREATE TABLE if not EXISTS Cliente (
+CREATE TABLE IF NOT EXISTS Cliente (
   id INT AUTO_INCREMENT PRIMARY KEY ,
   nome VARCHAR(191),
   cpf VARCHAR(11) UNIQUE,
@@ -14,7 +14,7 @@ CREATE TABLE if not EXISTS Cliente (
 );
 
 -- Funcionario
-CREATE TABLE Funcionario (
+CREATE TABLE IF NOT EXISTS Funcionario (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(191),
   cpf VARCHAR(11) UNIQUE,
@@ -25,7 +25,7 @@ CREATE TABLE Funcionario (
 );
 
 -- Categoria
-CREATE TABLE Categoria (
+CREATE TABLE IF NOT EXISTS Categoria (
   id INT AUTO_INCREMENT PRIMARY KEY,
   descricao VARCHAR(50) DEFAULT '0' UNIQUE,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -34,13 +34,13 @@ CREATE TABLE Categoria (
 );
 
 -- Situacao
-CREATE TABLE Situacao (
+CREATE TABLE IF NOT EXISTS Situacao (
   id INT AUTO_INCREMENT PRIMARY KEY,
   descricao VARCHAR(191)
 );
 
 -- Pedido
-CREATE TABLE Pedido (
+CREATE TABLE IF NOT EXISTS Pedido (
   id INT AUTO_INCREMENT PRIMARY KEY,
   idCliente INT,
   idSituacao INT,
@@ -52,7 +52,7 @@ CREATE TABLE Pedido (
 );
 
 -- Produto
-CREATE TABLE Produto (
+CREATE TABLE IF NOT EXISTS Produto (
   id INT AUTO_INCREMENT PRIMARY KEY,
   idCategoria INT,
   preco FLOAT,
@@ -65,7 +65,7 @@ CREATE TABLE Produto (
 );
 
 -- PedidoItem
-CREATE TABLE PedidoItem (
+CREATE TABLE IF NOT EXISTS PedidoItem (
   id INT AUTO_INCREMENT PRIMARY KEY,
   idPedido INT,
   idProduto INT,
@@ -73,6 +73,3 @@ CREATE TABLE PedidoItem (
   FOREIGN KEY (idPedido) REFERENCES Pedido(id),
   FOREIGN KEY (idProduto) REFERENCES Produto(id)
 );
-
-
-

@@ -19,19 +19,22 @@ spec:
                 name: node-fiap-configmap
           livenessProbe:
             httpGet:
-              path: /cliente
+              path: /
               port: 9001
             periodSeconds: 10
             failureThreshold: 3
-            initialDelaySeconds: 60
+            initialDelaySeconds: 10
           readinessProbe:
             httpGet:
-              path: /cliente
+              path: /
               port: 9001
             periodSeconds: 10
             failureThreshold: 5
-            initialDelaySeconds: 60
-  replicas: 3
+            initialDelaySeconds: 10
+          resources:
+            requests:
+              cpu: 1000m
+  replicas: 2
   selector:
     matchLabels:
       app: node-fiap

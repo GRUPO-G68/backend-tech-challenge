@@ -11,4 +11,4 @@ COPY src/ ./src
 
 RUN npm install
 
-CMD npm run migrate && npm run generate && npm run seed && npm run start
+CMD npm run start

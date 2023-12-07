@@ -13,6 +13,7 @@ services:
       - MARIADB_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - ./docker/mariadb:/var/lib/mysql
+      - ./db-init-scripts:/docker-entrypoint-initdb.d
     networks:
       - fiap-network  
   api:

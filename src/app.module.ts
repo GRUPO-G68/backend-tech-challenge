@@ -1,11 +1,13 @@
 import { Module } from "@nestjs/common";
 import { AppService } from "./app.service";
 import { ClientController } from "./adapters/cliente/client.controller";
-import { PedidoController } from "./adapters/pedido/pedido.controller";
+import { OrderController } from "./adapters/pedido/order.controller";
 import { ProdutoController } from "./adapters/produto/produto.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ClientRepositoryAdapter } from "./adapters/cliente/client.repository";
 import { Client } from "./domain/entities/client.entity";
+import { Order } from "./domain/entities/order.entity";
+import { OrderRepositoryAdapter } from "./adapters/pedido/order.repository";
 
 @Module({
   imports: [
@@ -19,10 +21,10 @@ import { Client } from "./domain/entities/client.entity";
       synchronize: true,
       autoLoadEntities: true,
     }),
-    TypeOrmModule.forFeature([Client]),
+    TypeOrmModule.forFeature([Client, Order]),
   ],
-  controllers: [ClientController, PedidoController, ProdutoController],
-  providers: [ClientRepositoryAdapter],
+  controllers: [ClientController, OrderController, ProdutoController],
+  providers: [ClientRepositoryAdapter, OrderRepositoryAdapter],
 })
 export class AppModule {}
 

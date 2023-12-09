@@ -1,5 +1,5 @@
 import { Client } from "src/domain/entities/client.entity";
-import { IClientRepository } from "../../application/ports/client.repository";
+import { IClientRepository } from "../../application/ports/client-repository.port";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";

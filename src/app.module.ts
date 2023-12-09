@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { AppService } from "./app.service";
 import { ClientController } from "./adapters/cliente/client.controller";
 import { OrderController } from "./adapters/pedido/order.controller";
 import { ProductController } from "./adapters/produto/product.controller";

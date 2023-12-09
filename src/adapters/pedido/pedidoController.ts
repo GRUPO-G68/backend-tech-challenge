@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { PedidoInDatabaseRepository } from "./pedidoInDatabaseRepository";
-import { MudarSituacaoPedido } from "../../applications/services/mudarSituacaoPedido";
+import { MudarSituacaoPedido } from "../../application/services/mudarSituacaoPedido";
 
 const pedidoController = Router();
 const pedidoRepository = new PedidoInDatabaseRepository();

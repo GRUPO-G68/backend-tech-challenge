@@ -2,9 +2,9 @@ import express from "express";
 import { config } from "dotenv";
 import swaggerUi from "swagger-ui-express";
 // import swaggerDocument from "../../s"
-import clienteController from "../adapter/cliente/clienteController";
-import pedidoController from "../adapter/pedido/pedidoController";
-import produtoController from "../adapter/produto/produto.controller";
+import clienteController from "../adapters/cliente/clienteController";
+import pedidoController from "../adapters/pedido/pedidoController";
+import produtoController from "../adapters/produto/produto.controller";
 import bodyParser from "body-parser";
 
 config();

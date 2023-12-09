@@ -1,6 +1,6 @@
 import { Cliente } from "../../domain/entities/clientes";
-import { IClienteRepository } from "../../applications/ports/clienteRepository";
-import Database from "../../infra/database";
+import { IClienteRepository } from "../../application/ports/clienteRepository";
+import Database from "../../infrastructure/database";
 
 export class clienteInDatabaseRepository implements IClienteRepository {
   db: Database;
@@ -14,7 +14,7 @@ export class clienteInDatabaseRepository implements IClienteRepository {
 
   async findByCpf(cpf: string): Promise<Cliente | null> {
     const results = await this.db.query(
-      `SELECT * FROM Cliente WHERE cpf = ${cpf}`
+      `SELECT * FROM Cliente WHERE cpf = ${cpf}`,
     );
     if (results && results.length > 0) {
       const clienteData = results[0];
@@ -32,7 +32,7 @@ export class clienteInDatabaseRepository implements IClienteRepository {
 
   async save(cliente: Cliente): Promise<void> {
     return await this.db.query(
-      `INSERT INTO Cliente ( nome, cpf, email) VALUES ('${cliente.nome}', '${cliente.cpf}', '${cliente.email}')`
+      `INSERT INTO Cliente ( nome, cpf, email) VALUES ('${cliente.nome}', '${cliente.cpf}', '${cliente.email}')`,
     );
   }
 }

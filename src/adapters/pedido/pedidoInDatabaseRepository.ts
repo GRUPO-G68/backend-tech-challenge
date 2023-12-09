@@ -1,7 +1,7 @@
 import { Pedido } from "../../domain/entities/pedido";
-import { IPedidoRepository } from "../../applications/ports/pedidoRepository";
+import { IPedidoRepository } from "../../application/ports/pedidoRepository";
 import { clienteInDatabaseRepository } from "../cliente/clienteInDatabaseRepository";
-import Database from "../../infra/database";
+import Database from "../../infrastructure/database";
 
 export class PedidoInDatabaseRepository implements IPedidoRepository {
   db: Database;
@@ -10,7 +10,7 @@ export class PedidoInDatabaseRepository implements IPedidoRepository {
   }
   private async itensPedido(idPedido: string) {
     const itens = await this.db.query(
-      `SELECT * FROM PedidoItem WHERE idPedido = ${idPedido}`
+      `SELECT * FROM PedidoItem WHERE idPedido = ${idPedido}`,
     );
     return itens;
   }
@@ -42,7 +42,7 @@ export class PedidoInDatabaseRepository implements IPedidoRepository {
       p.*,
       s.descricao AS situacao 
     FROM Pedido AS p
-      LEFT JOIN Situacao AS s ON s.id = p.idSituacao WHERE p.id = ${id}`
+      LEFT JOIN Situacao AS s ON s.id = p.idSituacao WHERE p.id = ${id}`,
     );
     if (pedido.length > 0) {
       pedido[0].itens = await this.itensPedido(id);
@@ -55,7 +55,7 @@ export class PedidoInDatabaseRepository implements IPedidoRepository {
       `UPDATE Pedido
       SET idSituacao = ${idSituacao}
       where
-        id = ${id}`
+        id = ${id}`,
     );
     return "Pedido atualizado com sucesso";
   }
@@ -65,7 +65,7 @@ export class PedidoInDatabaseRepository implements IPedidoRepository {
 
     if (pedido.cpfCliente) {
       const cliente = await new clienteInDatabaseRepository().findByCpf(
-        pedido.cpfCliente
+        pedido.cpfCliente,
       );
 
       if (cliente === null || Object.keys(cliente as object).length == 0) {
@@ -78,14 +78,14 @@ export class PedidoInDatabaseRepository implements IPedidoRepository {
     const pedidoResult = await this.db.query(
       `INSERT INTO Pedido ( idCliente, idSituacao ) VALUES (${
         idCliente ? `'${idCliente}'` : "NULL"
-      }, '1')`
+      }, '1')`,
     );
     const idPedido = pedidoResult.insertId;
 
     for (const prop in pedido.itens) {
       const item = pedido.itens[prop];
       await this.db.query(
-        `INSERT INTO PedidoItem ( idPedido, idProduto, quantidade ) VALUES ('${idPedido}','${item.id}', '${item.quantidade}')`
+        `INSERT INTO PedidoItem ( idPedido, idProduto, quantidade ) VALUES ('${idPedido}','${item.id}', '${item.quantidade}')`,
       );
     }
 

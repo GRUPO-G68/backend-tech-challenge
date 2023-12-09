@@ -8,6 +8,7 @@ import { ClientRepositoryAdapter } from "./adapters/cliente/client.repository";
 import { Client } from "./domain/entities/client.entity";
 import { Order } from "./domain/entities/order.entity";
 import { OrderRepositoryAdapter } from "./adapters/pedido/order.repository";
+import { Product } from "./domain/entities/product.entity";
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { OrderRepositoryAdapter } from "./adapters/pedido/order.repository";
       synchronize: true,
       autoLoadEntities: true,
     }),
-    TypeOrmModule.forFeature([Client, Order]),
+    TypeOrmModule.forFeature([Client, Order, Product]),
   ],
   controllers: [ClientController, OrderController, ProductController],
   providers: [ClientRepositoryAdapter, OrderRepositoryAdapter],

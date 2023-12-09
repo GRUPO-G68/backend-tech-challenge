@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { IClient } from "../../domain/entities/cliente.entity";
+import { IClient } from "../../domain/entities/client.entity";
 import { ClientRepositoryAdapter } from "./client.repository";
 
 @Controller("clients")

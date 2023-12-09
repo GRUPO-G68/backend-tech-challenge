@@ -1,4 +1,4 @@
-import { Client } from "src/domain/entities/cliente.entity";
+import { Client } from "src/domain/entities/client.entity";
 import { IClientRepository } from "../../application/ports/client.repository";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";

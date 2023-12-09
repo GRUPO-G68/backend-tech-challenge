@@ -5,7 +5,7 @@ import { PedidoController } from "./adapters/pedido/pedido.controller";
 import { ProdutoController } from "./adapters/produto/produto.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ClientRepositoryAdapter } from "./adapters/cliente/client.repository";
-import { Client } from "./domain/entities/cliente.entity";
+import { Client } from "./domain/entities/client.entity";
 
 @Module({
   imports: [

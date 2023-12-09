@@ -1,4 +1,4 @@
-import { Client } from "../../domain/entities/cliente.entity";
+import { Client } from "../../domain/entities/client.entity";
 
 export interface IClientRepository {
   findAll(): Promise<Array<Client> | null>;

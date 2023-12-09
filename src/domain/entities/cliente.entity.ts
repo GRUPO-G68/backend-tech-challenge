@@ -1,4 +1,4 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 
 export interface IClient {
   id: string;
@@ -9,7 +9,7 @@ export interface IClient {
 
 @Entity()
 export class Client implements IClient {
-  @Column({ type: "text", unique: true, nullable: false })
+  @PrimaryColumn()
   id: string;
   @Column({ type: "text", unique: true, nullable: false })
   name: string;

@@ -11,8 +11,9 @@ export class ClientRepositoryAdapter implements IClientRepository {
     private readonly clientRepository: Repository<Client>,
   ) {}
 
-  async save(client: Client): Promise<void> {
-    await this.clientRepository.save(client);
+  async save(client: Client): Promise<{ clientId: string }> {
+    const clientCreated = await this.clientRepository.save(client);
+    return { clientId: clientCreated.id };
   }
   findAll(): Promise<Client[]> {
     throw new Error("Method not implemented.");

@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { IClientRepository } from "../../application/ports/client.repository";
 import { IClient } from "../../domain/entities/cliente.entity";
 import { ClientRepositoryAdapter } from "./client.repository";
 
@@ -9,19 +8,18 @@ export class ClientController {
     private readonly clientRepositoryAdapter: ClientRepositoryAdapter,
   ) {}
   @Post()
-  async createClient(@Body() client: IClient): Promise<{ message: string }> {
-    await this.clientRepositoryAdapter.save(client);
-    return { message: "Cliente cadastrado com sucesso" };
+  async createClient(@Body() client: IClient): Promise<{ clientId: string }> {
+    return this.clientRepositoryAdapter.save(client);
   }
 
   @Get()
-  findAllClients(): { message: string } {
-    return { message: "Cliente cadastrado com sucesso" };
+  async findAllClients(): Promise<IClient[]> {
+    return this.clientRepositoryAdapter.findAll();
   }
   @Get(":clientDocument")
-  filterClientByDocument(@Param() input: { clienteCpf: string }): {
-    message: string;
-  } {
-    return { message: "Cliente cadastrado com sucesso" };
+  async filterClientByDocument(
+    @Param("clientDocument") clientDocument: string,
+  ): Promise<IClient> {
+    return this.clientRepositoryAdapter.findByCpf(clientDocument);
   }
 }

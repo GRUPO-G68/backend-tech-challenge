@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { AppService } from "./app.service";
 import { ClientController } from "./adapters/cliente/client.controller";
 import { OrderController } from "./adapters/pedido/order.controller";
-import { ProdutoController } from "./adapters/produto/produto.controller";
+import { ProductController } from "./adapters/produto/product.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ClientRepositoryAdapter } from "./adapters/cliente/client.repository";
 import { Client } from "./domain/entities/client.entity";
@@ -23,7 +23,7 @@ import { OrderRepositoryAdapter } from "./adapters/pedido/order.repository";
     }),
     TypeOrmModule.forFeature([Client, Order]),
   ],
-  controllers: [ClientController, OrderController, ProdutoController],
+  controllers: [ClientController, OrderController, ProductController],
   providers: [ClientRepositoryAdapter, OrderRepositoryAdapter],
 })
 export class AppModule {}

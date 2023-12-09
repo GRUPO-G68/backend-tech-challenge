@@ -1,10 +1,23 @@
-import { Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from "@nestjs/common";
+import { ProductRepositoryAdapter } from "./product.repository";
+import { Product } from "../../domain/entities/product.entity";
 
 @Controller("produtos")
-export class ProdutoController {
+export class ProductController {
+  constructor(private readonly productRepository: ProductRepositoryAdapter) {}
   @Post()
-  criarPedido(): { message: string } {
-    return { message: "Cliente cadastrado com sucesso" };
+  async createProduct(
+    @Body() product: Product,
+  ): Promise<{ productId: string }> {
+    return this.productRepository.save(product);
   }
   @Put()
   alterarPedido(): { message: string } {

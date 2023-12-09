@@ -9,8 +9,10 @@ import {
 } from "@nestjs/common";
 import { ProductRepositoryAdapter } from "./product.repository";
 import { Product } from "../../domain/entities/product.entity";
+import { ApiTags } from "@nestjs/swagger";
 
-@Controller("produtos")
+@ApiTags("Products")
+@Controller("products")
 export class ProductController {
   constructor(private readonly productRepository: ProductRepositoryAdapter) {}
   @Post()

@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { OrderRepositoryAdapter } from "./order.repository";
 import { IOrder, Order } from "../../domain/entities/order.entity";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags("Orders")
 @Controller("orders")
 export class OrderController {
   constructor(

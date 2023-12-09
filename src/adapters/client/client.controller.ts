@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { IClient } from "../../domain/entities/client.entity";
 import { ClientRepositoryAdapter } from "./client.repository";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags("Clients")
 @Controller("clients")
 export class ClientController {
   constructor(

@@ -4,7 +4,7 @@ import swaggerUi from "swagger-ui-express";
 // import swaggerDocument from "../../s"
 import clienteController from "../adapters/cliente/clienteController";
 import pedidoController from "../adapters/pedido/pedidoController";
-import produtoController from "../adapters/produto/produto.controller";
+import produtoController from "../adapters/produto/produtoController";
 import bodyParser from "body-parser";
 
 config();

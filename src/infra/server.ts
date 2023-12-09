@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "../../swagger.json";
+// import swaggerDocument from "../../s"
 import clienteController from "../adapter/cliente/clienteController";
 import pedidoController from "../adapter/pedido/pedidoController";
 import produtoController from "../adapter/produto/produto.controller";
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(clienteController, produtoController, pedidoController);
 
 /*docs*/
-app.use("/documentacao", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use("/documentacao", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/swagger", (_req, res) => {
   return res.sendFile(process.cwd() + "/swagger.json");
 });

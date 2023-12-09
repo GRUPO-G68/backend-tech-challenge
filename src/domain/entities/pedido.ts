@@ -1,6 +1,7 @@
-import { Produto } from "@prisma/client";
+// import { Produto } from "@prisma/client";
 
-export interface ProdutoPedido extends Produto {
+export interface ProdutoPedido {
+  id: string
   quantidade: number;
 }
 

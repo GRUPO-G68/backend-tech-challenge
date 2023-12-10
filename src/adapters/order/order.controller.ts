@@ -2,6 +2,10 @@ import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { OrderRepositoryAdapter } from "./order.repository";
 import { IOrder, Order } from "../../domain/entities/order.entity";
 import { ApiTags } from "@nestjs/swagger";
+// @todo Tratar excecao na controller
+// @todo Melhorar Documentacao
+// @todo Adicionar Dtos
+// @todo Adicionar Validacao de Entrada
 @ApiTags("Orders")
 @Controller("orders")
 export class OrderController {

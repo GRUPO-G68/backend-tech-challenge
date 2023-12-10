@@ -3,6 +3,7 @@ import mariadb, { Pool, PoolConnection } from "mariadb";
 
 dotenv.config();
 
+// @todo Ver o que vai ficar nessa camada de infrastructure, models and repositories?
 class Database {
   private pool: Pool;
 

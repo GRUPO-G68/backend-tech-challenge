@@ -3,7 +3,7 @@ import { IClientRepository } from "../../application/ports/client-repository.por
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
-
+// @todo implementar os metodos
 @Injectable()
 export class ClientRepositoryAdapter implements IClientRepository {
   constructor(

@@ -10,7 +10,10 @@ import {
 import { ProductRepositoryAdapter } from "./product.repository";
 import { Product } from "../../domain/entities/product.entity";
 import { ApiTags } from "@nestjs/swagger";
-
+// @todo Tratar excecao na controller
+// @todo Melhorar Documentacao
+// @todo Adicionar Dtos
+// @todo Adicionar Validacao de Entrada
 @ApiTags("Products")
 @Controller("products")
 export class ProductController {
@@ -21,14 +24,18 @@ export class ProductController {
   ): Promise<{ productId: string }> {
     return this.productRepository.save(product);
   }
+
+  // @todo implementar metodo
   @Put()
   alterarPedido(): { message: string } {
     return { message: "Cliente cadastrado com sucesso" };
   }
+  // @todo implementar metodo
   @Get()
   buscarTodosProdutos(): { message: string } {
     return { message: "Cliente cadastrado com sucesso" };
   }
+  // @todo implementar metodo
   @Get("categoria/:idCategoria")
   buscarProdutosPorCategoria(): { message: string } {
     return { message: "Cliente cadastrado com sucesso" };
@@ -38,6 +45,7 @@ export class ProductController {
   buscarProdutoPorId(): { message: string } {
     return { message: "Cliente cadastrado com sucesso" };
   }
+  // @todo implementar metodo
   @Delete(":idPedido")
   deletarPedidoPorId(@Param() input: { clienteCpf: string }): {
     message: string;

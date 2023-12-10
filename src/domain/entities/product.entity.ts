@@ -9,6 +9,7 @@ export interface IProduct {
   updatedAt: string;
 }
 
+// @todo adicionar anotaçoes para o banco de dados
 export class Product implements IProduct {
   id: string;
   category: number;

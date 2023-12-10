@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { IProductRepository } from "../../application/ports/product-repository.port";
 import { IProduct } from "src/domain/entities/product.entity";
 
+// @todo implementar os metodos e injetar o repository modelo para comunicar com o db
 @Injectable()
 export class ProductRepositoryAdapter implements IProductRepository {
   delete(productId: string): Promise<void> {

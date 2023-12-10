@@ -2,9 +2,9 @@ import { Injectable } from "@nestjs/common";
 import { IOrderRepository } from "../../application/ports/order-repository.port";
 import { IOrder, Order } from "../../domain/entities/order.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Client } from "../../domain/entities/client.entity";
 import { Repository } from "typeorm";
 
+// @todo implementar os metodos
 @Injectable()
 export class OrderRepositoryAdapter implements IOrderRepository {
   constructor(

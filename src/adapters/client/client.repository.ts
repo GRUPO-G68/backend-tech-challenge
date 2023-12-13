@@ -16,7 +16,7 @@ export class ClientRepositoryAdapter implements IClientRepository {
     return { clientId };
   }
   findAll(): Promise<Client[]> {
-    throw new Error('Method not implemented.');
+    return this.clientRepository.find();
   }
   findByCpf(cpf: string): Promise<Client> {
     throw new Error('Method not implemented.');

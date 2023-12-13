@@ -1,8 +1,7 @@
-import { Client } from '../../domain/entities/client.entity';
+import { Client, IClient } from '../../domain/entities/client.entity';
 
-// @todo padroinar nome de parametros e retornos
 export interface IClientRepository {
-  findAll(): Promise<Array<Client> | null>;
-  findByDocument(document: string): Promise<Client | null>;
+  findAll(): Promise<IClient[]>;
+  findByDocument(document: string): Promise<IClient>;
   save(client: Client): Promise<{ clientId: string }>;
 }

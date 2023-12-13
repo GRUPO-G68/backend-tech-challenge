@@ -1,10 +1,10 @@
 export interface IProduct {
   id: string;
   name: string;
-  descriptions: string;
-  category: number;
-  price: string;
-  status: number;
+  description: string;
+  category: string;
+  price: number;
+  status: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -12,11 +12,11 @@ export interface IProduct {
 // @todo adicionar anotaçoes para o banco de dados
 export class Product implements IProduct {
   id: string;
-  category: number;
-  descriptions: string;
+  category: string;
+  description: string;
   name: string;
-  price: string;
-  status: number;
+  price: number;
+  status: string;
   createdAt: string;
   updatedAt: string;
 }

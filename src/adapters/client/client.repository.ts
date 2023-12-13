@@ -15,10 +15,10 @@ export class ClientRepositoryAdapter implements IClientRepository {
     const { id: clientId } = await this.clientRepository.save(client);
     return { clientId };
   }
-  findAll(): Promise<Client[]> {
+  async findAll(): Promise<Client[]> {
     return this.clientRepository.find();
   }
-  findByCpf(cpf: string): Promise<Client> {
-    throw new Error('Method not implemented.');
+  async findByDocument(document: string): Promise<Client> {
+    return this.clientRepository.findOne({ where: { document } });
   }
 }

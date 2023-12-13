@@ -25,6 +25,6 @@ export class ClientController {
   }
   @Get(':clientDocument')
   async filterClientByDocument(@Param('clientDocument') clientDocument: string): Promise<IClient> {
-    return this.clientRepositoryAdapter.findByCpf(clientDocument);
+    return this.clientRepositoryAdapter.findByDocument(clientDocument);
   }
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 export interface IClient {
   id: string;
@@ -9,17 +9,16 @@ export interface IClient {
 
 @Entity()
 export class Client implements IClient {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column({ type: "text", unique: true, nullable: false })
+  @Column({ type: 'text', unique: true, nullable: false })
   name: string;
-  @Column({ type: "text", unique: true, nullable: false })
+  @Column({ type: 'text', unique: true, nullable: false })
   email: string;
-  @Column({ type: "text", unique: true, nullable: false })
+  @Column({ type: 'text', unique: true, nullable: false })
   document: string;
 
-  constructor(id: string, name: string, email: string, document: string) {
-    this.id = id;
+  constructor(name: string, email: string, document: string) {
     this.name = name;
     this.document = document;
     this.email = email;

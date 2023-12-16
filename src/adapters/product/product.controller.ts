@@ -45,7 +45,7 @@ export class ProductController {
 
   // @todo ver o retorno em caso de falha
   @Delete(':productId')
-  async deletarPedidoPorId(@Param('productId') productId: string): Promise<{ productWasDeleted: boolean }> {
+  async deleteProduct(@Param('productId') productId: string): Promise<{ productWasDeleted: boolean }> {
     await this.productRepository.delete(productId);
     return { productWasDeleted: true };
   }

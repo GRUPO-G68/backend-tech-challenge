@@ -33,6 +33,6 @@ export class ProductRepositoryAdapter implements IProductRepository {
   }
 
   async delete(productId: string): Promise<void> {
-    return Promise.resolve(undefined);
+    await this.productRepository.delete(productId);
   }
 }

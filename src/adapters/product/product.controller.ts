@@ -34,18 +34,19 @@ export class ProductController {
     return this.productRepository.findById(productId);
   }
 
+  // @todo ver o retorno em caso de falha
   @Put(':productId')
-  async updateProduct(@Param('productId') productId: string, @Body() inputDto: UpdateProductDto): Promise<void> {
+  async updateProduct(@Param('productId') productId: string, @Body() inputDto: UpdateProductDto): Promise<{ productWasUpdated: boolean }> {
     const existingProduct: Product = await this.productRepository.findById(productId);
     const product: Product = new Product(inputDto.name, inputDto.price, inputDto.category, inputDto.status, inputDto.description);
     await this.productRepository.update({ ...existingProduct, ...product });
+    return { productWasUpdated: true };
   }
 
-  // @todo implementar metodo
-  @Delete(':idPedido')
-  deletarPedidoPorId(@Param() input: { clienteCpf: string }): {
-    message: string;
-  } {
-    return { message: 'Cliente cadastrado com sucesso' };
+  // @todo ver o retorno em caso de falha
+  @Delete(':productId')
+  async deletarPedidoPorId(@Param('productId') productId: string): Promise<{ productWasDeleted: boolean }> {
+    await this.productRepository.delete(productId);
+    return { productWasDeleted: true };
   }
 }

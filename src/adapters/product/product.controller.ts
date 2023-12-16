@@ -20,8 +20,18 @@ export class ProductController {
   }
 
   @Get()
-  async findAllProducts(): Promise<IProduct[]> {
+  findAllProducts(): Promise<IProduct[]> {
     return this.productRepository.findAll();
+  }
+
+  @Get('category/:categoryId')
+  filterProductsByCategory(@Param('categoryId') categoryId: string): Promise<IProduct[]> {
+    return this.productRepository.findByCategory(categoryId);
+  }
+
+  @Get(':productId')
+  findProductById(@Param('productId') productId: string): Promise<IProduct> {
+    return this.productRepository.findById(productId);
   }
 
   @Put(':productId')
@@ -31,16 +41,6 @@ export class ProductController {
     await this.productRepository.update({ ...existingProduct, ...product });
   }
 
-  @Get('category/:categoryId')
-  filterProductsByCategory(@Param('categoryId') categoryId: string): Promise<IProduct[]> {
-    return this.productRepository.findByCategory(categoryId);
-  }
-
-  // @todo implementar metodo
-  @Get(':idProduto')
-  buscarProdutoPorId(): { message: string } {
-    return { message: 'Cliente cadastrado com sucesso' };
-  }
   // @todo implementar metodo
   @Delete(':idPedido')
   deletarPedidoPorId(@Param() input: { clienteCpf: string }): {

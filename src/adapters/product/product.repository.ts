@@ -16,23 +16,23 @@ export class ProductRepositoryAdapter implements IProductRepository {
     return { productId };
   }
 
-  delete(productId: string): Promise<void> {
-    return Promise.resolve(undefined);
-  }
-
   findAll(): Promise<IProduct[]> {
     return this.productRepository.find();
   }
 
-  findByCategory(categoryId: string): Promise<IProduct[]> {
+  async findByCategory(categoryId: string): Promise<IProduct[]> {
     return this.productRepository.find({ where: { category: categoryId } });
   }
 
-  findById(productId: string): Promise<IProduct> {
-    return Promise.resolve(undefined);
+  async findById(productId: string): Promise<IProduct> {
+    return this.productRepository.findOneBy({ id: productId });
   }
 
   async update(product: Product): Promise<void> {
     await this.productRepository.update(product.id, product);
+  }
+
+  async delete(productId: string): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }

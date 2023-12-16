@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ProductRepositoryAdapter } from './product.repository';
-import { Product, ProductStatusEnum } from '../../domain/entities/product.entity';
+import { IProduct, Product, ProductStatusEnum } from '../../domain/entities/product.entity';
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
 import { CreateProductDto } from './product.dtos';
 // @todo Tratar excecao na controller
@@ -19,16 +19,18 @@ export class ProductController {
     return this.productRepository.save(product);
   }
 
+  @Get()
+  async findAllProducts(): Promise<IProduct[]> {
+    return this.productRepository.findAll();
+  }
+
   // @todo implementar metodo
   @Put()
   alterarPedido(): { message: string } {
     return { message: 'Cliente cadastrado com sucesso' };
   }
   // @todo implementar metodo
-  @Get()
-  buscarTodosProdutos(): { message: string } {
-    return { message: 'Cliente cadastrado com sucesso' };
-  }
+
   // @todo implementar metodo
   @Get('categoria/:idCategoria')
   buscarProdutosPorCategoria(): { message: string } {

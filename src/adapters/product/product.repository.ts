@@ -20,16 +20,16 @@ export class ProductRepositoryAdapter implements IProductRepository {
     return Promise.resolve(undefined);
   }
 
-  findAll(): Promise<IProduct> {
-    return Promise.resolve(undefined);
+  findAll(): Promise<IProduct[]> {
+    return this.productRepository.find();
   }
 
   findByCategory(categoryId: string): Promise<IProduct[]> {
     return Promise.resolve([]);
   }
 
-  findById(productId: string): Promise<IProduct[]> {
-    return Promise.resolve([]);
+  findById(productId: string): Promise<IProduct> {
+    return Promise.resolve(undefined);
   }
 
   update(product: IProduct): Promise<void> {

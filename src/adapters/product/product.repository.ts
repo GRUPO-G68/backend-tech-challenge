@@ -25,7 +25,7 @@ export class ProductRepositoryAdapter implements IProductRepository {
   }
 
   findByCategory(categoryId: string): Promise<IProduct[]> {
-    return Promise.resolve([]);
+    return this.productRepository.find({ where: { category: categoryId } });
   }
 
   findById(productId: string): Promise<IProduct> {

@@ -31,16 +31,12 @@ export class ProductController {
     await this.productRepository.update({ ...existingProduct, ...product });
   }
 
-  // @todo implementar metodo
-
-  // @todo implementar metodo
-
-  // @todo implementar metodo
-  @Get('categoria/:idCategoria')
-  buscarProdutosPorCategoria(): { message: string } {
-    return { message: 'Cliente cadastrado com sucesso' };
+  @Get('category/:categoryId')
+  filterProductsByCategory(@Param('categoryId') categoryId: string): Promise<IProduct[]> {
+    return this.productRepository.findByCategory(categoryId);
   }
 
+  // @todo implementar metodo
   @Get(':idProduto')
   buscarProdutoPorId(): { message: string } {
     return { message: 'Cliente cadastrado com sucesso' };

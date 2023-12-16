@@ -6,7 +6,7 @@ export interface IProduct {
   description: string;
   category: string;
   price: number;
-  status: string;
+  status: ProductStatus;
   createdAt: Date;
   updatedAt: Date;
 }

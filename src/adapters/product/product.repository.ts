@@ -32,7 +32,7 @@ export class ProductRepositoryAdapter implements IProductRepository {
     return Promise.resolve(undefined);
   }
 
-  update(product: IProduct): Promise<void> {
-    return Promise.resolve(undefined);
+  async update(product: Product): Promise<void> {
+    await this.productRepository.update(product.id, product);
   }
 }

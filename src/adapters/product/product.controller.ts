@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ProductRepositoryAdapter } from './product.repository';
 import { IProduct, Product, ProductStatusEnum } from '../../domain/entities/product.entity';
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
-import { CreateProductDto } from './product.dtos';
+import { CreateProductDto, UpdateProductDto } from './product.dtos';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -24,11 +24,15 @@ export class ProductController {
     return this.productRepository.findAll();
   }
 
-  // @todo implementar metodo
-  @Put()
-  alterarPedido(): { message: string } {
-    return { message: 'Cliente cadastrado com sucesso' };
+  @Put(':productId')
+  async updateProduct(@Param('productId') productId: string, @Body() inputDto: UpdateProductDto): Promise<void> {
+    const existingProduct: Product = await this.productRepository.findById(productId);
+    const product: Product = new Product(inputDto.name, inputDto.price, inputDto.category, inputDto.status, inputDto.description);
+    await this.productRepository.update({ ...existingProduct, ...product });
   }
+
+  // @todo implementar metodo
+
   // @todo implementar metodo
 
   // @todo implementar metodo

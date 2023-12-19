@@ -9,6 +9,7 @@ import { Order } from './domain/entities/order.entity';
 import { OrderRepositoryAdapter } from './adapters/order/order.repository';
 import { Product } from './domain/entities/product.entity';
 import { ProductRepositoryAdapter } from './adapters/product/product.repository';
+import { OrderItem } from './domain/entities/order-item.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { ProductRepositoryAdapter } from './adapters/product/product.repository'
       synchronize: true,
       autoLoadEntities: true,
     }),
-    TypeOrmModule.forFeature([Client, Order, Product]),
+    TypeOrmModule.forFeature([Client, Order, OrderItem, Product]),
   ],
   controllers: [ClientController, OrderController, ProductController],
   providers: [ClientRepositoryAdapter, OrderRepositoryAdapter, ProductRepositoryAdapter],

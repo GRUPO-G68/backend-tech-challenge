@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
-import { OrderItem } from './order-items.entity';
+import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { OrderItem } from './order-item.entity';
 
 // @todo criar OrderItem para fazer o vinculo da quantidade de produtos no pedido
 // @todo vincular usuario no pedido
@@ -18,7 +18,7 @@ export class Order implements Partial<IOrder> {
   id: string;
   @Column({ type: 'text', nullable: false })
   clientDocument: string;
-  @Column()
+  @OneToMany(() => OrderItem, (orderItem: OrderItem) => orderItem.order, { eager: true, cascade: true })
   items: OrderItem[];
   @Column()
   status: string;

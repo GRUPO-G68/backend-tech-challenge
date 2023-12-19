@@ -3,7 +3,7 @@ import { OrderRepositoryAdapter } from './order.repository';
 import { IOrder, Order } from '../../domain/entities/order.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateOrderDto } from './order.dtos';
-import { OrderItem } from '../../domain/entities/order-items.entity';
+import { OrderItem } from '../../domain/entities/order-item.entity';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos

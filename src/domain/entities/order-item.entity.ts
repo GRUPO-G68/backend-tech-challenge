@@ -1,9 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { IOrder } from './order.entity';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { IOrder, Order } from './order.entity';
 
 export interface IOrderItem {
   product: string;
   quantity: number;
+  order: IOrder;
 }
 @Entity()
 export class OrderItem implements Partial<IOrderItem> {
@@ -13,6 +14,9 @@ export class OrderItem implements Partial<IOrderItem> {
   product: string;
   @Column()
   quantity: number;
+  @ManyToOne(() => Order, (order: Order) => order.items)
+  @JoinColumn()
+  order: IOrder;
 
   constructor(product: string, quantity: number) {
     this.product = product;

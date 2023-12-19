@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 // @todo criar OrderItem para fazer o vinculo da quantidade de produtos no pedido
 // @todo vincular usuario no pedido
@@ -14,8 +14,8 @@ export interface IOrder {
 export class Order implements Partial<IOrder> {
   @PrimaryColumn()
   id: string;
-  @Column({ type: "text", nullable: false })
-  documentClient: string;
+  @Column({ type: 'text', nullable: false })
+  clientDocument: string;
   @Column()
   products: string;
   @Column()

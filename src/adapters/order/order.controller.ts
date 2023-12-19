@@ -3,6 +3,7 @@ import { OrderRepositoryAdapter } from './order.repository';
 import { IOrder, Order } from '../../domain/entities/order.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateOrderDto } from './order.dtos';
+import { OrderItem } from '../../domain/entities/order-items.entity';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -13,8 +14,15 @@ export class OrderController {
   constructor(private readonly orderRepositoryAdapter: OrderRepositoryAdapter) {}
   @Post()
   async createOrder(@Body() orderInput: CreateOrderDto): Promise<{ orderId: string }> {
-    // return this.orderRepositoryAdapter.save(orderInput);
-    return { orderId: undefined };
+    const { clientDocument, items: orderItems } = orderInput;
+    const order: Order = new Order(clientDocument);
+    // @ts-ignore
+    for (const orderItemDto of orderItems) {
+      const { productId, quantity } = orderItemDto;
+      const orderItemEntity = new OrderItem(productId, quantity);
+      order.addItem(orderItemEntity);
+    }
+    return this.orderRepositoryAdapter.save(order);
   }
 
   @Get()

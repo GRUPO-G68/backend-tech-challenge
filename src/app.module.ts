@@ -11,6 +11,7 @@ import { Product } from './domain/entities/product.entity';
 import { ProductRepositoryAdapter } from './adapters/product/product.repository';
 import { OrderItem } from './domain/entities/order-item.entity';
 
+// @todo trocar os dados do banco fixos por variaveis de ambiente
 @Module({
   imports: [
     TypeOrmModule.forRoot({

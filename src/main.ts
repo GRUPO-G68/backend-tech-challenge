@@ -18,7 +18,7 @@ function buildApiDocs(app: NestExpressApplication): void {
 async function bootstrap() {
   const app: NestExpressApplication = await NestFactory.create(AppModule);
   buildApiDocs(app);
-  const port = process.env.API_PORT || 3000;
+  const port = process.env.API_PORT || 9001;
   await app.listen(port);
   console.log(`API Listening on the port ${port}`);
 }

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-fiap
+  labels:
+    app: mysql-fiap
+spec:
+  containers:
+    - name: mysql-fiap-container
+      image: mariadb:latest
+      ports:
+        - containerPort: 3306
+      envFrom:
+        - configMapRef:
+            name: mysql-fiap-configmap

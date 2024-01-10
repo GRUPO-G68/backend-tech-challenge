@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClientController } from './adapters/client/client.controller';
 import { OrderController } from './adapters/order/order.controller';
 import { ProductController } from './adapters/product/product.controller';
+import { TestController } from './adapters/test/test.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientRepositoryAdapter } from './adapters/client/client.repository';
 import { Client } from './domain/entities/client.entity';
@@ -10,13 +11,12 @@ import { OrderRepositoryAdapter } from './adapters/order/order.repository';
 import { Product } from './domain/entities/product.entity';
 import { ProductRepositoryAdapter } from './adapters/product/product.repository';
 import { OrderItem } from './domain/entities/order-item.entity';
-
 // @todo trocar os dados do banco fixos por variaveis de ambiente
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mariadb',
-      host: 'localhost',
+      host: 'svc-mysql-fiap',
       port: 3306,
       username: 'root',
       password: 'tech@123',
@@ -26,9 +26,9 @@ import { OrderItem } from './domain/entities/order-item.entity';
     }),
     TypeOrmModule.forFeature([Client, Order, OrderItem, Product]),
   ],
-  controllers: [ClientController, OrderController, ProductController],
+  controllers: [ClientController, OrderController, ProductController,TestController],
   providers: [ClientRepositoryAdapter, OrderRepositoryAdapter, ProductRepositoryAdapter],
 })
 export class AppModule {}
 
-// docker run -e MYSQL_ROOT_PASSWORD=tech@123 -p 3306:3306 --name techchallenge -d mariadb
+// docker run -e MYSQL_ROOT_PASSWORD=tech@123 -p 3306:3306 --name tech_challenge -d mariadb

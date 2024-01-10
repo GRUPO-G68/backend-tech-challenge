@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-fiap
+spec:
+  selector:
+    matchLabels:
+      app: node-fiap
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: node-fiap
+    spec:
+      containers:
+        - name: node-fiap-container
+          image: noobezera/nest
+          ports:
+            - containerPort: 9001
+          envFrom:
+            - configMapRef:
+                name: node-fiap-configmap
+          livenessProbe:
+            httpGet:
+              path: /clients
+              port: 9001
+            periodSeconds: 10
+            failureThreshold: 3
+            #initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /clients
+              port: 9001
+            periodSeconds: 10
+            failureThreshold: 5
+            #initialDelaySeconds: 20
+      initContainers: #inicia o pod node apos o mysql estiver ok
+        - name: wait-for-mysql
+          image: busybox
+          command: ['sh', '-c', 'until nc -z -w 3 svc-mysql-fiap 3306; do sleep 1; done;']

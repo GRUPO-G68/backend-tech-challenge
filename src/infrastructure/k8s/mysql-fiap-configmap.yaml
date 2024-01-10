@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-fiap-configmap
+data:
+  MYSQL_HOST: svc-mysql-fiap
+  MARIADB_ROOT_PASSWORD: tech@123
+  MARIADB_USER: fiap
+  MARIADB_PASSWORD: fiap
+  MARIADB_DATABASE: tech_challenge

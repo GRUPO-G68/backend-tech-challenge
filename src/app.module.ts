@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ClientController } from './adapters/client/client.controller';
 import { OrderController } from './adapters/order/order.controller';
 import { ProductController } from './adapters/product/product.controller';
-import { TestController } from './adapters/test/test.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientRepositoryAdapter } from './adapters/client/client.repository';
 import { Client } from './domain/entities/client.entity';
@@ -26,7 +25,7 @@ import { OrderItem } from './domain/entities/order-item.entity';
     }),
     TypeOrmModule.forFeature([Client, Order, OrderItem, Product]),
   ],
-  controllers: [ClientController, OrderController, ProductController,TestController],
+  controllers: [ClientController, OrderController, ProductController],
   providers: [ClientRepositoryAdapter, OrderRepositoryAdapter, ProductRepositoryAdapter],
 })
 export class AppModule {}

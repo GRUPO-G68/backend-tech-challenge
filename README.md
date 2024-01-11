@@ -81,7 +81,7 @@ redocly :
 swagger :
 
 ```bash
-  localhost:9001/documentacao
+  localhost:30000/documentacao
 ```
 
 #### 10. Acesso ao banco

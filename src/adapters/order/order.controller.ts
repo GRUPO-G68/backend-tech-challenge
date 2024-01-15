@@ -29,6 +29,10 @@ export class OrderController {
   async getAllOrders(): Promise<Partial<IOrder>[]> {
     return this.orderRepositoryAdapter.findAll();
   }
+  @Get('/status/:orderStatus')
+  async getorderStatusById(@Param('orderStatus') orderStatus: string): Promise<Partial<IOrder>[]> {
+    return this.orderRepositoryAdapter.findByOrderStatus(orderStatus);
+  }
   @Get(':orderId')
   async getOrderById(@Param('orderId') orderId: string): Promise<Partial<IOrder>> {
     return this.orderRepositoryAdapter.findById(orderId);

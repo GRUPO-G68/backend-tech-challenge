@@ -15,7 +15,8 @@ import { OrderItem } from './domain/entities/order-item.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mariadb',
-      host: 'svc-mysql-fiap',
+      // host: 'svc-mysql-fiap',
+      host: 'localhost',
       port: 3306,
       username: 'root',
       password: 'tech@123',

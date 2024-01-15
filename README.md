@@ -93,4 +93,13 @@ swagger :
   port: 3306
 ```
 
+### RODAR PROJETO LOCAL
+
+//passso 1 - container
+// docker run -e MYSQL_ROOT_PASSWORD=tech@123 -p 3306:3306 --name techchallenge -d mariadb
+//passso 2 - cria o banco
+//criar o banco no container techchallenge, banco-> tech_challenge
+//passo 3 - roda a aplicao
+//npm  run start:dev
+
 **Nota:** Certifique-se de ler a documentação completa do projeto.

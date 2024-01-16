@@ -10,12 +10,13 @@ import { OrderRepositoryAdapter } from './adapters/order/order.repository';
 import { Product } from './domain/entities/product.entity';
 import { ProductRepositoryAdapter } from './adapters/product/product.repository';
 import { OrderItem } from './domain/entities/order-item.entity';
+import { ProductCategoryRepositoryAdapter } from './adapters/product/product-category.repository';
 // @todo trocar os dados do banco fixos por variaveis de ambiente
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mariadb',
-      host: 'svc-mysql-fiap',
+      host: 'localhost',
       port: 3306,
       username: 'root',
       password: 'tech@123',
@@ -26,6 +27,6 @@ import { OrderItem } from './domain/entities/order-item.entity';
     TypeOrmModule.forFeature([Client, Order, OrderItem, Product]),
   ],
   controllers: [ClientController, OrderController, ProductController],
-  providers: [ClientRepositoryAdapter, OrderRepositoryAdapter, ProductRepositoryAdapter],
+  providers: [ClientRepositoryAdapter, OrderRepositoryAdapter, ProductRepositoryAdapter, ProductCategoryRepositoryAdapter],
 })
 export class AppModule {}

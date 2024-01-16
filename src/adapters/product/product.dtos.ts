@@ -7,7 +7,7 @@ export class CreateProductDto {
   @ApiProperty()
   price: number;
   @ApiProperty()
-  category: string;
+  categoryId: string;
   @ApiProperty()
   description: string;
 }

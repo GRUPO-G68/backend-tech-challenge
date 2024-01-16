@@ -3,6 +3,7 @@ import { ProductRepositoryAdapter } from './product.repository';
 import { IProduct, Product, ProductStatusEnum } from '../../domain/entities/product.entity';
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
 import { CreateProductDto, UpdateProductDto } from './product.dtos';
+import { ProductCategoryRepositoryAdapter } from './product-category.repository';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -10,11 +11,16 @@ import { CreateProductDto, UpdateProductDto } from './product.dtos';
 @ApiTags('Products')
 @Controller('products')
 export class ProductController {
-  constructor(private readonly productRepository: ProductRepositoryAdapter) {}
+  constructor(
+    private readonly productRepository: ProductRepositoryAdapter,
+    private readonly productCategoryRepository: ProductCategoryRepositoryAdapter,
+  ) {}
   @Post()
   async createProduct(@Body() inputDto: CreateProductDto): Promise<{ productId: string }> {
-    const { name, price, category, description } = inputDto;
-    const status: ProductStatusEnum.ACTIVATED = ProductStatusEnum.ACTIVATED;
+    const { name, price, categoryId, description } = inputDto;
+    const status: ProductStatusEnum = ProductStatusEnum.ACTIVATED;
+    const category = await this.productCategoryRepository.findById(categoryId);
+    if (!category) throw new Error(`Não existe a categoria com ID: ${categoryId}`);
     const product: Product = new Product(name, price, category, status, description);
     return this.productRepository.save(product);
   }

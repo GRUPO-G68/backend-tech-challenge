@@ -16,6 +16,7 @@ export class OrderRepositoryAdapter implements IOrderRepository {
     const orderCreated = await this.orderRepository.save(order);
     return { orderId: orderCreated.id };
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async changeOrderStatus(orderId: string, status: string): Promise<boolean> {
     return true;
   }

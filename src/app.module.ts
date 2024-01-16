@@ -29,5 +29,3 @@ import { OrderItem } from './domain/entities/order-item.entity';
   providers: [ClientRepositoryAdapter, OrderRepositoryAdapter, ProductRepositoryAdapter],
 })
 export class AppModule {}
-
-// docker run -e MYSQL_ROOT_PASSWORD=tech@123 -p 3306:3306 --name tech_challenge -d mariadb

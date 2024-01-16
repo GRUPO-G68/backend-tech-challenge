@@ -11,5 +11,5 @@ export class CreateOrderDto {
   @ApiProperty()
   clientDocument: string;
   @ApiProperty()
-  items: OrderItemDto;
+  products: Array<OrderItemDto>;
 }

@@ -1,5 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
-import { OrderItem } from './order-item.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { OrderItem, IOrderItem } from './order-item.entity';
 
 // @todo criar OrderItem para fazer o vinculo da quantidade de produtos no pedido
 // @todo vincular usuario no pedido
@@ -7,28 +7,34 @@ export interface IOrder {
   id: string;
   documentClient: string;
   status: string;
-  products: string;
+  products: Array<IOrderItem>;
   changeStatus(status: string): void;
-  addItem(item: OrderItem): void;
+  addItem(itemList: Array<OrderItem>): void;
 }
 
+
 @Entity()
-export class Order implements Partial<IOrder> {
+export class Order implements IOrder {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column({ type: 'text', nullable: false })
-  clientDocument: string;
+  documentClient: string;
   @OneToMany(() => OrderItem, (orderItem: OrderItem) => orderItem.order, { eager: true, cascade: true })
-  items: OrderItem[];
+  products: OrderItem[];
   @Column()
   status: string;
 
-  constructor(clientDocument: string) {
-    this.clientDocument = clientDocument;
+  constructor(documentClient: string) {
+    this.documentClient = documentClient;
     this.status = null;
   }
 
-  addItem(item: OrderItem): void {
-    this.items.push(item);
+  addItem(itemList: Array<OrderItem>): void {
+    this.products.push(...itemList);
+  }
+  
+  changeStatus(status: string): void {
+    console.log('status', status)
+      throw 'not implemented'
   }
 }

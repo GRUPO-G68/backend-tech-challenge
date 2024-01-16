@@ -14,7 +14,7 @@ export class OrderItem implements Partial<IOrderItem> {
   product: string;
   @Column()
   quantity: number;
-  @ManyToOne(() => Order, (order: Order) => order.items)
+  @ManyToOne(() => Order, (order: Order) => order.products)
   @JoinColumn()
   order: IOrder;
 

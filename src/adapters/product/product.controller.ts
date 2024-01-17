@@ -4,6 +4,9 @@ import { IProduct, Product, ProductStatusEnum } from '../../domain/entities/prod
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
 import { CreateProductDto, UpdateProductDto } from './product.dtos';
 import { ProductCategoryRepositoryAdapter } from './product-category.repository';
+import { ProductCategory } from '../../domain/entities/product-category.entity';
+import { CreateProductPresenter } from './presenters/create-product.presenter';
+import { UpdateProductPresenter } from './presenters/update-product.presenter';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -16,12 +19,10 @@ export class ProductController {
     private readonly productCategoryRepository: ProductCategoryRepositoryAdapter,
   ) {}
   @Post()
-  async createProduct(@Body() inputDto: CreateProductDto): Promise<{ productId: string }> {
+  async createProduct(@Body() inputDto: CreateProductDto): Promise<CreateProductPresenter> {
     const { name, price, categoryId, description } = inputDto;
-    const category = await this.productCategoryRepository.findById(categoryId);
-    if (!category) throw new Error(`Não existe a categoria com ID: ${categoryId}`);
-    const status: ProductStatusEnum = ProductStatusEnum.ACTIVATED;
-    const product: Product = new Product(name, price, category, status, description);
+    const category: ProductCategory = await this.productCategoryRepository.findById(categoryId);
+    const product: Product = new Product(name, price, category, ProductStatusEnum.ACTIVATED, description);
     return this.productRepository.save(product);
   }
 
@@ -42,7 +43,7 @@ export class ProductController {
 
   // @todo ver o retorno em caso de falha
   @Put(':productId')
-  async updateProduct(@Param('productId') productId: string, @Body() inputDto: UpdateProductDto): Promise<{ productWasUpdated: boolean }> {
+  async updateProduct(@Param('productId') productId: string, @Body() inputDto: UpdateProductDto): Promise<UpdateProductPresenter> {
     const existingProduct: Product = await this.productRepository.findById(productId);
     const category = await this.productCategoryRepository.findById(inputDto.category);
     if (!category) throw new Error(`Não existe a categoria com ID: ${category}`);

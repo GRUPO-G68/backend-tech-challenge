@@ -8,6 +8,8 @@ import { CreateProductPresenter } from './presenters/create-product.presenter';
 import { UpdateProductPresenter } from './presenters/update-product.presenter';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { UpdateProductDto } from './dtos/update-product.dto';
+import { CreateProductCategoryDto } from './dtos/create-product-category.dto';
+import { CreateProductCategoryPresenter } from './presenters/create-product-category.presenter';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -19,6 +21,14 @@ export class ProductController {
     private readonly productRepository: ProductRepositoryAdapter,
     private readonly productCategoryRepository: ProductCategoryRepositoryAdapter,
   ) {}
+
+  @Post()
+  async createProductCategory(@Body() inputDto: CreateProductCategoryDto): Promise<CreateProductCategoryPresenter> {
+    const { name, description } = inputDto;
+    const category: ProductCategory = new ProductCategory(name, description);
+    return this.productCategoryRepository.save(category);
+  }
+
   @Post()
   async createProduct(@Body() inputDto: CreateProductDto): Promise<CreateProductPresenter> {
     const { name, price, categoryId, description } = inputDto;

@@ -44,7 +44,9 @@ export class ProductController {
   @Put(':productId')
   async updateProduct(@Param('productId') productId: string, @Body() inputDto: UpdateProductDto): Promise<{ productWasUpdated: boolean }> {
     const existingProduct: Product = await this.productRepository.findById(productId);
-    const product: Product = new Product(inputDto.name, inputDto.price, inputDto.category, inputDto.status, inputDto.description);
+    const category = await this.productCategoryRepository.findById(inputDto.category);
+    if (!category) throw new Error(`Não existe a categoria com ID: ${category}`);
+    const product: Product = new Product(inputDto.name, inputDto.price, category, inputDto.status, inputDto.description);
     await this.productRepository.update({ ...existingProduct, ...product });
     return { productWasUpdated: true };
   }

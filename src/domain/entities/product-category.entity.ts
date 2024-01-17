@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Product } from './product.entity';
 
 export interface IProductCategory {
   id: string;
@@ -14,6 +15,8 @@ export class ProductCategory implements IProductCategory {
   name: string;
   @Column({ type: 'text', nullable: true })
   description: string;
+  @OneToMany(() => Product, (product) => product.category)
+  products: Product[];
 
   constructor(name: string, description: string) {
     this.name = name;

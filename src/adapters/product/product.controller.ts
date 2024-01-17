@@ -1,12 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ProductRepositoryAdapter } from './product.repository';
 import { IProduct, Product, ProductStatusEnum } from '../../domain/entities/product.entity';
-import { ApiProperty, ApiTags } from '@nestjs/swagger';
-import { CreateProductDto, UpdateProductDto } from './product.dtos';
+import { ApiTags } from '@nestjs/swagger';
 import { ProductCategoryRepositoryAdapter } from './product-category.repository';
 import { ProductCategory } from '../../domain/entities/product-category.entity';
 import { CreateProductPresenter } from './presenters/create-product.presenter';
 import { UpdateProductPresenter } from './presenters/update-product.presenter';
+import { CreateProductDto } from './dtos/create-product.dto';
+import { UpdateProductDto } from './dtos/update-product.dto';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos

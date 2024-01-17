@@ -23,13 +23,6 @@ export class ProductController {
   ) {}
 
   @Post()
-  async createProductCategory(@Body() inputDto: CreateProductCategoryDto): Promise<CreateProductCategoryPresenter> {
-    const { name, description } = inputDto;
-    const category: ProductCategory = new ProductCategory(name, description);
-    return this.productCategoryRepository.save(category);
-  }
-
-  @Post()
   async createProduct(@Body() inputDto: CreateProductDto): Promise<CreateProductPresenter> {
     const { name, price, categoryId, description } = inputDto;
     const category: ProductCategory = await this.productCategoryRepository.findById(categoryId);

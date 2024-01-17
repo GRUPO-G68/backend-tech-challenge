@@ -11,6 +11,7 @@ import { Product } from './domain/entities/product.entity';
 import { ProductRepositoryAdapter } from './adapters/product/product.repository';
 import { OrderItem } from './domain/entities/order-item.entity';
 import { ProductCategoryRepositoryAdapter } from './adapters/product/product-category.repository';
+import { ProductCategory } from './domain/entities/product-category.entity';
 // @todo trocar os dados do banco fixos por variaveis de ambiente
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { ProductCategoryRepositoryAdapter } from './adapters/product/product-cat
       synchronize: true,
       autoLoadEntities: true,
     }),
-    TypeOrmModule.forFeature([Client, Order, OrderItem, Product]),
+    TypeOrmModule.forFeature([Client, Order, OrderItem, Product, ProductCategory]),
   ],
   controllers: [ClientController, OrderController, ProductController],
   providers: [ClientRepositoryAdapter, OrderRepositoryAdapter, ProductRepositoryAdapter, ProductCategoryRepositoryAdapter],

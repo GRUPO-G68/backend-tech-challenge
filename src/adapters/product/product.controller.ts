@@ -18,9 +18,9 @@ export class ProductController {
   @Post()
   async createProduct(@Body() inputDto: CreateProductDto): Promise<{ productId: string }> {
     const { name, price, categoryId, description } = inputDto;
-    const status: ProductStatusEnum = ProductStatusEnum.ACTIVATED;
     const category = await this.productCategoryRepository.findById(categoryId);
     if (!category) throw new Error(`Não existe a categoria com ID: ${categoryId}`);
+    const status: ProductStatusEnum = ProductStatusEnum.ACTIVATED;
     const product: Product = new Product(name, price, category, status, description);
     return this.productRepository.save(product);
   }

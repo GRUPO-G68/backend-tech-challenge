@@ -32,7 +32,7 @@ export class OrderController {
     return this.orderRepositoryAdapter.findAll();
   }
   @Get('/status/:orderStatus')
-  async getorderStatusById(@Param('orderStatus') orderStatus: string): Promise<Partial<IOrder>[]> {
+  async getorderStatusById(@Param('orderStatus') orderStatus: number): Promise<Partial<IOrder>[]> {
     return this.orderRepositoryAdapter.findByOrderStatus(orderStatus);
   }
   @Get(':orderId')

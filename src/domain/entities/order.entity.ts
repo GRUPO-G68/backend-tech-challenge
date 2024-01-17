@@ -6,12 +6,11 @@ import { OrderItem, IOrderItem } from './order-item.entity';
 export interface IOrder {
   id: string;
   documentClient: string;
-  status: string;
+  status: number;
   products: Array<IOrderItem>;
   changeStatus(status: string): void;
   addItem(itemList: Array<OrderItem>): void;
 }
-
 
 @Entity()
 export class Order implements IOrder {
@@ -22,7 +21,7 @@ export class Order implements IOrder {
   @OneToMany(() => OrderItem, (orderItem: OrderItem) => orderItem.order, { eager: true, cascade: true })
   products: OrderItem[];
   @Column()
-  status: string;
+  status: number;
 
   constructor(documentClient: string) {
     this.documentClient = documentClient;
@@ -30,11 +29,17 @@ export class Order implements IOrder {
   }
 
   addItem(itemList: Array<OrderItem>): void {
+    const hasArray = this.products?.length === 0;
+
+    if (!hasArray) {
+      this.products = [];
+    }
+
     this.products.push(...itemList);
   }
-  
+
   changeStatus(status: string): void {
-    console.log('status', status)
-      throw 'not implemented'
+    console.log('status', status);
+    throw 'not implemented';
   }
 }

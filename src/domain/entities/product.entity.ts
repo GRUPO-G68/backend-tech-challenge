@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { ProductCategory } from './product-category.entity';
 
 export interface IProduct {
@@ -26,6 +26,7 @@ export class Product implements IProduct {
   @Column({ type: 'text', nullable: false })
   name: string;
   @ManyToOne(() => ProductCategory, (productCategory) => productCategory.products)
+  @JoinColumn()
   category: ProductCategory;
   @Column({ type: 'text', nullable: true })
   description: string;

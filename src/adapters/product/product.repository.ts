@@ -17,7 +17,7 @@ export class ProductRepositoryAdapter implements IProductRepository {
   }
 
   findAll(): Promise<IProduct[]> {
-    return this.productRepository.find();
+    return this.productRepository.find({ relations: ['category'] });
   }
 
   async findByCategory(categoryId: string): Promise<IProduct[]> {
@@ -25,7 +25,7 @@ export class ProductRepositoryAdapter implements IProductRepository {
   }
 
   async findById(productId: string): Promise<IProduct> {
-    return this.productRepository.findOneBy({ id: productId });
+    return this.productRepository.findOne({ where: { id: productId }, relations: ['category'] });
   }
 
   async update(product: Product): Promise<void> {

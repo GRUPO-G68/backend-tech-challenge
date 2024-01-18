@@ -7,7 +7,7 @@ export class CreateProductDto {
   @ApiProperty()
   price: number;
   @ApiProperty()
-  category: string;
+  category: number;
   @ApiProperty()
   description: string;
 }
@@ -18,7 +18,7 @@ export class UpdateProductDto {
   @ApiProperty()
   price: number;
   @ApiProperty()
-  category: string;
+  category: number;
   @ApiProperty()
   status: ProductStatus;
   @ApiProperty()

@@ -4,7 +4,7 @@ export interface IProduct {
   id: string;
   name: string;
   description: string;
-  category: string;
+  category: number;
   price: number;
   status: ProductStatus;
   createdAt: Date;
@@ -25,7 +25,7 @@ export class Product implements IProduct {
   @Column({ type: 'text', nullable: false })
   name: string;
   @Column({ type: 'text', nullable: false })
-  category: string;
+  category: number;
   @Column({ type: 'text', nullable: true })
   description: string;
 
@@ -38,7 +38,7 @@ export class Product implements IProduct {
   @UpdateDateColumn({ type: 'datetime', generated: true, nullable: false })
   updatedAt: Date;
 
-  constructor(name: string, price: number, category: string, status?: ProductStatus, description?: string) {
+  constructor(name: string, price: number, category: number, status?: ProductStatus, description?: string) {
     this.name = name;
     this.price = price;
     this.category = category;

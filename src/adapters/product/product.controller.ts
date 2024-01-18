@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ProductRepositoryAdapter } from './product.repository';
 import { IProduct, Product, ProductStatusEnum } from '../../domain/entities/product.entity';
-import { ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateProductDto, UpdateProductDto } from './product.dtos';
+import { FindProductByCategoryUseCase } from 'src/application/useCase/find-product-by-category.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -25,8 +26,10 @@ export class ProductController {
   }
 
   @Get('category/:categoryId')
-  filterProductsByCategory(@Param('categoryId') categoryId: string): Promise<IProduct[]> {
-    return this.productRepository.findByCategory(categoryId);
+  filterProductsByCategory(@Param('categoryId') categoryId: number): Promise<IProduct[]> {
+    const listProducts = new FindProductByCategoryUseCase().findProductByCategory(this.productRepository,categoryId)
+
+    return listProducts;
   }
 
   @Get(':productId')

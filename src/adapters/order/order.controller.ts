@@ -23,7 +23,6 @@ export class OrderController {
       order.addItem([orderItemEntity]);
     }
     const createdOrder = new CreateOrderUseCase().criarPedido(this.orderRepositoryAdapter, order);
-    // return this.orderRepositoryAdapter.save(order);
     return createdOrder
   }
 

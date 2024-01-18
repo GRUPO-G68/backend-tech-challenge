@@ -20,7 +20,7 @@ export class ProductRepositoryAdapter implements IProductRepository {
     return this.productRepository.find();
   }
 
-  async findByCategory(categoryId: string): Promise<IProduct[]> {
+  async findByCategory(categoryId: number): Promise<IProduct[]> {
     return this.productRepository.find({ where: { category: categoryId } });
   }
 

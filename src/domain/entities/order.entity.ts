@@ -14,7 +14,7 @@ export interface IOrder {
 
 @Entity()
 export class Order implements IOrder {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('increment')
   id: string;
   @Column({ type: 'text', nullable: false })
   documentClient: string;

@@ -4,7 +4,7 @@ import { OrderStatus } from 'src/domain/valueObjects/status-to-situation';
 
 export class CreateOrderUseCase {
   criarPedido(repo: OrderRepositoryAdapter, order: Order) {
-    order.status = OrderStatus.ORDER_DONE
+    order.status = OrderStatus.PAYMENT_APPROVED
     return repo.save(order);
   }
 }

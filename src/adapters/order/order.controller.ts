@@ -4,7 +4,7 @@ import { IOrder, Order } from '../../domain/entities/order.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateOrderDto } from './order.dtos';
 import { OrderItem } from '../../domain/entities/order-item.entity';
-import { CreateOrderUseCase } from 'src/domain/use-cases/order/create-order.use-case';
+import { CreateOrderUseCase } from 'src/application/useCase/create-order.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos

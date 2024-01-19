@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { IOrderRepository } from '../../application/ports/order-repository.port';
 import { IOrder, Order } from '../../domain/entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { OrderStatus } from 'src/domain/valueObjects/status-to-situation';
 
 // @todo implementar os metodos
@@ -11,13 +11,13 @@ export class OrderRepositoryAdapter implements IOrderRepository {
   constructor(
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
-  ) {}
+  ) { }
 
   async save(order: Partial<IOrder>): Promise<{ orderId }> {
     const orderCreated = await this.orderRepository.save(order);
     return { orderId: orderCreated.id };
   }
-  
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async changeOrderStatus(orderId: string, status: string): Promise<boolean> {
     return true;
@@ -31,7 +31,7 @@ export class OrderRepositoryAdapter implements IOrderRepository {
   }
 
   async findAll(): Promise<Partial<IOrder>[]> {
-    const orders = await this.orderRepository.find();
+    const orders = await this.orderRepository.find({ order: { status: 'DESC', created_at: 'ASC' }, where: { status: Not(4) } });
     orders.forEach((order) => this.applySituationToOrder(order));
     return orders;
   }

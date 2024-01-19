@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { OrderItem, IOrderItem } from './order-item.entity';
 
 // @todo criar OrderItem para fazer o vinculo da quantidade de produtos no pedido
@@ -10,6 +10,8 @@ export interface IOrder {
   products: Array<IOrderItem>;
   changeStatus(status: string): void;
   addItem(itemList: Array<OrderItem>): void;
+  created_at: Date;
+  updated_at: Date;
 }
 
 @Entity()
@@ -22,6 +24,11 @@ export class Order implements IOrder {
   products: OrderItem[];
   @Column()
   status: number;
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  created_at: Date;
+
+  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  updated_at: Date;
 
   constructor(documentClient: string) {
     this.documentClient = documentClient;

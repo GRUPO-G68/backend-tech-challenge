@@ -7,6 +7,7 @@ import { OrderItem } from '../../domain/entities/order-item.entity';
 import { CreateOrderUseCase } from 'src/application/useCase/order/create-order.use-case';
 import { ProcessPaymentUseCase } from 'src/application/useCase/order/process-payment.use-case';
 import { WebhookProcessPaymentUseCase } from 'src/application/useCase/order/webhook-process-payment.use-case';
+import { GetOrderByStatusUseCase } from 'src/application/useCase/order/get-order-by-status.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -34,8 +35,8 @@ export class OrderController {
   }
 
   @Get('/status/:orderStatus')
-  async getOrderStatusById(@Param('orderStatus') orderStatus: number): Promise<Partial<IOrder>[]> {
-    return this.orderRepositoryAdapter.findByOrderStatus(orderStatus);
+  async getOrderByStatusId(@Param('orderStatus') orderStatus: number): Promise<Partial<IOrder>[]> {
+    return new GetOrderByStatusUseCase(this.orderRepositoryAdapter).execute(orderStatus)
   }
 
   @Get(':orderId')

@@ -16,16 +16,16 @@ export class ProductRepositoryAdapter implements IProductRepository {
     return { productId };
   }
 
-  findAll(): Promise<IProduct[]> {
-    return this.productRepository.find();
+  async findAll(): Promise<IProduct[]> {
+    return this.productRepository.find({ relations: ['category'] });
   }
 
-  async findByCategory(categoryId: number): Promise<IProduct[]> {
-    return this.productRepository.find({ where: { category: categoryId } });
+  async findByCategory(categoryId: string): Promise<IProduct[]> {
+    return this.productRepository.find({ where: { category: { id: categoryId } } });
   }
 
   async findById(productId: string): Promise<IProduct> {
-    return this.productRepository.findOneBy({ id: productId });
+    return this.productRepository.findOne({ where: { id: productId }, relations: ['category'] });
   }
 
   async update(product: Product): Promise<void> {

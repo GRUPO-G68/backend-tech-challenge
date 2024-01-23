@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { OrderRepositoryAdapter } from './order.repository';
 import { IOrder, Order } from '../../domain/entities/order.entity';
 import { ApiTags } from '@nestjs/swagger';
@@ -6,6 +6,7 @@ import { CreateOrderDto, PaymentFeedbackDto } from './order.dtos';
 import { OrderItem } from '../../domain/entities/order-item.entity';
 import { CreateOrderUseCase } from 'src/application/useCase/create-order.use-case';
 import { ProcessPaymentUseCase } from 'src/application/useCase/process-payment.use-case';
+import { WebhookProcessPaymentUseCase } from 'src/application/useCase/webhook-process-payment.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -31,10 +32,12 @@ export class OrderController {
   async getAllOrders(): Promise<Partial<IOrder>[]> {
     return this.orderRepositoryAdapter.findAll();
   }
+  
   @Get('/status/:orderStatus')
-  async getorderStatusById(@Param('orderStatus') orderStatus: number): Promise<Partial<IOrder>[]> {
+  async getOrderStatusById(@Param('orderStatus') orderStatus: number): Promise<Partial<IOrder>[]> {
     return this.orderRepositoryAdapter.findByOrderStatus(orderStatus);
   }
+
   @Get(':orderId')
   async getOrderById(@Param('orderId') orderId: string): Promise<Partial<IOrder>> {
     return this.orderRepositoryAdapter.findById(orderId);
@@ -46,9 +49,14 @@ export class OrderController {
     return { orderStatusWasChanged: true };
   }
 
-  @Post('/paymentFeedback')
-  async paymentFeedback(@Body()paymentFeedback: PaymentFeedbackDto) {
-    const {orderId, paymentStatus} = paymentFeedback
+  @Post('/updateOrderPaymentStatus')
+  async paymentFeedback(@Body() paymentFeedback: PaymentFeedbackDto) {
+    const { orderId, paymentStatus } = paymentFeedback;
     return new ProcessPaymentUseCase().processPayment(this.orderRepositoryAdapter, orderId, paymentStatus);
+  }
+
+  @Post('/webhook')
+  async webhookPagamento(@Query() id: string, @Query() topic: string) {
+    return new WebhookProcessPaymentUseCase().processPayment(this.orderRepositoryAdapter, id, topic);
   }
 }

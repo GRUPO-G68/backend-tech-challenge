@@ -1,7 +1,8 @@
-export const statusToSituation = {
-    "1": "Pagamento pendente",
-    "2": "Pagamento Aprovado",
-    "3": "Pedido em preparação",
-    "4": "Pedido finalizado"
-  } as const;
-  
+  export enum OrderStatus {
+    WAITING_PAYMENT = 1,
+    PAYMENT_APPROVED = 2,
+    PREPARING_ORDER = 3,
+    ORDER_DONE = 4
+
+  }
+

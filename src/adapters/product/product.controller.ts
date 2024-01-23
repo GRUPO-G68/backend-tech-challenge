@@ -8,8 +8,8 @@ import { CreateProductPresenter } from './presenters/create-product.presenter';
 import { UpdateProductPresenter } from './presenters/update-product.presenter';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { UpdateProductDto } from './dtos/update-product.dto';
-import { CreateProductCategoryDto } from './dtos/create-product-category.dto';
-import { CreateProductCategoryPresenter } from './presenters/create-product-category.presenter';
+
+import { FindProductByCategoryUseCase } from 'src/application/useCase/find-product-by-category.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -37,7 +37,9 @@ export class ProductController {
 
   @Get('category/:categoryId')
   filterProductsByCategory(@Param('categoryId') categoryId: string): Promise<IProduct[]> {
-    return this.productRepository.findByCategory(categoryId);
+    const listProducts = new FindProductByCategoryUseCase().findProductByCategory(this.productRepository, categoryId);
+
+    return listProducts;
   }
 
   @Get(':productId')

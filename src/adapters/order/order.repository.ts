@@ -36,7 +36,7 @@ export class OrderRepositoryAdapter implements IOrderRepository {
     return orders;
   }
 
-  async findById(orderId: string): Promise<Partial<IOrder>> {
+  async findById(orderId: string): Promise<IOrder> {
     const order = await this.orderRepository.findOne({ where: { id: orderId } });
     if (order) {
       this.applySituationToOrder(order);

@@ -8,6 +8,7 @@ import { CreateOrderUseCase } from 'src/application/useCase/order/create-order.u
 import { ProcessPaymentUseCase } from 'src/application/useCase/order/process-payment.use-case';
 import { WebhookProcessPaymentUseCase } from 'src/application/useCase/order/webhook-process-payment.use-case';
 import { GetOrderByStatusUseCase } from 'src/application/useCase/order/get-order-by-status.use-case';
+import { GetOrderByIdUseCase } from 'src/application/useCase/order/get-order-by-id.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -40,8 +41,8 @@ export class OrderController {
   }
 
   @Get(':orderId')
-  async getOrderById(@Param('orderId') orderId: string): Promise<Partial<IOrder>> {
-    return this.orderRepositoryAdapter.findById(orderId);
+  async getOrderById(@Param('orderId') orderId: string): Promise<IOrder> {
+    return new GetOrderByIdUseCase(this.orderRepositoryAdapter).execute(orderId)
   }
 
   @Get(':orderId/change-status/:orderStatus')

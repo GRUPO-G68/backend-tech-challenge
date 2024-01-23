@@ -5,4 +5,5 @@ export interface IOrderRepository {
   findById(orderId: string): Promise<Partial<IOrder>>;
   save(order: IOrder): Promise<{ orderId: string }>;
   changeOrderStatus(orderId: string, status: string): Promise<boolean>;
+  findByOrderStatus(orderStatus: number): Promise<Array<IOrder>>
 }

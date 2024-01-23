@@ -2,9 +2,10 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { OrderRepositoryAdapter } from './order.repository';
 import { IOrder, Order } from '../../domain/entities/order.entity';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateOrderDto } from './order.dtos';
+import { CreateOrderDto, PaymentFeedbackDto } from './order.dtos';
 import { OrderItem } from '../../domain/entities/order-item.entity';
 import { CreateOrderUseCase } from 'src/application/useCase/create-order.use-case';
+import { ProcessPaymentUseCase } from 'src/application/useCase/process-payment.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -23,7 +24,7 @@ export class OrderController {
       order.addItem([orderItemEntity]);
     }
     const createdOrder = new CreateOrderUseCase().criarPedido(this.orderRepositoryAdapter, order);
-    return createdOrder
+    return createdOrder;
   }
 
   @Get()
@@ -43,5 +44,11 @@ export class OrderController {
   async filterOrdersByStatus(@Param('orderId') orderId: string, @Param('orderStatus') orderStatus: string): Promise<{ orderStatusWasChanged: boolean }> {
     await this.orderRepositoryAdapter.changeOrderStatus(orderId, orderStatus);
     return { orderStatusWasChanged: true };
+  }
+
+  @Post('/paymentFeedback')
+  async paymentFeedback(@Body()paymentFeedback: PaymentFeedbackDto) {
+    const {orderId, paymentStatus} = paymentFeedback
+    return new ProcessPaymentUseCase().processPayment(this.orderRepositoryAdapter, orderId, paymentStatus);
   }
 }

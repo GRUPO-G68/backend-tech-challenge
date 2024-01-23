@@ -11,7 +11,7 @@ export class OrderRepositoryAdapter implements IOrderRepository {
   constructor(
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
-  ) { }
+  ) {}
 
   async save(order: Partial<IOrder>): Promise<{ orderId }> {
     const orderCreated = await this.orderRepository.save(order);
@@ -44,9 +44,8 @@ export class OrderRepositoryAdapter implements IOrderRepository {
     return order;
   }
 
-  async findByOrderStatus(orderStatus: number): Promise<Partial<IOrder>[]> {
+  async findByOrderStatus(orderStatus: number): Promise<Array<IOrder>> {
     const orders = await this.orderRepository.find({ where: { status: orderStatus } });
-    orders.forEach((order) => this.applySituationToOrder(order));
     return orders;
   }
 }

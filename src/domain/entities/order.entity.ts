@@ -8,7 +8,7 @@ export interface IOrder {
   documentClient: string;
   status: number;
   products: Array<IOrderItem>;
-  changeStatus(status: string): void;
+  changeStatus(status: number): void;
   addItem(itemList: Array<OrderItem>): void;
   created_at: Date;
   updated_at: Date;
@@ -45,8 +45,7 @@ export class Order implements IOrder {
     this.products.push(...itemList);
   }
 
-  changeStatus(status: string): void {
-    console.log('status', status);
-    throw 'not implemented';
+  changeStatus(status: number): void {
+    this.status = status
   }
 }

@@ -13,3 +13,10 @@ export class CreateOrderDto {
   @ApiProperty()
   products: Array<OrderItemDto>;
 }
+
+export class PaymentFeedbackDto{
+  @ApiProperty()
+  orderId: string
+  @ApiProperty()
+  paymentStatus: number
+}

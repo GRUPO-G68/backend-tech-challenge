@@ -4,9 +4,9 @@ import { IOrder, Order } from '../../domain/entities/order.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateOrderDto, PaymentFeedbackDto } from './order.dtos';
 import { OrderItem } from '../../domain/entities/order-item.entity';
-import { CreateOrderUseCase } from 'src/application/useCase/create-order.use-case';
-import { ProcessPaymentUseCase } from 'src/application/useCase/process-payment.use-case';
-import { WebhookProcessPaymentUseCase } from 'src/application/useCase/webhook-process-payment.use-case';
+import { CreateOrderUseCase } from 'src/application/useCase/order/create-order.use-case';
+import { ProcessPaymentUseCase } from 'src/application/useCase/order/process-payment.use-case';
+import { WebhookProcessPaymentUseCase } from 'src/application/useCase/order/webhook-process-payment.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -32,7 +32,7 @@ export class OrderController {
   async getAllOrders(): Promise<Partial<IOrder>[]> {
     return this.orderRepositoryAdapter.findAll();
   }
-  
+
   @Get('/status/:orderStatus')
   async getOrderStatusById(@Param('orderStatus') orderStatus: number): Promise<Partial<IOrder>[]> {
     return this.orderRepositoryAdapter.findByOrderStatus(orderStatus);

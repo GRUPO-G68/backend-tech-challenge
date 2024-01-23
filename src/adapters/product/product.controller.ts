@@ -9,7 +9,7 @@ import { UpdateProductPresenter } from './presenters/update-product.presenter';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { UpdateProductDto } from './dtos/update-product.dto';
 
-import { FindProductByCategoryUseCase } from 'src/application/useCase/find-product-by-category.use-case';
+import { FindProductByCategoryUseCase } from 'src/application/useCase/product/find-product-by-category.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos

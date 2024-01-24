@@ -11,6 +11,8 @@ import { UpdateProductDto } from './dtos/update-product.dto';
 
 import { FindProductByCategoryUseCase } from 'src/application/useCase/product/find-product-by-category.use-case';
 import { FindAllProductsUseCase } from 'src/application/useCase/product/find-all-products.use-case';
+import { FindProductByIdUseCase } from 'src/application/useCase/product/find-product-by-id.use-case';
+import { CreateProductUseCase } from 'src/application/useCase/product/create-product.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -28,7 +30,7 @@ export class ProductController {
     const { name, price, categoryId, description } = inputDto;
     const category: ProductCategory = await this.productCategoryRepository.findById(categoryId);
     const product: Product = new Product(name, price, category, ProductStatusEnum.ACTIVATED, description);
-    return this.productRepository.save(product);
+    return new CreateProductUseCase(this.productRepository).execute(product)
   }
 
   @Get()
@@ -43,7 +45,7 @@ export class ProductController {
 
   @Get(':productId')
   findProductById(@Param('productId') productId: string): Promise<IProduct> {
-    return this.productRepository.findById(productId);
+    return new FindProductByIdUseCase(this.productRepository).execute(productId)
   }
 
   // @todo ver o retorno em caso de falha

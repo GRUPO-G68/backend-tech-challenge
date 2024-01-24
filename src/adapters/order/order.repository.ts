@@ -18,11 +18,6 @@ export class OrderRepositoryAdapter implements IOrderRepository {
     return { orderId: orderCreated.id };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async changeOrderStatus(orderId: string, status: string): Promise<boolean> {
-    return true;
-  }
-
   private applySituationToOrder(order: Partial<IOrder>): void {
     const situation = OrderStatus[order.status];
     if (situation) {

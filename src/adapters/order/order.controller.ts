@@ -9,6 +9,7 @@ import { ProcessPaymentUseCase } from 'src/application/useCase/order/process-pay
 import { WebhookProcessPaymentUseCase } from 'src/application/useCase/order/webhook-process-payment.use-case';
 import { GetOrderByStatusUseCase } from 'src/application/useCase/order/get-order-by-status.use-case';
 import { GetOrderByIdUseCase } from 'src/application/useCase/order/get-order-by-id.use-case';
+import { FindAllOrdersUseCase } from 'src/application/useCase/order/find-all.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -32,7 +33,7 @@ export class OrderController {
 
   @Get()
   async getAllOrders(): Promise<Partial<IOrder>[]> {
-    return this.orderRepositoryAdapter.findAll();
+    return new FindAllOrdersUseCase(this.orderRepositoryAdapter).execute()
   }
 
   @Get('/status/:orderStatus')
@@ -45,13 +46,7 @@ export class OrderController {
     return new GetOrderByIdUseCase(this.orderRepositoryAdapter).execute(orderId)
   }
 
-  @Get(':orderId/change-status/:orderStatus')
-  async filterOrdersByStatus(@Param('orderId') orderId: string, @Param('orderStatus') orderStatus: string): Promise<{ orderStatusWasChanged: boolean }> {
-    await this.orderRepositoryAdapter.changeOrderStatus(orderId, orderStatus);
-    return { orderStatusWasChanged: true };
-  }
-
-  @Post('/updateOrderPaymentStatus')
+  @Post('/updateOrderStatus')
   async paymentFeedback(@Body() paymentFeedback: PaymentFeedbackDto) {
     const { orderId, paymentStatus } = paymentFeedback;
     return new ProcessPaymentUseCase().processPayment(this.orderRepositoryAdapter, orderId, paymentStatus);

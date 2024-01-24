@@ -13,6 +13,9 @@ import { FindProductByCategoryUseCase } from 'src/application/useCase/product/fi
 import { FindAllProductsUseCase } from 'src/application/useCase/product/find-all-products.use-case';
 import { FindProductByIdUseCase } from 'src/application/useCase/product/find-product-by-id.use-case';
 import { CreateProductUseCase } from 'src/application/useCase/product/create-product.use-case';
+import { FindCategoryByIdUseCase } from 'src/application/useCase/product/find-category-by-id.use-case';
+import { UpdateProductUseCase } from 'src/application/useCase/product/update-product.use-case';
+import { DeleteProductUseCase } from 'src/application/useCase/product/delete-product.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -30,12 +33,12 @@ export class ProductController {
     const { name, price, categoryId, description } = inputDto;
     const category: ProductCategory = await this.productCategoryRepository.findById(categoryId);
     const product: Product = new Product(name, price, category, ProductStatusEnum.ACTIVATED, description);
-    return new CreateProductUseCase(this.productRepository).execute(product)
+    return new CreateProductUseCase(this.productRepository).execute(product);
   }
 
   @Get()
   findAllProducts(): Promise<IProduct[]> {
-    return new FindAllProductsUseCase(this.productRepository).execute()
+    return new FindAllProductsUseCase(this.productRepository).execute();
   }
 
   @Get('category/:categoryId')
@@ -45,24 +48,24 @@ export class ProductController {
 
   @Get(':productId')
   findProductById(@Param('productId') productId: string): Promise<IProduct> {
-    return new FindProductByIdUseCase(this.productRepository).execute(productId)
+    return new FindProductByIdUseCase(this.productRepository).execute(productId);
   }
 
   // @todo ver o retorno em caso de falha
   @Put(':productId')
   async updateProduct(@Param('productId') productId: string, @Body() inputDto: UpdateProductDto): Promise<UpdateProductPresenter> {
-    const existingProduct: Product = await this.productRepository.findById(productId);
-    const category = await this.productCategoryRepository.findById(inputDto.category);
+    const existingProduct: Product = await new FindProductByIdUseCase(this.productRepository).execute(productId);
+    const category = await new FindCategoryByIdUseCase(this.productCategoryRepository).execute(inputDto.category);
     if (!category) throw new Error(`Não existe a categoria com ID: ${category}`);
     const product: Product = new Product(inputDto.name, inputDto.price, category, inputDto.status, inputDto.description);
-    await this.productRepository.update({ ...existingProduct, ...product });
+    await new UpdateProductUseCase(this.productRepository).execute({...existingProduct, ...product})
     return { productWasUpdated: true };
   }
 
   // @todo ver o retorno em caso de falha
   @Delete(':productId')
   async deleteProduct(@Param('productId') productId: string): Promise<{ productWasDeleted: boolean }> {
-    await this.productRepository.delete(productId);
+    await new DeleteProductUseCase(this.productRepository).execute(productId)
     return { productWasDeleted: true };
   }
 }

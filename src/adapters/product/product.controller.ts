@@ -10,6 +10,7 @@ import { CreateProductDto } from './dtos/create-product.dto';
 import { UpdateProductDto } from './dtos/update-product.dto';
 
 import { FindProductByCategoryUseCase } from 'src/application/useCase/product/find-product-by-category.use-case';
+import { FindAllProductsUseCase } from 'src/application/useCase/product/find-all-products.use-case';
 // @todo Tratar excecao na controller
 // @todo Melhorar Documentacao
 // @todo Adicionar Dtos
@@ -32,14 +33,12 @@ export class ProductController {
 
   @Get()
   findAllProducts(): Promise<IProduct[]> {
-    return this.productRepository.findAll();
+    return new FindAllProductsUseCase(this.productRepository).execute()
   }
 
   @Get('category/:categoryId')
   filterProductsByCategory(@Param('categoryId') categoryId: string): Promise<IProduct[]> {
-    const listProducts = new FindProductByCategoryUseCase().findProductByCategory(this.productRepository, categoryId);
-
-    return listProducts;
+    return new FindProductByCategoryUseCase(this.productRepository).findProductByCategory(categoryId);
   }
 
   @Get(':productId')

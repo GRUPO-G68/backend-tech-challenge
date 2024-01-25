@@ -16,6 +16,7 @@ export class ProductCategoryController {
     const category: ProductCategory = new ProductCategory(name, description);
     return this.productCategoryRepository.save(category);
   }
+  
   @Get()
   findAll(): Promise<IProductCategory[]> {
     return this.productCategoryRepository.findAll();

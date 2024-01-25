@@ -10,6 +10,7 @@ export class ProductCategoryRepositoryAdapter implements IProductCategoryReposit
     @InjectRepository(ProductCategory)
     private readonly productCategoryRepository: Repository<ProductCategory>,
   ) {}
+  
   findAll(): Promise<ProductCategory[]> {
     return this.productCategoryRepository.find();
   }

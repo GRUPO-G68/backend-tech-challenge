@@ -2,6 +2,7 @@ import { ProductRepositoryAdapter } from 'src/adapters/product/product.repositor
 
 export class FindProductByCategoryUseCase {
   constructor(private productRepositoryAdapter: ProductRepositoryAdapter) {}
+  
   findProductByCategory( categoryId: string) {
     return this.productRepositoryAdapter.findByCategory(categoryId);
   }

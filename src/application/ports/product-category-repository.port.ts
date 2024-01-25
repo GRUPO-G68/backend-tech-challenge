@@ -1,5 +1,7 @@
+import { ProductCategory } from "src/domain/entities/product-category.entity";
+
 export interface IProductCategoryRepository {
-  save(category: any): Promise<{ categoryId: string }>;
-  findAll(): Promise<any[]>;
-  findById(categoryId: string): Promise<any>;
+  save(category: ProductCategory): Promise<{ categoryId: string }>;
+  findAll(): Promise<ProductCategory[]>;
+  findById(categoryId: string): Promise<ProductCategory>;
 }

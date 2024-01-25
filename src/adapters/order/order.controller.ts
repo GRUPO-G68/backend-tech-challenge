@@ -27,7 +27,7 @@ export class OrderController {
       const orderItemEntity = new OrderItem(productId, quantity);
       order.addItem([orderItemEntity]);
     }
-    const createdOrder = new CreateOrderUseCase().criarPedido(this.orderRepositoryAdapter, order);
+    const createdOrder = new CreateOrderUseCase().execute(this.orderRepositoryAdapter, order);
     return createdOrder;
   }
 
@@ -49,11 +49,11 @@ export class OrderController {
   @Post('/updateOrderStatus')
   async paymentFeedback(@Body() paymentFeedback: PaymentFeedbackDto) {
     const { orderId, paymentStatus } = paymentFeedback;
-    return new ProcessPaymentUseCase().processPayment(this.orderRepositoryAdapter, orderId, paymentStatus);
+    return new ProcessPaymentUseCase().execute(this.orderRepositoryAdapter, orderId, paymentStatus);
   }
 
   @Post('/webhook')
   async webhookPagamento(@Query() id: string, @Query() topic: string) {
-    return new WebhookProcessPaymentUseCase().processPayment(this.orderRepositoryAdapter, id, topic);
+    return new WebhookProcessPaymentUseCase().execute(this.orderRepositoryAdapter, id, topic);
   }
 }

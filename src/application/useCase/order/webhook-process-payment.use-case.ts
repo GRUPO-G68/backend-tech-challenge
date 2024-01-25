@@ -5,7 +5,7 @@ export class WebhookProcessPaymentUseCase{
         "payment": this.topicPayment,
         "merchant_order": this.topicMerchantOrder
     }
-    processPayment(repo: OrderRepositoryAdapter, id: string, topic: string ) {
+    execute(repo: OrderRepositoryAdapter, id: string, topic: string ) {
 
         const hasTopic = !!topic
 

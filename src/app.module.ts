@@ -18,7 +18,7 @@ import { ProductCategoryController } from './adapters/product/product-category.c
   imports: [
     TypeOrmModule.forRoot({
       type: 'mariadb',
-      host: 'localhost',
+      host: 'svc-mysql-fiap',
       port: 3306,
       username: 'root',
       password: 'tech@123',

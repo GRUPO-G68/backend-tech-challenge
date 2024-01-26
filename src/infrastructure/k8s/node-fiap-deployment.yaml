@@ -20,19 +20,19 @@ spec:
           envFrom:
             - configMapRef:
                 name: node-fiap-configmap
-          # livenessProbe:
-          #   httpGet:
-          #     path: /clients
-          #     port: 9001
-          #   periodSeconds: 10
-          #   failureThreshold: 3
-          #   #initialDelaySeconds: 20
-          # readinessProbe:
-          #   httpGet:
-          #     path: /clients
-          #     port: 9001
-          #   periodSeconds: 10
-          #   failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /clients
+              port: 9001
+            periodSeconds: 10
+            failureThreshold: 3
+            #initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /clients
+              port: 9001
+            periodSeconds: 10
+            failureThreshold: 5
             #initialDelaySeconds: 20
       initContainers: #inicia o pod node apos o mysql estiver ok
         - name: wait-for-mysql

@@ -9,7 +9,7 @@ export interface IProductCategory {
 
 @Entity()
 export class ProductCategory implements IProductCategory {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('increment')
   id: string;
   @Column({ type: 'text', nullable: false })
   name: string;

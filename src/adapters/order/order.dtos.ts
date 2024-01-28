@@ -10,13 +10,13 @@ export class OrderItemDto {
 export class CreateOrderDto {
   @ApiProperty()
   clientDocument: string;
-  @ApiProperty()
+  @ApiProperty({ type: [OrderItemDto] })
   products: Array<OrderItemDto>;
 }
 
-export class PaymentFeedbackDto{
+export class PaymentFeedbackDto {
   @ApiProperty()
-  orderId: string
+  orderId: string;
   @ApiProperty()
-  paymentStatus: number
+  paymentStatus: number;
 }

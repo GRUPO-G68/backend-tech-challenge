@@ -1,9 +1,9 @@
 import { ProductRepositoryAdapter } from 'src/adapters/product/product.repository';
 
-export class FindProductByCategoryUseCase {
+export class DeleteProductUseCase {
   constructor(private productRepositoryAdapter: ProductRepositoryAdapter) {}
-  
-  findProductByCategory( categoryId: string) {
-    return this.productRepositoryAdapter.findByCategory(categoryId);
+
+  execute(productId: string) {
+    return this.productRepositoryAdapter.delete(productId);
   }
 }

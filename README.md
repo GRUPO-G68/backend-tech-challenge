@@ -125,3 +125,4 @@ Atualize a linha 18 do arquivo `node-fiap-deployment.yaml` com o nome da imagem 
 ## D. Link video demonstrativo.
 
 #### link video youtube.
+https://youtu.be/u0owNQ7n658

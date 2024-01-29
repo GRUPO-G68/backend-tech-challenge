@@ -26,6 +26,12 @@ O Gateway confirma o pagamento para o sistema que por sua vez, altera o status d
 
 ## B. Collection das apis.
 
+A aplicação é desenvolvida em NodeJs com o framework Nest.js e como banco de dados utiliza MariaDB.
+
+Não fizemos o deploy em ambiente de cloud. Para o ambiente de desenvolvimento, o MariaDB é executado em um pod do kubernetes.
+
+![image info](./docs/img/design-kubernets.png)
+
 #### i. Link do swagger.
 
 Para acessar a documentação acesse:

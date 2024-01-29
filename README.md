@@ -24,64 +24,14 @@ O Gateway confirma o pagamento para o sistema que por sua vez, altera o status d
 
 #### ii: Os requisitos de infraestrutura.
 
-##### Versão específica do Next.js:
-
-Especifique a versão compatível com sua aplicação Node.js.
-Dependências e bibliotecas: Liste todas as dependências e bibliotecas necessárias para a execução da aplicação.
-Banco de Dados:
-
-##### Tipo de banco de dados:
-
-Especifique o banco de dados escolhido (por exemplo, MongoDB, PostgreSQL).
-Configuração de replicação: Se necessário, especifique a configuração de replicação para garantir a alta disponibilidade e a recuperação de falhas.
-
-##### Contêineres e Imagens Docker:
-
-Crie imagens Docker para suas aplicações e serviços.
-Especifique as dependências necessárias para a execução dos contêineres.
-Kubernetes:
-
-##### Versão do Kubernetes:
-
-Especifique a versão do Kubernetes compatível com sua aplicação.
-Configuração de Cluster: Descreva a configuração do cluster, incluindo o número de nós, capacidade de recursos (CPU, memória) e o sistema operacional utilizado.
-
-##### Configuração de Rede:
-
-Descreva as políticas de rede, serviços, e como os pods se comunicarão entre si.
-Configuração de Segurança: Aborde práticas de segurança, como RBAC (Role-Based Access Control) e políticas de segurança de rede.
-
-##### Escalabilidade:
-
-Descreva como o sistema pode escalar horizontalmente em termos de replicação de pods e serviços.
-Monitoramento e Logging:
-
-Especificações sobre ferramentas de monitoramento e logging (por exemplo, Prometheus, Grafana, ELK stack).
-
-##### Backup e Recuperação:
-
-Procedimentos para backup e recuperação de dados, especialmente no contexto do banco de dados.
-Configuração de CI/CD:
-
-Descreva o processo de integração contínua e entrega contínua para atualizações de software.
-Configuração de Tolerância a Falhas:
-
-Estratégias para lidar com falhas de pods, nodes ou serviços.
-Configuração de Segredos e Variáveis de Ambiente:
-
-Gerenciamento seguro de credenciais e informações sensíveis.
-
-##### Testes:
-
-Requisitos de teste, incluindo testes unitários, integração e testes de carga.
-
-##### Documentação:
-
-Documentação abrangente para facilitar a manutenção e a colaboração futura.
 
 ## B. Collection das apis.
 
 #### i. Link do swagger.
+Para acessar a documentação acesse:
+http://localhost:30000/docs
+
+Para subir a documentação, execute os passos listados em [Execute a soluçao com o kubernets](#execute-a-solução-com-o-kubernetes)
 
 ## C. Guia completo para execução do projeto.
 

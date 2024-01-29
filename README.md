@@ -85,7 +85,7 @@ Documentação abrangente para facilitar a manutenção e a colaboração futura
 
 ## C. Guia completo para execução do projeto.
 
-#### Instalação
+### Instalação
 
 Para começar a usar o projeto, siga os passos abaixo:
 
@@ -105,7 +105,7 @@ Navegue para o diretório recém-clonado usando o comando cd:
   cd backend-tech-challenge
 ```
 
-#### 3. Instale as dependências
+#### 3. Desenvolvimento local
 
 Baixe e instale o Node.js em https://nodejs.org/en/download.
 
@@ -114,37 +114,37 @@ Instale as dependencias do projeto com o comando
 ```bash
   npm install
 ```
+Crie uma cópia do arquivo `.env.example` e altere o nome para `.env`. Dentro desse arquivo estão as variáveis referente a conexão com o banco de dados. Caso você for utilizar uma banco localmente ou com credenciais diferentes, atualiza as informações.
 
-Instale o Docker https://www.docker.com/products/docker-desktop/
-
-Ative o Kubernets https://docs.docker.com/desktop/kubernetes/
-
-Instale ou execute uma instancia de MariaDB no seu computador. Você precisa informar no arquivo `.env` os detalhes de conexão do banco de dados. Você pode também executar um container docker do MariaDB.
-
-> IMPORTANTE: Para execução de imagem via Kubernetes com os arquivos .yaml, tenha certeza de definir o valor da variável `DB_HOST` para `svc-mysql-fiap`, caso contrário a aplicação não conseguirá se conectar ao pod com o banco dados.
-
-#### 4. Desenvolvimento local
+Você também precisa ter em execução o MariaDB na sua máquina para a aplicação funcionar, ou seguir os passos da seção abaixo para usar o banco de dados que é instanciado com o Kubernetes.
 
 Após configurado, para executar o projeto localmente, execute o comando `npm run start:dev`.
 
 A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:9001/docs
 
-#### 5. Execute o APP com o Kubernetes
+### Execute a solução com o Kubernetes
+
+Instale o Docker https://www.docker.com/products/docker-desktop/
+> O projeto foi criado com a versão 4.26.1
+
+Ative o Kubernets https://docs.docker.com/desktop/kubernetes/
+> O projeto foi criado com a versão 1.28.2. Versões anteriores podem falhar em executar a solução com erros sobre unable to recognize .yaml: no matches for kind: ....
 
 A imagem do banco de dados e da aplicação já constam nos arquivos .yaml para execução do projeto.
+> IMPORTANTE: Para execução de imagem via Kubernetes com os arquivos .yaml, tenha certeza de definir o valor da variável `DB_HOST` para `svc-mysql-fiap`, caso contrário a aplicação não conseguirá se conectar ao pod com o banco dados.
 
 Para executar usando a configuração atual, abra um terminal na raiz do projeto e execute o comando
 
 ```bash
 kubect apply -f ./src/infrastructure/k8s/
 ```
-A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:30000/docs
+A aplicação leva alguns segundos para ficar disponível, dependo da configuração da maquina pode levar 1 ou 2 minutos. A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:30000/docs
 
 Para derrubar toda a soluçao, execute `kubectl delete namespace fiap`.
 
-##### Editando a imagem
+#### Editando a imagem
 
-Caso você queira editar ou usar uma imagem diferente, faça as alterações n código, e no Dockerfile (caso necessário).
+Caso você queira editar ou usar uma imagem diferente, faça as alterações no código, e no Dockerfile (caso necessário).
 
 Faça o build da sua imagem:
 
@@ -154,11 +154,11 @@ docker build -t <nome:versão> .
 
 Atualize a linha 18 do arquivo `node-fiap-deployment.yaml` com o nome da imagem que você deu no comando de build. Você não precisa fazer o upload para docker hub dessa imagem se não quiser, a configuração do projeto busca pela imagem localmente antes de tentar acessar a mesma no repositório online do Docker Hub.
 
-#### 8. Importe a colletion da API
-
-Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
-
-O arquivo da colletion esta na raiz do projeto e está nomeada de `COLLECTION DA API.postman_collection.json`.
+### Guia de execução do Swagger
+1) Cadastrar categoria
+2) Cadastrar produto
+3) Cadastrar cliente
+4) Realizar pedido
 
 ## D. Link video demonstrativo.
 

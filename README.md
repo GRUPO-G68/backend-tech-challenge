@@ -2,7 +2,7 @@
 
 ## A. Desenho da arquitetura
 
-#### i.Os requisitos do negocio (problema)
+### i.Os requisitos do negocio (problema)
 
 O processo de pedido de lanche se inicia quando um cliente se dirigi a um terminal de autoautendimento para fazer o pedido. O cliente chega no terminal e escolhe se irá fazer login no sistema com seu CPF ou se fará um pedido de forma anonima.
 
@@ -22,12 +22,12 @@ O cliente realiza o pagamento do pedido.
 
 O Gateway confirma o pagamento para o sistema que por sua vez, altera o status do pedido para “Recebido” e envia o mesmo para a cozinha.
 
-#### ii: Os requisitos de infraestrutura.
-
+### ii: Os requisitos de infraestrutura.
 
 ## B. Collection das apis.
 
 #### i. Link do swagger.
+
 Para acessar a documentação acesse:
 http://localhost:30000/docs
 
@@ -64,6 +64,7 @@ Instale as dependencias do projeto com o comando
 ```bash
   npm install
 ```
+
 Crie uma cópia do arquivo `.env.example` e altere o nome para `.env`. Dentro desse arquivo estão as variáveis referente a conexão com o banco de dados. Caso você for utilizar uma banco localmente ou com credenciais diferentes, atualiza as informações.
 
 Você também precisa ter em execução o MariaDB na sua máquina para a aplicação funcionar, ou seguir os passos da seção abaixo para usar o banco de dados que é instanciado com o Kubernetes.
@@ -75,12 +76,15 @@ A documentação da aplicação pode ser acessada no seu navegador através do e
 ### Execute a solução com o Kubernetes
 
 Instale o Docker https://www.docker.com/products/docker-desktop/
+
 > O projeto foi criado com a versão 4.26.1
 
 Ative o Kubernets https://docs.docker.com/desktop/kubernetes/
+
 > O projeto foi criado com a versão 1.28.2. Versões anteriores podem falhar em executar a solução com erros sobre unable to recognize .yaml: no matches for kind: ....
 
 A imagem do banco de dados e da aplicação já constam nos arquivos .yaml para execução do projeto.
+
 > IMPORTANTE: Para execução de imagem via Kubernetes com os arquivos .yaml, tenha certeza de definir o valor da variável `DB_HOST` para `svc-mysql-fiap`, caso contrário a aplicação não conseguirá se conectar ao pod com o banco dados.
 
 Para executar usando a configuração atual, abra um terminal na raiz do projeto e execute o comando
@@ -88,6 +92,7 @@ Para executar usando a configuração atual, abra um terminal na raiz do projeto
 ```bash
 kubect apply -f ./src/infrastructure/k8s/
 ```
+
 A aplicação leva alguns segundos para ficar disponível, dependo da configuração da maquina pode levar 1 ou 2 minutos. A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:30000/docs
 
 Para derrubar toda a soluçao, execute `kubectl delete namespace fiap`.
@@ -105,10 +110,11 @@ docker build -t <nome:versão> .
 Atualize a linha 18 do arquivo `node-fiap-deployment.yaml` com o nome da imagem que você deu no comando de build. Você não precisa fazer o upload para docker hub dessa imagem se não quiser, a configuração do projeto busca pela imagem localmente antes de tentar acessar a mesma no repositório online do Docker Hub.
 
 ### Guia de execução do Swagger
-1) Cadastrar categoria
-2) Cadastrar produto
-3) Cadastrar cliente
-4) Realizar pedido
+
+1. Cadastrar categoria
+2. Cadastrar produto
+3. Cadastrar cliente
+4. Realizar pedido
 
 ## D. Link video demonstrativo.
 

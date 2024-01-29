@@ -90,7 +90,7 @@ A imagem do banco de dados e da aplicação já constam nos arquivos .yaml para 
 Para executar usando a configuração atual, abra um terminal na raiz do projeto e execute o comando
 
 ```bash
-kubect apply -f ./src/infrastructure/k8s/
+kubectl apply -f ./src/infrastructure/k8s/
 ```
 
 A aplicação leva alguns segundos para ficar disponível, dependo da configuração da maquina pode levar 1 ou 2 minutos. A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:30000/docs

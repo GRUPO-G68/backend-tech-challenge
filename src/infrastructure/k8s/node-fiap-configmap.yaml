@@ -2,8 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: node-fiap-configmap
+  namespace: fiap
 data:
   HOST_DB: svc-mysql-fiap:3306
   USER_DB: root
   PASS_DB: tech@123
-  DATABASE_DB: fiap_db
+  DATABASE_DB: tech_challenge

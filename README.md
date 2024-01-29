@@ -61,87 +61,58 @@ Navegue para o diretório recém-clonado usando o comando cd:
 
 #### 3. Instale as dependências
 
-Use o gerenciador de pacotes Node.js (npm) para instalar todas as dependências do projeto:
+Baixe e instale o Node.js em https://nodejs.org/en/download.
+
+Instale as dependencias do projeto com o comando
 
 ```bash
   npm install
 ```
 
-#### 4. Configure os arquivos de exemplo
+Instale o Docker https://www.docker.com/products/docker-desktop/
 
-Há arquivos/pastas de exemplo no projeto que você deve configurar para suas necessidades. Para fazer isso, siga estas etapas:
+Ative o Kubernets https://docs.docker.com/desktop/kubernetes/
 
-- Localize os arquivos/pastas com nomes terminando em `.exemple` e faça cópias deles sem a extensão `.exemple`. Por exemplo, `.env.exemple` deve ser renomeado para `.env`.
+Instale ou execute uma instancia de MariaDB no seu computador. Você precisa informar no arquivo `.env` os detalhes de conexão do banco de dados. Você pode também executar um container docker do MariaDB.
 
-#### 5. Inicie o aplicativo com o Docker
+> IMPORTANTE: Para execução de imagem via Kubernetes com os arquivos .yaml, tenha certeza de definir o valor da variável `DB_HOST` para `svc-mysql-fiap`, caso contrário a aplicação não conseguirá se conectar ao pod com o banco dados.
 
-Certifique-se de ter o Docker instalado em sua máquina e execute o seguinte comando para iniciar o aplicativo:
+#### 4. Desenvolvimento local
 
-```bash
-  docker compose up -d
-```
+Após configurado, para executar o projeto localmente, execute o comando `npm run start:dev`.
 
-Isso iniciará os contêineres Docker necessários para executar o projeto.
+A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:9001/docs
 
-#### 6. Execute as migrations
+#### 5. Execute o APP com o Kubernetes
 
-Após o container iniciado por completo execute o seguinte comando para realizar as migrações do banco:
+A imagem do banco de dados e da aplicação já constam nos arquivos .yaml para execução do projeto.
 
-**Obs:** Certifique-se de que o container e o banco esteja de pé
+Para executar usando a configuração atual, abra um terminal na raiz do projeto e execute o comando
 
 ```bash
-  npm run migrate
+kubect apply -f ./src/infrastructure/k8s/
 ```
+A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:30000/docs
 
-#### 7. Execute os seeders
+Para derrubar toda a soluçao, execute `kubectl delete namespace fiap`.
 
-Após as migrations executadas, execute os seeders:
+##### Editando a imagem
+
+Caso você queira editar ou usar uma imagem diferente, faça as alterações n código, e no Dockerfile (caso necessário).
+
+Faça o build da sua imagem:
 
 ```bash
-  npm run seed
+docker build -t <nome:versão> .
 ```
+
+Atualize a linha 18 do arquivo `node-fiap-deployment.yaml` com o nome da imagem que você deu no comando de build. Você não precisa fazer o upload para docker hub dessa imagem se não quiser, a configuração do projeto busca pela imagem localmente antes de tentar acessar a mesma no repositório online do Docker Hub.
 
 #### 8. Importe a colletion da API
 
 Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 
-O arquivo da colletion esta na raiz do projeto e está nomeada de `COLLECTION DA API.postman_collection.json`,
-
-#### 9. Acesse a documentação
-
-Esse projeto utiliza a documentação dinâmica [swagger](https://swagger.io/docs/specification/adding-examples/) e [redocly](https://redocly.com/docs/), para acessar navegue a seguinte URL
-
-redocly :
-
-```bash
-  localhost:9001/
-```
-
-swagger :
-
-```bash
-  localhost:30000/documentacao
-```
-
-#### 10. Acesso ao banco
-
-```bash
-  URL: localhoat
-  user: root
-  password: segredo
-  port: 3306
-```
-
-### RODAR PROJETO LOCAL
-
-//passo 1 - container
-// docker run -e MYSQL_ROOT_PASSWORD=tech@123 -p 3306:3306 --name techchallenge -d mariadb
-//passo 2 - cria o banco
-//criar o banco no container techchallenge, banco-> tech_challenge
-//passo 3 - roda a aplicação
-//npm run start:dev
-
-**Nota:** Certifique-se de ler a documentação completa do projeto.
+O arquivo da colletion esta na raiz do projeto e está nomeada de `COLLECTION DA API.postman_collection.json`.
 
 ## D. Link video demonstrativo.
 

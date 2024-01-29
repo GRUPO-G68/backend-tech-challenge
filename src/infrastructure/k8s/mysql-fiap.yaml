@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: mysql-fiap
+  namespace: fiap
   labels:
     app: mysql-fiap
 spec:

@@ -1,4 +1,4 @@
-FROM node
+FROM node:alpine
 
 WORKDIR /home/node/app
 
@@ -21,4 +21,4 @@ COPY src/ /home/node/app/src/
 RUN npm install
 
 # Comando para iniciar a aplicação
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start"]

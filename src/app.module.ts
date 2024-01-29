@@ -13,16 +13,17 @@ import { OrderItem } from './domain/entities/order-item.entity';
 import { ProductCategoryRepositoryAdapter } from './adapters/product/product-category.repository';
 import { ProductCategory } from './domain/entities/product-category.entity';
 import { ProductCategoryController } from './adapters/product/product-category.controller';
+import { config } from 'dotenv'
 // @todo trocar os dados do banco fixos por variaveis de ambiente
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mariadb',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'tech@123',
-      database: 'tech_challenge',
+      host: config().parsed['DB_HOST'],
+      port: Number(config().parsed['DB_PORT']),
+      username: config().parsed['DB_USER'],
+      password: config().parsed['DB_PASSWORD'],
+      database: config().parsed['DB_DATABASE'],
       synchronize: true,
       autoLoadEntities: true,
     }),

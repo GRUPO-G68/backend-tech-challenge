@@ -3,7 +3,8 @@ import { Order } from 'src/domain/entities/order.entity';
 import { OrderStatus } from 'src/domain/valueObjects/status-to-situation';
 
 export class CreateOrderUseCase {
-  criarPedido(repo: OrderRepositoryAdapter, order: Order) {
+  
+  execute(repo: OrderRepositoryAdapter, order: Order) {
     order.status = OrderStatus.PAYMENT_APPROVED;
     return repo.save(order);
   }

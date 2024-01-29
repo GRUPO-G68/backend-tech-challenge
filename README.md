@@ -1,6 +1,91 @@
 # Backend Tech Challenge
 
-## Instalação
+## A. Desenho da arquitetura
+
+#### i.Os requisitos do negocio (problema)
+
+O processo de pedido de lanche se inicia quando um cliente se dirigi a um terminal de autoautendimento para fazer o pedido. O cliente chega no terminal e escolhe se irá fazer login no sistema com seu CPF ou se fará um pedido de forma anonima.
+
+Depois disso o terminal apresenta ao cliente uma lista de lanches.
+
+O cliente escolhe o lanche desejado. O terminal então apresenta a opção de acompanhamentos para o cliente.
+
+O cliente escolhe se deseja acompanhamento no pedido.
+
+A ultima escolha é referente a bebida. O cliente então fecha o carrinho de pedido.
+
+Com os itens do pedido do cliente, o sistema gera uma ordem de pedido, calcula o total do mesmo e apresenta as informações referente aos itens e valor total para o cliente.
+
+O cliente revisa as informações e ao confirmar, solicita a informação de pagamento. O sistema realiza a comunicação com o gateway de pagamento e apresenta um QR Code para que o pagamento seja realizado.
+
+O cliente realiza o pagamento do pedido.
+
+O Gateway confirma o pagamento para o sistema que por sua vez, altera o status do pedido para “Recebido” e envia o mesmo para a cozinha.
+
+#### ii: Os requisitos de infraestrutura.
+
+##### Versão específica do Next.js:
+
+Especifique a versão compatível com sua aplicação Node.js.
+Dependências e bibliotecas: Liste todas as dependências e bibliotecas necessárias para a execução da aplicação.
+Banco de Dados:
+
+##### Tipo de banco de dados:
+
+Especifique o banco de dados escolhido (por exemplo, MongoDB, PostgreSQL).
+Configuração de replicação: Se necessário, especifique a configuração de replicação para garantir a alta disponibilidade e a recuperação de falhas.
+
+##### Contêineres e Imagens Docker:
+
+Crie imagens Docker para suas aplicações e serviços.
+Especifique as dependências necessárias para a execução dos contêineres.
+Kubernetes:
+
+##### Versão do Kubernetes:
+
+Especifique a versão do Kubernetes compatível com sua aplicação.
+Configuração de Cluster: Descreva a configuração do cluster, incluindo o número de nós, capacidade de recursos (CPU, memória) e o sistema operacional utilizado.
+
+##### Configuração de Rede:
+
+Descreva as políticas de rede, serviços, e como os pods se comunicarão entre si.
+Configuração de Segurança: Aborde práticas de segurança, como RBAC (Role-Based Access Control) e políticas de segurança de rede.
+
+##### Escalabilidade:
+
+Descreva como o sistema pode escalar horizontalmente em termos de replicação de pods e serviços.
+Monitoramento e Logging:
+
+Especificações sobre ferramentas de monitoramento e logging (por exemplo, Prometheus, Grafana, ELK stack).
+
+##### Backup e Recuperação:
+
+Procedimentos para backup e recuperação de dados, especialmente no contexto do banco de dados.
+Configuração de CI/CD:
+
+Descreva o processo de integração contínua e entrega contínua para atualizações de software.
+Configuração de Tolerância a Falhas:
+
+Estratégias para lidar com falhas de pods, nodes ou serviços.
+Configuração de Segredos e Variáveis de Ambiente:
+
+Gerenciamento seguro de credenciais e informações sensíveis.
+
+##### Testes:
+
+Requisitos de teste, incluindo testes unitários, integração e testes de carga.
+
+##### Documentação:
+
+Documentação abrangente para facilitar a manutenção e a colaboração futura.
+
+## B. Collection das apis.
+
+#### i. Link do swagger.
+
+## C. Guia completo para execução do projeto.
+
+#### Instalação
 
 Para começar a usar o projeto, siga os passos abaixo:
 
@@ -22,84 +107,59 @@ Navegue para o diretório recém-clonado usando o comando cd:
 
 #### 3. Instale as dependências
 
-Use o gerenciador de pacotes Node.js (npm) para instalar todas as dependências do projeto:
+Baixe e instale o Node.js em https://nodejs.org/en/download.
+
+Instale as dependencias do projeto com o comando
 
 ```bash
   npm install
 ```
 
-#### 4. Configure os arquivos de exemplo
+Instale o Docker https://www.docker.com/products/docker-desktop/
 
-Há arquivos/pastas de exemplo no projeto que você deve configurar para suas necessidades. Para fazer isso, siga estas etapas:
+Ative o Kubernets https://docs.docker.com/desktop/kubernetes/
 
-- Localize os arquivos/pastas com nomes terminando em `.exemple` e faça cópias deles sem a extensão `.exemple`. Por exemplo, `.env.exemple` deve ser renomeado para `.env`.
+Instale ou execute uma instancia de MariaDB no seu computador. Você precisa informar no arquivo `.env` os detalhes de conexão do banco de dados. Você pode também executar um container docker do MariaDB.
 
-#### 5. Inicie o aplicativo com o Docker
+> IMPORTANTE: Para execução de imagem via Kubernetes com os arquivos .yaml, tenha certeza de definir o valor da variável `DB_HOST` para `svc-mysql-fiap`, caso contrário a aplicação não conseguirá se conectar ao pod com o banco dados.
 
-Certifique-se de ter o Docker instalado em sua máquina e execute o seguinte comando para iniciar o aplicativo:
+#### 4. Desenvolvimento local
 
-```bash
-  docker compose up -d
-```
+Após configurado, para executar o projeto localmente, execute o comando `npm run start:dev`.
 
-Isso iniciará os contêineres Docker necessários para executar o projeto.
+A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:9001/docs
 
-#### 6. Execute as migrations
+#### 5. Execute o APP com o Kubernetes
 
-Após o container iniciado por completo execute o seguinte comando para realizar as migrações do banco:
+A imagem do banco de dados e da aplicação já constam nos arquivos .yaml para execução do projeto.
 
-**Obs:** Certifique-se de que o container e o banco esteja de pé
+Para executar usando a configuração atual, abra um terminal na raiz do projeto e execute o comando
 
 ```bash
-  npm run migrate
+kubect apply -f ./src/infrastructure/k8s/
 ```
+A documentação da aplicação pode ser acessada no seu navegador através do endereço: http://localhost:30000/docs
 
-#### 7. Execute os seeders
+Para derrubar toda a soluçao, execute `kubectl delete namespace fiap`.
 
-Após as migrations executadas, execute os seeders:
+##### Editando a imagem
+
+Caso você queira editar ou usar uma imagem diferente, faça as alterações n código, e no Dockerfile (caso necessário).
+
+Faça o build da sua imagem:
 
 ```bash
-  npm run seed
+docker build -t <nome:versão> .
 ```
+
+Atualize a linha 18 do arquivo `node-fiap-deployment.yaml` com o nome da imagem que você deu no comando de build. Você não precisa fazer o upload para docker hub dessa imagem se não quiser, a configuração do projeto busca pela imagem localmente antes de tentar acessar a mesma no repositório online do Docker Hub.
 
 #### 8. Importe a colletion da API
 
 Agora você deve ter o aplicativo funcionando localmente em seu ambiente.
 
-O arquivo da colletion esta na raiz do projeto e está nomeada de `COLLECTION DA API.postman_collection.json`,
+O arquivo da colletion esta na raiz do projeto e está nomeada de `COLLECTION DA API.postman_collection.json`.
 
-#### 9. Acesse a documentação
+## D. Link video demonstrativo.
 
-Esse projeto utiliza a documentação dinâmica [swagger](https://swagger.io/docs/specification/adding-examples/) e [redocly](https://redocly.com/docs/), para acessar navegue a seguinte URL
-
-redocly :
-
-```bash
-  localhost:9001/
-```
-
-swagger :
-
-```bash
-  localhost:30000/documentacao
-```
-
-#### 10. Acesso ao banco
-
-```bash
-  URL: localhoat
-  user: root
-  password: segredo
-  port: 3306
-```
-
-### RODAR PROJETO LOCAL
-
-//passso 1 - container
-// docker run -e MYSQL_ROOT_PASSWORD=tech@123 -p 3306:3306 --name techchallenge -d mariadb
-//passso 2 - cria o banco
-//criar o banco no container techchallenge, banco-> tech_challenge
-//passo 3 - roda a aplicao
-//npm  run start:dev
-
-**Nota:** Certifique-se de ler a documentação completa do projeto.
+#### link video youtube.

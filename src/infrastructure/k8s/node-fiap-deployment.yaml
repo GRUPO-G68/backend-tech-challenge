@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-fiap
+  namespace: fiap
 spec:
   selector:
     matchLabels:
@@ -14,7 +15,8 @@ spec:
     spec:
       containers:
         - name: node-fiap-container
-          image: noobezera/nest
+          image: esantiagovieira/node-fiap-alpine
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9001
           envFrom:

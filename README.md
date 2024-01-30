@@ -118,9 +118,41 @@ Atualize a linha 18 do arquivo `node-fiap-deployment.yaml` com o nome da imagem 
 ### Guia de execução do Swagger
 
 1. Cadastrar categoria
+```JSON
+{
+  "name": "Lanches",
+  "description": "É um lanche"
+}
+```
 2. Cadastrar produto
+```JSON
+{
+  "name": "Hamburguer com queijo",
+  "price": 20,
+  "categoryId": 1,
+  "description": "Hamburguer com queijo, tipo, o nome diz tudo"
+}
+```
 3. Cadastrar cliente
+```JSON
+{
+  "name": "Ciclano",
+  "document": "12312312",
+  "email": "ciclano@coldmail.com"
+}
+```
 4. Realizar pedido
+```JSON
+{
+  "clientDocument": "12312312",
+  "products": [
+    {
+      "productId": "Hamburguer com queijo",
+      "quantity": 1
+    }
+  ]
+}
+```
 
 ## D. Link video demonstrativo.
 

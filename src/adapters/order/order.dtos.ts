@@ -20,3 +20,10 @@ export class PaymentFeedbackDto {
   @ApiProperty()
   paymentStatus: number;
 }
+
+export class WebhookDto {
+  @ApiProperty()
+  id: string;
+  @ApiProperty()
+  topic: string
+}

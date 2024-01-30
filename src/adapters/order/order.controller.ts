@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { OrderRepositoryAdapter } from './order.repository';
 import { IOrder, Order } from '../../domain/entities/order.entity';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateOrderDto, PaymentFeedbackDto } from './order.dtos';
+import { CreateOrderDto, PaymentFeedbackDto, WebhookDto } from './order.dtos';
 import { OrderItem } from '../../domain/entities/order-item.entity';
 import { CreateOrderUseCase } from 'src/application/useCase/order/create-order.use-case';
 import { ProcessPaymentUseCase } from 'src/application/useCase/order/process-payment.use-case';
@@ -33,17 +33,17 @@ export class OrderController {
 
   @Get()
   async getAllOrders(): Promise<Partial<IOrder>[]> {
-    return new FindAllOrdersUseCase(this.orderRepositoryAdapter).execute()
+    return new FindAllOrdersUseCase(this.orderRepositoryAdapter).execute();
   }
 
   @Get('/status/:orderStatus')
   async getOrderByStatusId(@Param('orderStatus') orderStatus: number): Promise<Partial<IOrder>[]> {
-    return new GetOrderByStatusUseCase(this.orderRepositoryAdapter).execute(orderStatus)
+    return new GetOrderByStatusUseCase(this.orderRepositoryAdapter).execute(orderStatus);
   }
 
   @Get(':orderId')
   async getOrderById(@Param('orderId') orderId: string): Promise<IOrder> {
-    return new GetOrderByIdUseCase(this.orderRepositoryAdapter).execute(orderId)
+    return new GetOrderByIdUseCase(this.orderRepositoryAdapter).execute(orderId);
   }
 
   @Post('/updateOrderStatus')
@@ -53,7 +53,7 @@ export class OrderController {
   }
 
   @Post('/webhook')
-  async webhookPagamento(@Query() id: string, @Query() topic: string) {
-    return new WebhookProcessPaymentUseCase().execute(this.orderRepositoryAdapter, id, topic);
+  async webhookPagamento(@Body() body: WebhookDto) {
+    return new WebhookProcessPaymentUseCase().execute(this.orderRepositoryAdapter, body.id, body.topic);
   }
 }

@@ -22,15 +22,15 @@ O cliente realiza o pagamento do pedido.
 
 O Gateway confirma o pagamento para o sistema que por sua vez, altera o status do pedido para “Recebido” e envia o mesmo para a cozinha.
 
-### ii: Os requisitos de infraestrutura.
+### ii: Diagrama da infraestrutura.
+![image info](./docs/img/design-kubernets.png)
 
 ## B. Collection das apis.
 
 A aplicação é desenvolvida em NodeJs com o framework Nest.js e como banco de dados utiliza MariaDB.
 
-Não fizemos o deploy em ambiente de cloud. Para o ambiente de desenvolvimento, o MariaDB é executado em um pod do kubernetes.
+Não fizemos o deploy em ambiente de cloud. Para o ambiente de desenvolvimento, o MariaDB é executado em um pod do kubernetes para facilitar a execução local da solução.
 
-![image info](./docs/img/design-kubernets.png)
 
 #### i. Link do swagger.
 
@@ -38,6 +38,8 @@ Para acessar a documentação acesse:
 http://localhost:30000/docs
 
 Para subir a documentação, execute os passos listados em [Execute a soluçao com o kubernets](#execute-a-solução-com-o-kubernetes)
+
+As chamadas no swagger já estão preenchidas com os modelos. Você pode alterar os valores ou enviar do jeito que estão. A aplicação será capaz de regristar a retornar os valores enviados nos endpoints de GET.
 
 ## C. Guia completo para execução do projeto.
 

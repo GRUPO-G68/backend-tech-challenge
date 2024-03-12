@@ -5,7 +5,7 @@ import { SwaggerModule, DocumentBuilder, OpenAPIObject } from "@nestjs/swagger";
 
 function buildApiDocs(app: NestExpressApplication): void {
   const config: Omit<OpenAPIObject, "paths"> = new DocumentBuilder()
-    .setTitle("FIAP - Software Architecture - Tech Challenge")
+    .setTitle("FIAP - Software Architecture - Tech Challenge ")
     .setDescription(
       "Tech challenge for postgraduate studies in software architecture",
     )

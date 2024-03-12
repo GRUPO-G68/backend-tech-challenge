@@ -3,7 +3,7 @@ name: Docker Build & Push
 on:
   push:
     branches:
-      - feature/renan  # ajuste conforme sua branch principal
+      - main  # ajuste conforme sua branch principal
 
 jobs:
   build:

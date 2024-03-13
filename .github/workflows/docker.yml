@@ -55,4 +55,5 @@ jobs:
       if: always()
       uses: sonarsource/sonarcloud-github-action@master
       with:
+        projectBaseDir: .
         github-token: ${{ secrets.GITHUB_TOKEN }}

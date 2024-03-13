@@ -56,4 +56,5 @@ jobs:
       uses: sonarsource/sonarcloud-github-action@master
       with:
         projectBaseDir: .
-        # github-token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

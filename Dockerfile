@@ -4,7 +4,7 @@ WORKDIR /home/node/app
 
 # Copia os arquivos de configuração
 COPY package-lock.json ./
-COPY .env.example .env
+COPY .env.exemple .env
 COPY package.json ./
 COPY tsconfig.json ./
 COPY tsconfig.build.json ./

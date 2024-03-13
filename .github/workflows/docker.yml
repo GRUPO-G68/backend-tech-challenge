@@ -52,4 +52,4 @@ jobs:
       if: always()
       uses: sonarsource/sonarcloud-github-action@master
       with:
-        github-token: ${{ secrets.TOKEN_FIAP }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}

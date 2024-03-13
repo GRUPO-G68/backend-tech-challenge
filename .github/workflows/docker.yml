@@ -46,7 +46,8 @@ jobs:
           -e SONAR_TOKEN="${{ secrets.SONAR_TOKEN }}" \
           -v "${PWD}:/usr/src" \
           -w /usr/src sonarsource/sonar-scanner-cli:latest \
-          sonar-scanner
+          sonar-scanner \
+          -Dsonar.host.url=https://sonarcloud.io
 
     - name: Publish SonarCloud Quality Gate result
       if: always()

@@ -53,10 +53,13 @@ jobs:
 
     - name: Publish SonarCloud Quality Gate result
       if: always()
-      uses: sonarsource/sonarcloud-github-action@master
-      with:
-        projectBaseDir: .
-      env:
-        SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
-        projectKey: backend-tech-challenge
-        organization: grupo-g68
+      run: |
+        docker run --rm \
+          -e SONAR_TOKEN="${{ secrets.SONAR_TOKEN }}" \
+          -v "${PWD}:/usr/src" \
+          -w /usr/src sonarsource/sonar-scanner-cli:latest \
+          sonar-scanner \
+          -Dsonar.qualitygate.wait=true \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.projectKey=backend-tech-challenge \
+          -Dsonar.organization=grupo-g68

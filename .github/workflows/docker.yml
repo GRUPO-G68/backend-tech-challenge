@@ -58,5 +58,5 @@ jobs:
         projectBaseDir: .
       env:
         SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
-        SONAR_PROJECT_KEY: backend-tech-challenge
-        SONAR_ORGANIZATION: grupo-g68
+        projectKey: backend-tech-challenge
+        organization: grupo-g68

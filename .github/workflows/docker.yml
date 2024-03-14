@@ -48,7 +48,7 @@ jobs:
           -w /usr/src sonarsource/sonar-scanner-cli:latest \
           sonar-scanner \
           -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+          -Dsonar.projectKey=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.organization=grupo-g68
 
     - name: Publish SonarCloud Quality Gate result
@@ -57,6 +57,5 @@ jobs:
       with:
         projectBaseDir: .
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+        SONAR_PROJECT_KEY: ${{ secrets.SONAR_TOKEN }}
         SONAR_ORGANIZATION: grupo-g68
